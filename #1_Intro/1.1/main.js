@@ -4,9 +4,9 @@ var acceleration = force / weight;
 
 document.write(
 	'**************</br>' + 
-	'Ускорение тела при силе F = ' + [force] + 
-	' и массе m = ' + [weight] + 
+	'Ускорение тела при силе F = ' + force + 
+	' и массе m = ' + weight + 
 	' :</br>--------------------</br>' +
-	' a = ' + [acceleration] + 
+	' a = ' + acceleration + 
 	' .</br>-------------------</br>end.'
 );
