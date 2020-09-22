@@ -15,7 +15,12 @@ for (var i = 0; i < 5; i++){
 		if(i == 0 || i == 4){
 			row += "*";
 		}else{
-			row = "*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*";
+			if(j == 0 || j == 5){
+				row += "*";
+			}else{
+				row += "&nbsp;&nbsp;";
+			}
+			
 		}
 	}
 	document.writeln(row + "<br>");
