@@ -4,7 +4,7 @@
 */
 
 var a = [];
-a.length = Math.round(Math.random() * 10);
+a.length = 5;
 
 for (var i = 0, aSize = a.length; i < aSize; i++){
     if( (i % 2) != 0 ){
