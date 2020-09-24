@@ -30,20 +30,18 @@ for(var i = 1; i < n; i++){
     }
 }
 
+if(minIndex > maxIndex){
+    var temp = minIndex;
+    minIndex = maxIndex;
+    maxIndex = temp;
+}
 var b = [];
 b.length = Math.abs(minIndex - maxIndex) - 1;
-if(minIndex < maxIndex){
-    for(var i = 0, bSize = b.length; i < bSize; i++){
-        b[i] = a[minIndex + 1 + i];
-    }
-}else{
-    for(var i = 0, bSize = b.length; i < bSize; i++){
-        b[i] = a[maxIndex + 1 + i];
-    }
+
+for(var i = 0, bSize = b.length; i < bSize; i++){
+    b[i] = a[minIndex + 1 + i];
 }
-
-
 
 console.log(a);
 console.log(min, max);
-console.log(b)
+console.log(b);
