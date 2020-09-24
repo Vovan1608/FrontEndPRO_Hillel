@@ -6,7 +6,6 @@
 
 var a = [];
 var n = 5;
-a.length = n;
 
 for (var i = 0; i < n; i++){
     do{
