@@ -4,9 +4,10 @@
 */
 
 var a = [];
-a.length = 5;
+var n = 5;
+a.length = n;
 
-for (var i = 0, aSize = a.length; i < aSize; i++){
+for (var i = 0; i < n; i++){
     if( (i % 2) != 0 ){
         a[i] = 0; 
     }else{
