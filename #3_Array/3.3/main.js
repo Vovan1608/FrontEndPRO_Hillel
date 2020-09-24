@@ -35,6 +35,7 @@ if(minIndex > maxIndex){
     minIndex = maxIndex;
     maxIndex = temp;
 }
+
 var b = [];
 b.length = Math.abs(minIndex - maxIndex) - 1;
 
