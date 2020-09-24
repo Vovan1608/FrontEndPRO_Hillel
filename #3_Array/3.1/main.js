@@ -5,7 +5,6 @@
 
 var a = [];
 var n = 5;
-a.length = n;
 
 for (var i = 0; i < n; i++){
     if( (i % 2) != 0 ){
