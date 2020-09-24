@@ -23,5 +23,9 @@ for(var i = 0; i < n; i++){
 
 var average = Math.round(sum / count);
 
+if(isNaN(average)){
+    average = "В массиве нет чётных элементов, стоящих на нечётных местах."
+}
+
 console.log(a);
 console.log(average);
