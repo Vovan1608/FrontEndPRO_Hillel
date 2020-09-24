@@ -8,7 +8,6 @@
 
 var a = [];
 var n = 9;
-a.length = n;
 
 for (var i = 0; i < n; i++){
     a[i] = Math.round(Math.random() * 10);
