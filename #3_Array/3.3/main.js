@@ -10,38 +10,27 @@ var a = [];
 var n = 9;
 
 for (var i = 0; i < n; i++){
-    a[i] = Math.round(Math.random() * 10);
+    a[i] = Math.round( Math.random() * 10 );
 }
 
-var max = a[0];
-var min = a[0];
-var maxIndex = 0;
-var minIndex = 0;
+console.log(a);
 
-for(var i = 1; i < n; i++){
-    if(max <= a[i]){
-        max = a[i];
-        maxIndex = i;
-    }
-    if(min >= a[i]){
-        min = a[i];
-        minIndex = i;
-    }
-}
+var max = Math.max( ...a );
+var min = Math.min( ...a );
 
-if(minIndex > maxIndex){
+console.log( min, max );
+
+minIndex = a.lastIndexOf( min, a.length - 1 );
+maxIndex = a.lastIndexOf( max, a.length - 1 );
+console.log( minIndex, maxIndex );
+
+if( minIndex > maxIndex ){
     var temp = minIndex;
     minIndex = maxIndex;
     maxIndex = temp;
 }
 
-var b = [];
-b.length = Math.abs(minIndex - maxIndex) - 1;
-
-for(var i = 0, bSize = b.length; i < bSize; i++){
-    b[i] = a[minIndex + 1 + i];
-}
+var b = a.slice( minIndex + 1, maxIndex );
 
 console.log(a);
-console.log(min, max);
 console.log(b);
