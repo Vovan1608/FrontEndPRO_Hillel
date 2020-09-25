@@ -10,7 +10,7 @@ var a = [];
 var n = 9;
 
 for (var i = 0; i < n; i++){
-    a[i] = Math.round( Math.random() * 10 );
+    a.push( Math.round( Math.random() * 10 ) );
 }
 
 console.log(a);
@@ -20,13 +20,11 @@ var min = Math.min( ...a );
 
 console.log( min, max );
 
-minIndex = a.lastIndexOf( min, a.length - 1 );
-maxIndex = a.lastIndexOf( max, a.length - 1 );
+var minIndex = a.lastIndexOf( min, a.length - 1 );
+var maxIndex = a.lastIndexOf( max, a.length - 1 );
 
 if( minIndex > maxIndex ){
-    var temp = minIndex;
-    minIndex = maxIndex;
-    maxIndex = temp;
+    [minIndex, maxIndex] = [maxIndex, minIndex];
 }
 
 var b = a.slice( minIndex + 1, maxIndex );
