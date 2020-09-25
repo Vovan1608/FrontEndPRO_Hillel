@@ -10,7 +10,7 @@ var sum = 0;
 var count = 0;
 
 for(var i = 0; i < n; i++){
-    a[i] = Math.round(Math.random() * 10);
+    a.push( Math.round(Math.random() * 10) );
     
     if( (i % 2) != 0 && (a[i] % 2) == 0 ){
         sum += a[i];
@@ -21,7 +21,7 @@ for(var i = 0; i < n; i++){
 var average = Math.round(sum / count);
 
 if(isNaN(average)){
-    average = "В массиве нет чётных элементов, стоящих на нечётных местах."
+    average = `В массиве [${a}] нет чётных элементов, стоящих на нечётных местах.`
 }
 
 console.log(a);
