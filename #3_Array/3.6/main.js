@@ -4,25 +4,41 @@
 */
 
 var num = 95824;
-var arrComponents = [];
 
-var divider = 10;
+var numComponents = Number( String(num).split("").sort().join("") );
 
-for (var i = 0; (num / divider) > 0; i++){
-    arrComponents[i] = num % divider;
-    num = parseInt( num / divider );
-}
+console.log(numComponents);
 
-var arrSize = arrComponents.length;
 
-for(var i = arrSize - 1; i >= 1; i--){
-    for(var j = 0; j < i; j++){
-        if(arrComponents[j] > arrComponents[j + 1]){
-            var temp = arrComponents[j];
-            arrComponents[j] = arrComponents[j + 1];
-            arrComponents[j + 1] = temp;
-        }
-    }
-}
 
-console.log(arrComponents);
+
+
+
+
+
+
+
+
+
+// var arrComponents = [];
+
+// var divider = 10;
+
+// for (var i = 0; (num / divider) > 0; i++){
+//     arrComponents[i] = num % divider;
+//     num = parseInt( num / divider );
+// }
+
+// var arrSize = arrComponents.length;
+
+// for(var i = arrSize - 1; i >= 1; i--){
+//     for(var j = 0; j < i; j++){
+//         if(arrComponents[j] > arrComponents[j + 1]){
+//             var temp = arrComponents[j];
+//             arrComponents[j] = arrComponents[j + 1];
+//             arrComponents[j + 1] = temp;
+//         }
+//     }
+// }
+
+// console.log(arrComponents);
