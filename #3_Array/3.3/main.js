@@ -22,7 +22,6 @@ console.log( min, max );
 
 minIndex = a.lastIndexOf( min, a.length - 1 );
 maxIndex = a.lastIndexOf( max, a.length - 1 );
-console.log( minIndex, maxIndex );
 
 if( minIndex > maxIndex ){
     var temp = minIndex;
@@ -32,5 +31,4 @@ if( minIndex > maxIndex ){
 
 var b = a.slice( minIndex + 1, maxIndex );
 
-console.log(a);
 console.log(b);
