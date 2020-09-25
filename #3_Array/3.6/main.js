@@ -5,7 +5,7 @@
 
 var num = 95824;
 
-var numComponents = Number( String(num).split("").sort().join("") );
+var numComponents = String(num).split("").sort().join(" ");
 
 console.log(numComponents);
 
