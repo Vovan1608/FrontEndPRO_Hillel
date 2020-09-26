@@ -4,15 +4,16 @@
 консоль квадраты чётных чисел.
 */
 
-var a = +prompt("Enter a", "");
-var b = +prompt("Enter b > a","");
+do{
+	var a = prompt("Введите число a", "");
+}while ( isNaN(a) || a == null || a.trim() === "");
 
-if (a > b){
-	console.log("Incorrect.");
-}
+do{
+	var b = prompt("Введите число b", "");
+}while ( isNaN(b) || b == null || b.trim() === "" || a > b);
 
-for (var i = a; i <= b; i++){
+for (var i = +a; i <= b; i++){
 	if(i % 2 == 0){
-		console.log( i * i);
+		console.log( i ** 2);
 	}
 }
