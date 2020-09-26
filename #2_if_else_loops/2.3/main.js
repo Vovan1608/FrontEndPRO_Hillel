@@ -5,8 +5,8 @@
 */
 
 do{
-	var number = +prompt("Введите число", "");
+	var number = prompt("Введите число", "");
 	//Для альтернативной проверки переменной на NaN без 
 	//использования функции isNaN() можно воспользоваться 
 	//конструкцией x !== x
-}while (number !== number || number == 0);
+}while ( isNaN(number) || number == null || number.trim() === "");
