@@ -9,8 +9,8 @@ var n = 5;
 
 for (var i = 0; i < n; i++){
     do{
-        a[i] = prompt("Введите число.", "");
-    }while( isNaN(a[i]) || a[i] == null || a[i].trim() === "" || a[i] <= 0);
+        a[i] = prompt("Введите число >= 0 .", "");
+    }while( isNaN(a[i]) || a[i] == null || a[i] === "" || a[i] < 0);
     a[i] = Number(a[i]);
 }
 
