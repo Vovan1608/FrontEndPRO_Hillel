@@ -15,13 +15,8 @@ for (var i = 0; i < n; i++){
 
 console.log(a);
 
-var max = Math.max( ...a );
-var min = Math.min( ...a );
-
-console.log( min, max );
-
-var minIndex = a.lastIndexOf( min, a.length - 1 );
-var maxIndex = a.lastIndexOf( max, a.length - 1 );
+var minIndex = a.lastIndexOf( Math.min( ...a ), a.length - 1 );
+var maxIndex = a.lastIndexOf( Math.max( ...a ), a.length - 1 );
 
 if( minIndex > maxIndex ){
     [minIndex, maxIndex] = [maxIndex, minIndex];
