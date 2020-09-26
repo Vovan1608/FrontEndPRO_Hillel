@@ -4,11 +4,12 @@
 вычисляется так: 1 * 2 * 3 * 4 * 5 = 120
 */
 
-// По умолчанию вводим только числа и целые
+do{
+	var number = prompt("Введите целое число > 0","5");
+}while ( isNaN(number) || number == null || number.trim() === "" || number == 0);
 
-var num = +prompt("Введите целое число > 0","5");
 var factorialNum = 1;
-for (var i = 2; i <= num; i++){
+for (var i = 2; i <= +number; i++){
 	factorialNum *= i;
 }
 console.log(factorialNum);
