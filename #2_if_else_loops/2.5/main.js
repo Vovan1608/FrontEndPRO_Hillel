@@ -4,25 +4,22 @@
 единицу и само число)
 */
 
-// По умолчанию вводятся целые числа
-var num = +prompt("Введите целое число > 1", "5");
-
-//Проверка на корректность введенного числа
-if(num !== num || num == 0 || num < 2){
-	console.log("Некорректное значение.")
-}
+do {
+	var number = prompt("Введите число", "");
+} while (isNaN(number) || number == null || number.trim() === "" || number < 2);
 
 var count = 0;
 
-for (var i = 2; i < num; i++){
-	if(num % i == 0){
+for (var i = 2; i < Math.sqrt(number); i++) {
+	if (number % i == 0) {
 		count++;
 		break;
 	}
 }
 
-if(count != 0){
-	console.log("Число " + num + " составное.");
-}else{
-	console.log("Число " + num + " простое.");
+if (count != 0) {
+	console.log(`Число ${number} составное.`);
+} else {
+	console.log(`Число ${number} простое.`);
+
 }
