@@ -5,13 +5,13 @@
 
 let a =[1, 2, 3];
 
-
-for (var i = 3; i <= a.length; i++){
-    a[i] = prompt("Введите число.", "");
-    if(a[i] === "&"){
+for (let i = 3; i <= a.length; i++){
+    let b  = prompt("Введите число.", "");
+    if(b !== "&"){
+        a.push(b);
+    }else{
         break;
     }
-    a.push(a[i]);
 }
 
-console.log(a)
+console.log(a); 
