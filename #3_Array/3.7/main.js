@@ -31,10 +31,14 @@ document.write(`<br>---------------------<br>`);
 //3)
 let arr1 = [1, 2, 3, 4, 5, 6];
 
-if (arr1.length % 2 !== 0){
-    arr1.splice( arr1[parseInt(arr1.length / 2)], 1);
-}else{
-    arr1.splice([arr1.length / 2 - 1], 2);
-}
+// if (arr1.length % 2 !== 0){
+//     arr1.splice([parseInt(arr1.length / 2)], 1);
+// }else{
+//     arr1.splice([arr1.length / 2 - 1], 2);
+// }
 
+var center = arr1.length % 2 == 0 ? 2 : 1;
+var position = Math.ceil(arr1.length / 2) - 1;
+
+arr1.splice(position, center);
 console.log(arr1);
