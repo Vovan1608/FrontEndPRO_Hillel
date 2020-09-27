@@ -12,17 +12,18 @@ var count = 0;
 for(var i = 0; i < n; i++){
     a.push( Math.round(Math.random() * 10) );
     
-    if( (i % 2) != 0 && (a[i] % 2) == 0 ){
+    if( (i % 2) !== 0 && (a[i] % 2) === 0 ){
         sum += a[i];
         count++;
     }
 }
 
+console.log(a);
+
 var average = Math.round(sum / count);
 
-if(isNaN(average)){
+if(count == 0){
     average = `В массиве [${a}] нет чётных элементов, стоящих на нечётных местах.`
 }
 
-console.log(a);
 console.log(average);
