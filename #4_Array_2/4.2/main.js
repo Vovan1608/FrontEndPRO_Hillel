@@ -7,23 +7,25 @@
 */
 
 let arr = [];
-
-arr.length = Math.round(Math.random() * 4);
+arr.length = 3;
 
 let sumColumn = 0;
+let sumColumnMin = 0;
+let sumColumnMax = 0;
+let count = 0;
 
 for (let i = 0, arrSize = arr.length; i < arrSize; i++){
     
-    arr[i] = new Array(arrSize);
+    arr[i] = new Array(1);
     
-    for(let j = 0; j < arrSize; j++){
+    for(let j = 0; j <= 0; j++){
+        
         arr[i][j] = Math.round(Math.random() * 10);
+
+        sumColumn += arr[i][j]; 
     }
-
-    sumColumn += arr[i][0];
-
 }
 
 console.log(arr);
-console.log(sumColumn)
-
+console.log(sumColumn);
+console.log(sumColumnMin, sumColumnMax);
