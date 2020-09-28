@@ -17,7 +17,7 @@ if(arr.length % 2 == 0){
     arrSize = arr.length - 1;
 }
 
-for(let i = 0; i < arrSize - 1; i += 2){
+for(let i = 0; i < arrSize; i += 2){
     [ arr[i], arr[i + 1] ] = [ arr[i + 1], arr[i] ];
 }
 
