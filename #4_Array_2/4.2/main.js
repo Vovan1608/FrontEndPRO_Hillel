@@ -10,10 +10,6 @@ let arr = [];
 arr.length = 4;
 let sumColumn = [];
 
-for (let i = 0, sizeSumCol = arr.length; i < sizeSumCol; i++) {
-	sumColumn[i] = 0;
-}
-
 for (let i = 0, arrSize = arr.length; i < arrSize; i++){
     
     arr[i] = new Array(arrSize);
@@ -22,7 +18,12 @@ for (let i = 0, arrSize = arr.length; i < arrSize; i++){
         
         arr[i][j] = Math.round(Math.random() * 10);
         
-        sumColumn[j] += arr[i][j];   
+        if(i === 0){
+            sumColumn[j] = arr[i][j]; 
+        }
+        if(i > 0){
+            sumColumn[j] += arr[i][j];
+        }  
     }
 }
 
