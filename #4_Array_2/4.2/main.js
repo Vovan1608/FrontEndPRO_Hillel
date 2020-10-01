@@ -7,8 +7,8 @@
 */
 
 let arr = [];
-arr.length = 4;
-let sumColumn = [];
+arr.length = 3;
+let sumColumn = new Array(arr.length);
 
 for (let i = 0, arrSize = arr.length; i < arrSize; i++){
     
@@ -18,17 +18,17 @@ for (let i = 0, arrSize = arr.length; i < arrSize; i++){
         
         arr[i][j] = Math.round(Math.random() * 10);
         
-        if(i === 0){
-            sumColumn[j] = arr[i][j]; 
+        if(isNaN(sumColumn[j])){
+            sumColumn[j] = 0;
         }
-        if(i > 0){
-            sumColumn[j] += arr[i][j];
-        }  
+
+        sumColumn[j] += arr[i][j];
     }
 }
 
 console.log(arr);
 console.log(sumColumn);
+
 
 let min = sumColumn.indexOf(Math.min(...sumColumn));
 let max = sumColumn.indexOf(Math.max(...sumColumn));
