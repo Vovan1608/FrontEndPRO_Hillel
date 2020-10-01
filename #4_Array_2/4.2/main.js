@@ -22,20 +22,11 @@ for (let i = 0, arrSize = arr.length; i < arrSize; i++){
         
         if(j === 0){
             sum += arr[i][j];
-            min = sum;
-            max = sum;
-            continue;
         }
-
     }
+
+    
 }
 
 console.log(arr);
 console.log(sum);
-
-
-// let min = sumColumn.indexOf(Math.min(...sumColumn));
-// let max = sumColumn.indexOf(Math.max(...sumColumn));
-
-// console.log(`Наименьшая сумма элементов находится в колонке ${min + 1}`);
-// console.log(`Наибольшая сумма элементов находится в колонке ${max + 1}`);
