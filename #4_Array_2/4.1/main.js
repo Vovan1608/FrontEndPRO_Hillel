@@ -1,4 +1,5 @@
-﻿/*
+﻿"use strict";
+/*
 В одномерном массиве произвести замену:
 1. 1 элемент поменять со 2
 2. 3 элемент поменять с 4
@@ -7,11 +8,10 @@
 Если массив непарный - последний элемент не трогать
 */
 
-let arr = [1, 2, 3, 4, 5, 6, 7];
+let arr = [1, 2, 3, 4, 5, 6];
 
-let arrSize = (arr.length % 2 == 0) ? arr.length : arr.length - 1;
-
-for(let i = 0; i < arrSize; i += 2){
+for(let i = 0, arrSize = arr.length; i < arrSize - 1; i += 2){
+    
     [ arr[i], arr[i + 1] ] = [ arr[i + 1], arr[i] ];
 }
 
