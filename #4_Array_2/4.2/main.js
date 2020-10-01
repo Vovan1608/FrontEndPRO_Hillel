@@ -8,7 +8,9 @@
 
 let arr = [];
 arr.length = 3;
-let sumColumn = new Array(arr.length);
+let sum = 0;
+let min = 0;
+let max = 0;
 
 for (let i = 0, arrSize = arr.length; i < arrSize; i++){
     
@@ -18,20 +20,22 @@ for (let i = 0, arrSize = arr.length; i < arrSize; i++){
         
         arr[i][j] = Math.round(Math.random() * 10);
         
-        if(isNaN(sumColumn[j])){
-            sumColumn[j] = 0;
+        if(j === 0){
+            sum += arr[i][j];
+            min = sum;
+            max = sum;
+            continue;
         }
 
-        sumColumn[j] += arr[i][j];
     }
 }
 
 console.log(arr);
-console.log(sumColumn);
+console.log(sum);
 
 
-let min = sumColumn.indexOf(Math.min(...sumColumn));
-let max = sumColumn.indexOf(Math.max(...sumColumn));
+// let min = sumColumn.indexOf(Math.min(...sumColumn));
+// let max = sumColumn.indexOf(Math.max(...sumColumn));
 
-console.log(`Наименьшая сумма элементов находится в колонке ${min + 1}`);
-console.log(`Наибольшая сумма элементов находится в колонке ${max + 1}`);
+// console.log(`Наименьшая сумма элементов находится в колонке ${min + 1}`);
+// console.log(`Наибольшая сумма элементов находится в колонке ${max + 1}`);
