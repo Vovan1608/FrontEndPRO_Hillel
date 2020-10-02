@@ -15,23 +15,33 @@ function isNumber(value){
     }
 }
 
-function isString(znak){
-    if(znak === "+" ||  "-" || "*" || "/" || "%" || "^"){
-        return true;
-    }else{
-        return false;
+function isZnak(znak){
+
+    switch(znak){
+        case "+":
+        case "-":
+        case "*":
+        case "/":
+        case "%":
+        case "^":
+            return true;
+            break;
+        default:
+            return false;
     }
 }
 
 function doMath (x, znak, y){
-    if(isNumber(x) && isNumber(y) && isString(znak)){
-
+    
+    if( isNumber(x) && isNumber(y) && isZnak(znak)){
+        return eval(`${x} ${znak} ${y}`);
+    }else{
+        return "uncorrect value";
     }
 }
 
-let zn = isString("3");
-console.log(zn)
+let s = doMath(2, "+", 5); // 7
+console.log(s);
 
-/*
---------------------еоды UTF-8 для +, -, * и т.д.
-*/
+let minus = doMath(9, "-", 7); // 2
+console.log(minus);
