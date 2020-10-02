@@ -9,12 +9,12 @@ function mul (){
     
     let res = 1;
     
-    for(let i = 0, size = arguments.length; i < size; i++){
-        res *= arguments[i]; 
+    for(let i of arguments){
+        res *= i;
     }
 
     return res;
 }
 
-let res = mul (3, 4, 5, 1, 10);
+let res = mul (3, 4, 5, 10);
 console.log(res);
