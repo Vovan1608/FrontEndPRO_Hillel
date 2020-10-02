@@ -34,7 +34,6 @@ function isZnak(znak){
         case "%":
         case "^":
             return true;
-            break;
         default:
             return false;
     }
