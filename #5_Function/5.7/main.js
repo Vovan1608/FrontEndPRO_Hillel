@@ -10,21 +10,26 @@
 парный: [1, 2, 3, 4, 5, 6] -> 3, 4
 */
 
-function getCentralElements (arrFirst, arrSecond) {
+function getCentralElements () {
     
     var mass = [];
 
-    for(var i = 0; i < arguments.length; i++) {
-        var rem = getCutElems(arguments[i]);
+    for(let i of arguments){
+        var rem = getCutElems(i);
         mass = mass.concat(rem);
     }
+    
+    // for(var i = 0; i < arguments.length; i++) {
+    //     var rem = getCutElems(arguments[i]);
+    //     mass = mass.concat(rem);
+    // }
     console.log(mass, 'mass');
 }
 
 
 function getCutElems(arr) {
     
-    var count = arr.length % 2 == 0 ? 2 : 1;
+    var count = (arr.length % 2 == 0) ? 2 : 1;
     var position = Math.ceil(arr.length / 2) - 1;
     var rem = arr.splice(position, count);
 
