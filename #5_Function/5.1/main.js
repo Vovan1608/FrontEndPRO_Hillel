@@ -33,35 +33,11 @@ let dgh;
 console.log(fillingArrey(dgh));// arrSize is not a correct
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 /*
 А вот если пробовать console.log( fillingArrey( dgh ) ) - ПАРАМЕТР без кавычек,
 то выдает ошибку Uncaught ReferenceError: dgh is not defined
 хотя проверка typeof value === "undefined" есть.
 
-И в консоли     typeof dgh === "undefined"
-                true
-
-Если пробовать
-let dgh;
-console.log(fillingArrey(dgh)), то проверка срабатывает;
+Да потому, что dgh НЕ СУЩЕСТВУЕТ В ПАМЯТИ, а с let dgh- хотябы память выделилась под 
+переменную и она undefined.
 */
