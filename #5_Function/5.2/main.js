@@ -6,6 +6,12 @@
 большая - должен вернутся функцией.
 */
 
+function checkArrs (arr1, arr2) {
+
+    return ( getSumElemArray(arr1) > getSumElemArray(arr2) ) ? arr1 : arr2;
+
+}
+
 function isNumber(value){
     if(isNaN(value) || value === "" || typeof value === "boolean" || typeof value === "string"){
         return false;
@@ -24,12 +30,6 @@ function getSumElemArray(arr){
         }
     }
     return sum;
-}
-
-function checkArrs (arr1, arr2) {
-
-    return ( getSumElemArray(arr1) > getSumElemArray(arr2) ) ? arr1 : arr2;
-
 }
 
 let arr1 = [1, "1ghjk", 2, null, undefined, 3, 1];
