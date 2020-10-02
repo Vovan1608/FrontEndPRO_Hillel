@@ -10,8 +10,11 @@
 function deleteValue(str, arr){
 
     let temp = str.split("");
+    
     for (let i = temp.length - 1 ; i > 0; i--){
+        
         for (let j = 0, arrSize = arr.length; j < arrSize; j++){
+            
             if(temp[i] === arr[j]){
                 temp.splice(i, 1);
             }
