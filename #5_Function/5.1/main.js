@@ -4,14 +4,6 @@
 Написать функцию заполнения массива. Имя произвольное.
 */
 
-function isCoorectArrLength(value){
-    if(value <= 0 || isNaN(value) || value === null || value === "" || typeof value === "undefined"){
-        return false;
-    }else{
-        return true;
-    }
-}
-
 function fillingArrey(arrSize){
     
     if( isCoorectArrLength(arrSize)){
@@ -26,11 +18,40 @@ function fillingArrey(arrSize){
     }
 }
 
+function isCoorectArrLength(val){
+    if(val <= 0 || isNaN(val) || val === null || val === "" || typeof val === "undefined"){
+        return false;
+    }else{
+        return true;
+    }
+}
+
 let arr = fillingArrey(2);
 console.log(arr); // заполняем массив из двух элементов
 
 let dgh;
 console.log(fillingArrey(dgh));// arrSize is not a correct
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 /*
 А вот если пробовать console.log( fillingArrey( dgh ) ) - ПАРАМЕТР без кавычек,
