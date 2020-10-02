@@ -28,16 +28,15 @@ function getSumElemArray(arr){
 
 function checkArrs (arr1, arr2) {
 
-    let check = ( getSumElemArray(arr1) > getSumElemArray(arr2) ) ? arr1 : arr2;
+    return ( getSumElemArray(arr1) > getSumElemArray(arr2) ) ? arr1 : arr2;
 
-    return check;
 }
 
 let arr1 = [1, "1ghjk", 2, null, undefined, 3, 1];
 let arr2 = [4, 5, "rty", 1, true, "", NaN, " "];
 
 let c = checkArrs(arr1, arr2);
-console.log(c);
+console.log(c); // [4, 5, "rty", 1, true, "", NaN, " "]
 
 console.log(getSumElemArray(arr1)); // 7
 console.log(getSumElemArray(arr2));// 10
