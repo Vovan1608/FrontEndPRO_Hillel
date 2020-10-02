@@ -7,21 +7,42 @@
 'func("hello world", ['l', 'd'])' вернет нам "heo wor"
 */
 
-function deleteValue(str, arr){
+function deleteChar(str, arr){
 
-    let temp = str.split("");
-    
-    for (let i = temp.length - 1 ; i > 0; i--){
+    if(isString(str) && isArray(arr)){
         
-        for (let j = 0, arrSize = arr.length; j < arrSize; j++){
+        let temp = str.split("");
+    
+        for (let i = temp.length; i >= 0; i--){
             
-            if(temp[i] === arr[j]){
-                temp.splice(i, 1);
+            for (let j = 0, arrSize = arr.length; j < arrSize; j++){
+                
+                if(temp[i] === arr[j]){
+                    temp.splice(i, 1);
+                }
             }
         }
+        return temp.join("");
+    }else{
+        return "incorrect value"
     }
-    return temp.join("");
 }
 
-let d = deleteValue("hello world", ['l', 'd']); // вернет нам "heo wor"
+function isString(str){
+    if(typeof str === "string"){
+        return true 
+    }else{
+        return false
+    }
+}
+
+function isArray(arr){
+    if(arr.constructor === Array){
+        return true;
+    }else{
+        return false;
+    }
+}
+
+let d = deleteChar("hello world", ['l', 'd']); // вернет нам "heo wor"
 console.log(d)
