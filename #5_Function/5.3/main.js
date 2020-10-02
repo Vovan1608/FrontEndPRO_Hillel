@@ -7,8 +7,17 @@
 действия, указанного в переменной znak.
 */
 
-function isNumber(value){
-    if(isNaN(value) || value === "" || typeof value === "boolean" || typeof value === "string" || value === null){
+function doMath (x, znak, y){
+    
+    if( isNumber(x) && isNumber(y) && isZnak(znak)){
+        return eval(`${x} ${znak} ${y}`);
+    }else{
+        return "incorrect value";
+    }
+}
+
+function isNumber(val){
+    if(isNaN(val) || val === "" || typeof val === "boolean" || typeof val === "string" || val === null){
         return false;
     }else{
         return true;
@@ -28,15 +37,6 @@ function isZnak(znak){
             break;
         default:
             return false;
-    }
-}
-
-function doMath (x, znak, y){
-    
-    if( isNumber(x) && isNumber(y) && isZnak(znak)){
-        return eval(`${x} ${znak} ${y}`);
-    }else{
-        return "uncorrect value";
     }
 }
 
