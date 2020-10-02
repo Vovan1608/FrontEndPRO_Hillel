@@ -11,8 +11,8 @@ console.log(filter(input, isEven)); // [2, 4, 6]
 
 function isEven(x) { return x % 2 == 0; }
 
-function filter(arr, check){
-
+function filter(arr, isEven){
+    
     let input = [];
 
     for(let i of arr){
