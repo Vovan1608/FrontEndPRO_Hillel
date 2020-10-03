@@ -13,14 +13,19 @@ function deleteChar(str, arr){
         
         let temp = str.split("");
     
-        for (let i = temp.length; i >= 0; i--){
+        for (let i = temp.length - 1; i >= 0; i--){
             
-            for (let j = 0, arrSize = arr.length; j < arrSize; j++){
-                
-                if(temp[i] === arr[j]){
+            for(let j of arr){ // не такой гибкий как  for, но запись короче 
+                if(temp[i] === j){
                     temp.splice(i, 1);
                 }
             }
+            // for (let j = 0, arrSize = arr.length; j < arrSize; j++){
+                
+            //     if(temp[i] === arr[j]){
+            //         temp.splice(i, 1);
+            //     }
+            // }
         }
         return temp.join("");
     }else{
@@ -37,7 +42,7 @@ function isString(str){
 }
 
 function isArray(arr){
-    if(arr.constructor === Array){
+    if(Array.isArray(arr)){
         return true;
     }else{
         return false;
