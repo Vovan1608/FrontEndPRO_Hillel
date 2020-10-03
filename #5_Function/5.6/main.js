@@ -7,6 +7,12 @@
 
 function mul (){
     
+    // 1-st way
+    // for (var res = 1, i = 0; i < arguments.length; i++) {
+    //     res *= arguments[i];
+    // }
+    
+    // 2-nd way
     let res = 1;
     
     for(let i of arguments){
