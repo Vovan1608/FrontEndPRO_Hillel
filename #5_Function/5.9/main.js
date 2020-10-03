@@ -19,7 +19,7 @@ function expNum(num, pow, callback){
     }
 }
 
-function elevate (num, pow) {
+function getPow (num, pow) {
 
     if(isCorrectNumber(num) && isCorrectNumber(pow)){
         return (num ** pow);
@@ -68,5 +68,5 @@ function getDiv(a, b){
     }
 }
 
-let e = expNum(2, 3, getMul);
+let e = expNum(2, 3, getPow);
 console.log(e);
