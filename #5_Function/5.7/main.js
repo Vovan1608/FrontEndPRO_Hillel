@@ -14,11 +14,13 @@ function getCentralElements () {
     
     var mass = [];
 
+    // 1-st way
     for(let i of arguments){
         var rem = getCutElems(i);
         mass = mass.concat(rem);
     }
     
+    //2-nd way
     // for(var i = 0; i < arguments.length; i++) {
     //     var rem = getCutElems(arguments[i]);
     //     mass = mass.concat(rem);
