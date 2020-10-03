@@ -16,23 +16,23 @@ function isEven(x) {
 function filter(arr, isEven){
     
     if(isArray(arr) && isFunction(isEven)){
+        
         let input = [];
 
-    for(let i of arr){
-        if(isEven(i)){
-            input.push(i);
+        for(let i of arr){
+            if(isEven(i)){
+                input.push(i);
+            }
         }
-    }
-    return input;
-    
+        return input;
+        
     }else{
         return "incorrect parameters"
     }
-    
 }
 
 function isArray(arr){
-    if(arr.constructor === Array){
+    if(Array.isArray(arr)){
         return true;
     }else{
         return false;
