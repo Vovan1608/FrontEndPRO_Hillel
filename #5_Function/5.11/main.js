@@ -22,7 +22,7 @@ let mutationValue = function (value) {
 }
 
 function isArray(arr){
-    if(arr.constructor === Array){
+    if(Array.isArray(arr)){
         return true;
     }else{
         return false;
