@@ -68,5 +68,7 @@ function getDiv(a, b){
     }
 }
 
+
+
 let e = expNum(2, 0, getDiv);
 console.log(e);
