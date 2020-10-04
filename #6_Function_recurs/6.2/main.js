@@ -10,11 +10,7 @@ sumTo(3) = 3 + 2 + 1 = 6
 
 function sumTo(n){
     
-    if(n === 1){
-        return 1;
-    }else{
-        return (n + sumTo(n - 1));
-    }
+    return (n === 1) ? 1 : (n + sumTo(n - 1));
 }
 
 console.log(sumTo(3));
