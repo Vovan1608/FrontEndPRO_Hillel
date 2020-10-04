@@ -8,9 +8,11 @@ row (5) // 5 4 3 2 1
 
 function row(n){
 
-    console.log(n)
+    console.log(n)// в обратном порядке
     
     n === 1 ? n : row (n - 1);
+
+    // console.log(n)// в прямом порядке
 }
 
 row(5);
