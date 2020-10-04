@@ -61,12 +61,12 @@ function getMul(a, b){
 }
 
 function getDiv(a, b){
-    if(isCorrectNumber(a) && isCorrectNumber(b)){
+    if(isCorrectNumber(a) && isCorrectNumber(b) && b !== 0){
         return a / b;
     }else{
         return "incorrect value a or b"
     }
 }
 
-let e = expNum(2, 3, getPow);
+let e = expNum(2, 0, getDiv);
 console.log(e);
