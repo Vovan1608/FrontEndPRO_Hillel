@@ -7,7 +7,7 @@ Cоздать конвертер-функцию которая получает 
 массив: [1,2,3,3.1,4,5,6,7,8]
 */
 
-
+let mutArr = [];
 
 function mutationArray(arr){
     
@@ -15,17 +15,12 @@ function mutationArray(arr){
         if(Array.isArray(arr[i])){
             mutationArray(arr[i]);
         }else{
-            
-            mutArray.push(arr[i]);
-            console.log(arr[i]);
+            mutArr.push(arr[i]);
         }
     }
-    return arr;
+    return mutArr;
 }
 
-
 let mass = [[1,2,3, [3.1]], 4, [5,6, [7, 8]]];
-let mutArr = [];
-// mutationArray(mass)
-console.log(mutationArray(mass))
-// console.log(mutationArray(mass));
+let changed = [];
+console.log(mutationArray(mass, changed));
