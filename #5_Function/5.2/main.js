@@ -11,7 +11,7 @@ function checkArrs (arr1, arr2) {
     if(isArray(arr1) && isArray(arr2)){
         return ( getSumElemArray(arr1) > getSumElemArray(arr2) ) ? arr1 : arr2;
     }else{
-        return "incorrect arr"
+        throw new Error("incorrect arr");
     }
 }
 
@@ -23,23 +23,14 @@ function isNumber(value){
     }
 }
 
-function getSumElemArray(arr){
-    
-    // 1-st way
-    let sum = arr.reduce( (sum, next) => {
-        if( isNumber( next) ){
-            sum += next;
-        }
-        return sum;
-    }, 0);
-
-    // 2-nd way
-    // for (let i = 0, arrSize = arr.length; i < arrSize; i++){
+function getSumElemArray(arr1, arr2){
+    arrSize = (arr1.length > arr2.length) ? arr1.length : arr2.length; 
+    for (let i = 0, arrSize = arr.length; i < arrSize; i++){
         
-    //     if( isNumber(arr[i]) ){
-    //         sum += arr[i]
-    //     }
-    // }
+        if( isNumber(arr[i]) ){
+            sum += arr[i]
+        }
+    }
     return sum;
 }
 

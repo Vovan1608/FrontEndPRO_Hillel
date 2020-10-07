@@ -14,7 +14,7 @@ function fillingArrey(arrSize){
         }
         return arr;
     }else{
-        return "arrSize is not a correct";
+        throw new Error("arrSize is not a correct");
     }
 }
 
