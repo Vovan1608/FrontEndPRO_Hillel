@@ -24,11 +24,14 @@ function isNumber(value){
 }
 
 function getSumElemArray(arr1, arr2){
-    arrSize = (arr1.length > arr2.length) ? arr1.length : arr2.length; 
-    for (let i = 0, arrSize = arr.length; i < arrSize; i++){
+    let arrSize = (arr1.length > arr2.length) ? arr1.length : arr2.length; 
+    for (let i = 0; i < arrSize; i++){
         
-        if( isNumber(arr[i]) ){
-            sum += arr[i]
+        if( isNumber(arr1[i]) ){
+            sum1 += arr1[i]
+        }
+        if(isNumber(arr2[i])){
+            sum2 += arr2[i];
         }
     }
     return sum;
