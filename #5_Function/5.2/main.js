@@ -6,13 +6,11 @@
 большая - должен вернутся функцией.
 */
 
-function checkArrs (arr1, arr2) {
+function checkArrs () {
 
-    if(isArray(arr1) && isArray(arr2)){
-        return ( getSumElemArray(arr1) > getSumElemArray(arr2) ) ? arr1 : arr2;
-    }else{
-        throw new Error("incorrect arr");
-    }
+    // let arrForCheck =  getSumElemArray(arr1, arr2);
+
+    return ( getSumElemArray(arr1, arr2)[0] > getSumElemArray(arr1, arr2)[1] ) ? arr1 : arr2;
 }
 
 function isNumber(value){
@@ -24,17 +22,29 @@ function isNumber(value){
 }
 
 function getSumElemArray(arr1, arr2){
-    let arrSize = (arr1.length > arr2.length) ? arr1.length : arr2.length; 
-    for (let i = 0; i < arrSize; i++){
+    
+    if(isArray(arr1) && isArray(arr2)){
+        let arrSize = ( arr1.length > arr2.length ) ? arr1.length : arr2.length;
         
-        if( isNumber(arr1[i]) ){
-            sum1 += arr1[i]
+        let sumElemArr1 = 0; 
+        let sumElemArr2 = 0;
+        
+        for (let i = 0; i < arrSize; i++){
+            
+            if( isNumber(arr1[i]) ){
+                sumElemArr1 += arr1[i]
+            }
+
+            if(isNumber(arr2[i])){
+                sumElemArr2 += arr2[i];
+            }
         }
-        if(isNumber(arr2[i])){
-            sum2 += arr2[i];
-        }
+        return [sumElemArr1, sumElemArr2];
+    }else{
+
+        throw new Error("incorrect arr");
     }
-    return sum;
+    
 }
 
 function isArray(arr){
