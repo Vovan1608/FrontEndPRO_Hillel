@@ -9,8 +9,27 @@
 
 function doMath (x, znak, y){
     
-    if( isNumber(x) && isNumber(y) && isZnak(znak)){
-        return eval(x + znak + y); // or `${x} ${znak} ${y}` 
+    if( isNumber(x) && isNumber(y) && isZnak(znak) ){
+        switch(znak){
+            case "+":
+                return x + y;
+            case "-": 
+                return x - y;
+            case "*":
+                return x * y;
+            case "/":
+                if( y !== 0){
+                    return x / y;
+                }else{
+                    throw new Error("incorrect value y");
+                }
+            case "%":
+                return x % y;
+            case "^":
+                return x ^ y;
+        }
+        
+        // return eval(x + znak + y); // or `${x} ${znak} ${y}` 
     }else{
         throw new Error("incorrect value");
     }

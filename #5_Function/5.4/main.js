@@ -15,11 +15,15 @@ function deleteChar(str, arr){
     
         for (let i = temp.length - 1; i >= 0; i--){
             
-            for(let j of arr){ // не такой гибкий как  for, но запись короче 
-                if(temp[i] === j){
-                    temp.splice(i, 1);
-                }
+            if (str.includes(arr[i])){
+                str.indexOf(arr[i]);
+                console.log(str.indexOf(i))
             }
+            // for(let j of arr){ // не такой гибкий как  for, но запись короче 
+            //     if(temp[i] === j){
+            //         temp.splice(i, 1);
+            //     }
+            // }
             // for (let j = 0, arrSize = arr.length; j < arrSize; j++){
                 
             //     if(temp[i] === arr[j]){
@@ -29,7 +33,7 @@ function deleteChar(str, arr){
         }
         return temp.join("");
     }else{
-        return "incorrect value"
+        throw new Error("incorrect value");
     }
 }
 
