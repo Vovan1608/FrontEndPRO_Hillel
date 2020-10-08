@@ -9,7 +9,7 @@ function copyArr(arr){
     if(isArray(arr)){
         return arr.map( (index) => index);
     }else{
-        return "arr is not arrey"
+        throw new Error("array is not array");
     }
     
 }
