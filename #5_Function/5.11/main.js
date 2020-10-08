@@ -12,7 +12,7 @@ function copyArr(arr, func){
     if(isArray(arr) && isFunction(func)){
         return arr.map( (i) => mutationValue(i));
     }else{
-        return "incorrect"
+        throw new Error("incorrect arr or func");
     }
     
 }
