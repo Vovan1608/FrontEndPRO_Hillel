@@ -15,7 +15,7 @@ function expNum(num, pow, callback){
     if(isFunction(callback)){
         return callback(num, pow);
     }else{
-        return "callback is not a function";
+        throw new Error("callback is not a function");
     }
 }
 
@@ -24,7 +24,7 @@ function getPow (num, pow) {
     if(isCorrectNumber(num) && isCorrectNumber(pow)){
         return (num ** pow);
     }else{
-        return "incorrect value num or pow"
+        throw new Error("incorrect value num or pow");
     }
 }
 
@@ -48,7 +48,7 @@ function getSum(a, b){
     if(isCorrectNumber(a) && isCorrectNumber(b)){
         return a + b;
     }else{
-        return "incorrect value a or b"
+        throw new Error("incorrect value a or b");
     }
 }
 
@@ -56,7 +56,7 @@ function getMul(a, b){
     if(isCorrectNumber(a) && isCorrectNumber(b)){
         return a * b;
     }else{
-        return "incorrect value a or b"
+        throw new Error("incorrect value a or b");
     }
 }
 
@@ -64,7 +64,7 @@ function getDiv(a, b){
     if(isCorrectNumber(a) && isCorrectNumber(b) && b !== 0){
         return a / b;
     }else{
-        return "incorrect value a or b"
+        throw new Error("incorrect value a or b");
     }
 }
 
