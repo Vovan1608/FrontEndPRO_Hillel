@@ -15,7 +15,7 @@ function deleteChar(str, arr){
     
         for (let i = temp.length - 1; i >= 0; i--){
             
-            if(temp[i] === arr.some()){
+            if( arr.includes(temp[i])){
                 temp.splice(i, 1);
             }
         }
