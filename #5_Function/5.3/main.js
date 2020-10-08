@@ -12,7 +12,7 @@ function doMath (x, znak, y){
     if( isNumber(x) && isNumber(y) && isZnak(znak)){
         return eval(x + znak + y); // or `${x} ${znak} ${y}` 
     }else{
-        throw new Error("incorrect arr");
+        throw new Error("incorrect value");
     }
 }
 
