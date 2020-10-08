@@ -1,13 +1,21 @@
 ﻿"use strict";
 
 /*
-Вывести в консоль последовательность чисел в обратном порядке, 
-используя рекурсивный вызов функиции
-row (5) // 5 4 3 2 1
+Написать функцию convert(obj), он получает аргументом obj. 
+Функция должна вернуть новый объект: newObj = { a: 10, b: 12, f: 13 }
 */
 
-function getPerson(names, from, to){
-    let person = {
-        name: names, 
-        age: Math.random() * (to - )}
+function convert(obj){
+    
+    return { a: 10, b: 12, f: 13 };
 }
+
+let any = {
+    a: 456,
+    v: 123,
+    s: 1235
+
+}
+
+let res = convert(any);
+console.log(res);
