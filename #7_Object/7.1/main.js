@@ -1,21 +1,39 @@
 ﻿"use strict";
 
 /*
-Написать функцию convert(obj), он получает аргументом obj. 
-Функция должна вернуть новый объект: newObj = { a: 10, b: 12, f: 13 }
+Создать объект с такой структурой: obj = 
+{ a: 10, b: 12, c: { f: 13, g: { m: 20} } } 
+Написать функцию convert(obj), он получает 
+аргументом obj. Функция должна вернуть новый 
+объект: newObj = { a: 10, b: 12, f: 13, m: 20 }
 */
 
-function convert(obj){
+function convert(obj, newObj){
     
-    return { a: 10, b: 12, f: 13 };
+    for(let key in obj){
+
+        if(typeof obj[key] === "object"){
+            
+            convert(obj[key], newObj);
+            
+        }else{
+            newObj[key] = obj[key];
+        }
+    }
+    return newObj;
 }
 
-let any = {
-    a: 456,
-    v: 123,
-    s: 1235
-
+let any = { 
+    a: 10, 
+    b: 12, 
+    c: { 
+        f: 13, 
+        g: { 
+            m: 20
+        } 
+    } 
 }
+let newObj = {};
+let res = convert(any, newObj);
 
-let res = convert(any);
 console.log(res);
