@@ -6,7 +6,7 @@
 большая - должен вернутся функцией.
 */
 
-function checkArrs () {
+function checkArrs (arr1, arr2) {
 
     // let arrForCheck =  getSumElemArray(arr1, arr2);
 
