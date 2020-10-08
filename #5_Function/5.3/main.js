@@ -12,7 +12,7 @@ function doMath (x, znak, y){
     if( isNumber(x) && isNumber(y) && isZnak(znak)){
         return eval(x + znak + y); // or `${x} ${znak} ${y}` 
     }else{
-        return "incorrect value";
+        throw new Error("incorrect arr");
     }
 }
 
@@ -25,17 +25,10 @@ function isNumber(val){
 }
 
 function isZnak(znak){
-
-    switch(znak){
-        case "+":
-        case "-":
-        case "*":
-        case "/":
-        case "%":
-        case "^":
-            return true;
-        default:
-            return false;
+    if(["+", "-", "*", "/", "%", "^"].includes(znak)){
+        return true;
+    }else{
+        return false;
     }
 }
 
