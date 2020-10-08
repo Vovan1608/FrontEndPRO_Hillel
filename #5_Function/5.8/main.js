@@ -11,7 +11,7 @@ function expNum(num, pow, callback){
     if(isFunction(callback)){
         return callback(num, pow);
     }else{
-        return "callback is not a function";
+        throw new Error("callback is not a function");
     }
 }
 
@@ -20,7 +20,7 @@ function elevate (num, pow) {
     if(isCorrectNumber(num) && isCorrectNumber(pow)){
         return (num ** pow);
     }else{
-        return "incorrect value num or pow"
+        throw new Error("incorrect value num or pow");
     }
 }
 
