@@ -27,7 +27,7 @@ function filter(arr, isEven){
         return input;
         
     }else{
-        return "incorrect parameters"
+        throw new Error("incorrect parameters");
     }
 }
 
