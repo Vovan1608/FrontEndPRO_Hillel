@@ -11,7 +11,7 @@ function assignObjects() {
     for(let i = 1, size = arguments.length; i < size; i += 1) {
         
             for(let key in arguments[i]) {
-            arguments[0][key] = arguments[i][key];
+                arguments[0][key] = arguments[i][key];
         }
     }
 
