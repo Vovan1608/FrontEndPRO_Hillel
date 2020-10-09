@@ -9,13 +9,9 @@
 */
 
 function convert(obj, newObj){
-    
     for(let key in obj){
-
         if(typeof obj[key] === "object"){
-            
             convert(obj[key], newObj);
-            
         }else{
             newObj[key] = obj[key];
         }
@@ -35,5 +31,4 @@ let any = {
 }
 let newObj = {};
 let res = convert(any, newObj);
-
 console.log(res);
