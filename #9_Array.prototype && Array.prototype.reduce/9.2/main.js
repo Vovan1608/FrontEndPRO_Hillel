@@ -120,8 +120,9 @@ const farmAccountLog = [
         age: 3
     }
 ].reduce( (accumulator, curent) => {
-    
-    return Object.assign(accumulator, {[curent.family]: 1})
+    let count = 1;
+    if([curent.family])
+    return Object.assign(accumulator, {[curent.family]: count});
 }, {});
 
 console.log(farmAccountLog);
