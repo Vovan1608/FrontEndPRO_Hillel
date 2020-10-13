@@ -14,7 +14,7 @@ function convert(obj, newObj) {
         
         if(typeof obj[key] === "object") {
             convert(obj[key], newObj);
-        }else{
+        } else {
             newObj[key] = obj[key];
         }
     }
@@ -31,7 +31,7 @@ let any = {
             m: 20
         } 
     } 
-}
+};
 let newObj = {};
 
 let res = convert(any, newObj);
