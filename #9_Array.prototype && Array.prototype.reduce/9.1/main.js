@@ -11,15 +11,14 @@
 */
 
 function slice(array, start = 0, end = array.length) {
-    start = (start >= 0) ? start : (array.length + start);
-    end = (end > array.length) ? array.length : 
-          (end > 0) ?  end : (array.length + end);
+    start = getIndexForSlice(array, start);
+    end = getIndexForSlice(array, end);
     let newArray = [];
 
     if(isArray(array)) {
 
         for (let i = start; i < end; i += 1) {
-            newArray[newArray.length] = array[i];
+            push(newArray, array[i]);
         }
     }
     
@@ -28,6 +27,19 @@ function slice(array, start = 0, end = array.length) {
 
 function isArray(array) {
     return Array.isArray(array);
+}
+
+function getIndexForSlice(array, index) {
+    index = (index > array.length) ? array.length : 
+            (index >= 0) ?  index : (array.length + index);
+    
+    return index;
+}
+
+function push(array, element) {
+    array[array.length] = element;
+
+    return array.length;
 }
 
 let array = [1, 2, 3, 4, 5, 6, 7, 8];
