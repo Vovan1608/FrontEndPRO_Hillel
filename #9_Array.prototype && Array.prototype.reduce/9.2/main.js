@@ -119,10 +119,10 @@ const farmAccountLog = [
         gender: "♂",
         age: 3
     }
-].reduce( (accumulator, curent) => {
-    let count = 1;
-    if([curent.family])
-    return Object.assign(accumulator, {[curent.family]: count});
+].reduce( (acc, curent) => {
+    acc[curent.family] = ([curent.family] in acc) ? (acc[curent.family] + 1) : 1; 
+
+    return acc;
 }, {});
 
 console.log(farmAccountLog);
