@@ -10,16 +10,33 @@
 
 function convert(obj, newObj) {
     
-    for(let key in obj){
+    // for(let key in obj){
         
-        if(typeof obj[key] === "object") {
-            convert(obj[key], newObj);
-        } else {
-            newObj[key] = obj[key];
-        }
-    }
+    //     if(typeof obj[key] === "object") {
+    //         convert(obj[key], newObj);
+    //     } else {
+    //         newObj[key] = obj[key];
+    //     }
+    // }
     
+    // Object.entries - позволяет гарантированно перебрать объект
+    // for(let key in obj) - переберет еще и prototype 
+    Object.entries(obj).forEach( ([key, element]) => {
+        
+        if(isObject(element)) {
+            convert(element, newObj);
+        } else {
+            newObj[key] = element;
+        }
+    });
+
     return newObj;
+}
+
+function isObject(object) {
+    if(typeof object === "object" && object !== null && !Array.isArray(object)) {
+        return true;
+    }
 }
 
 let any = { 
