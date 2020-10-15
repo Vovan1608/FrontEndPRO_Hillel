@@ -17,22 +17,21 @@ function splice(array, start, deleteCount = 0) {
     deleteCount = (arguments[2] <= array.length - start) ? getIndexForSplice(array, deleteCount) : array.length - start;
     // arrayDeletedVal - то,что функция возвращает (массив из удаленных элементов)
     let arrayDeletedVal = [],
-        tempFirst = slice(array, 0, start),
-        tempSecond = slice(array, start, array.length);
-        
-    // тут впихнул в конец первого временного массива то, что вcтавить 
-    for(let i = 3, size = arguments.length; i < size; i += 1) {
-        push(tempFirst, arguments[i]);
+        arrayTempVal = [];
+    
+    //  
+    for(let i = start; i < deleteCount + start; i += 1) {
+        arrayDeletedVal[arrayDeletedVal.length] = array[i];
     }
+
+
     // тут копирую в возвращаемый массив удаляемые єлементы,
     // удалил из второго временного массива, все что нужно убить
-    for(let i = 0; i < deleteCount; i += 1) {
-        arrayDeletedVal[arrayDeletedVal.length] = tempSecond[0];
-        tempSecond.shift(i);
-    }
+    // for(let i = 0; i < deleteCount; i += 1) {
+    //     arrayDeletedVal[arrayDeletedVal.length] = tempSecond[0];
+    //     tempSecond.shift(i);
+    // }
     // объединил оба временных массива
-    array = tempFirst.concat(tempSecond);
-    console.log(array, "array after splice");
     
     return arrayDeletedVal;
 }
@@ -70,6 +69,7 @@ function push(array, element) {
 }
 
 let arr = [1, 3, 4, 6, 9, 11];
-let spl = splice(arr, 2, 3, "num", "mki", "bnm") ;
+let spl = splice(arr, 2, 2, "num", "mki", "bnm") ;
 
-console.log(spl);
+console.log(spl, "work function");
+console.log(arr);
