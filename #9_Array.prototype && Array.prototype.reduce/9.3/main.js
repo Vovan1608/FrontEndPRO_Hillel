@@ -13,7 +13,7 @@
 
 function splice(array, start, deleteCount) {
     start = getIndexForSplice(array, start);
-    deleteCount = (arguments[2] < array.length) ? getIndexForSplice(array, deleteCount) : getIndexForSplice(array, deleteCount) - start;
+    deleteCount = (arguments[2] <= array.length - start) ? getIndexForSplice(array, deleteCount) : array.length - start;
     let arrayDeletedVal = [];
 
     for(let i = start; i < start + deleteCount; i += 1) {
@@ -45,6 +45,6 @@ function getIndexForSplice(array, index) {
 }
 
 let arr = [1, 3, 4, 6, 9, 11];
-let spl = splice(arr, 2, 50);
+let spl = splice(arr, 2, 3);
 console.log(arr);
 console.log(spl);
