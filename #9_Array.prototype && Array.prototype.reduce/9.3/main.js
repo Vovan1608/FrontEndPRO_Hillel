@@ -11,25 +11,29 @@
 и/или добавляя новые.
 */
 
-function splice(array, start, deleteCount) {
+function splice(array, start, deleteCount = 0) {
     start = getIndexForSplice(array, start);
+    // deleteCount - сколько элементов удалить из массива; тут ограничение нужно для цикла, если вдруг число больше длины массива
     deleteCount = (arguments[2] <= array.length - start) ? getIndexForSplice(array, deleteCount) : array.length - start;
-    let arrayDeletedVal = [];
-
-    for(let i = start; i < start + deleteCount; i += 1) {
-        arrayDeletedVal[arrayDeletedVal.length] = array[i];
-        delete array[i];
+    // arrayDeletedVal - то,что функция возвращает (массив из удаленных элементов)
+    let arrayDeletedVal = [],
+        tempFirst = slice(array, 0, start),
+        tempSecond = slice(array, start, array.length);
         
-        for(let j = 3, size = arguments.length; j < size; j += 1) {
-            array[i] = arguments[j];
-            break;
-        }    
+    // тут впихнул в конец первого временного массива то, что вcтавить 
+    for(let i = 3, size = arguments.length; i < size; i += 1) {
+        push(tempFirst, arguments[i]);
     }
-    // if(deleteCount === 0) {
-        
-    //     arrayDeletedVal = [];
-    // }
-
+    // тут копирую в возвращаемый массив удаляемые єлементы,
+    // удалил из второго временного массива, все что нужно убить
+    for(let i = 0; i < deleteCount; i += 1) {
+        arrayDeletedVal[arrayDeletedVal.length] = tempSecond[0];
+        tempSecond.shift(i);
+    }
+    // объединил оба временных массива
+    array = tempFirst.concat(tempSecond);
+    console.log(array, "array after splice");
+    
     return arrayDeletedVal;
 }
 
@@ -44,7 +48,28 @@ function getIndexForSplice(array, index) {
     return index;
 }
 
+function slice(array, start = 0, end = array.length) {
+    start = getIndexForSplice(array, start);
+    end = getIndexForSplice(array, end);
+    let newArray = [];
+
+    if(isArray(array)) {
+
+        for (let i = start; i < end; i += 1) {
+            push(newArray, array[i]);
+        }
+    }
+    
+    return newArray;
+}
+
+function push(array, element) {
+    array[array.length] = element;
+
+    return array.length;
+}
+
 let arr = [1, 3, 4, 6, 9, 11];
-let spl = splice(arr, 2, 3);
-console.log(arr);
+let spl = splice(arr, 2, 3, "num", "mki", "bnm") ;
+
 console.log(spl);
