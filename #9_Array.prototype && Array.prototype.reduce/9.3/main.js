@@ -19,33 +19,46 @@ function splice(array, start, deleteCount = 0) {
     let arrayDeletedVal = [],
         // arrayTempVal - значения, которые нужно сдвинуть 
         arrayTempVal = [],
+        originalArraySize = array.length,
         // кол-во итераций цикла
-        numberOfIterations = (deleteCount <= arguments.length - 3) ? arguments.length - 3 : deleteCount;
+        numberOfIterations = (array.length - start <= arguments.length - 3) ? arguments.length - 3 : array.length - start;
         //  
-    for(let i = 0; i < numberOfIterations; i += 1) {
+    for(let i = 0; i < numberOfIterations || Boolean(arrayTempVal.length) === true; i += 1) {
         
         if(deleteCount < arguments.length - 3) {
             // получаем два массива, важен второй - для значений, которые нужно сдвинуть
             if(i < deleteCount) {
                 arrayDeletedVal[arrayDeletedVal.length] = array[i + start];
-                // перетираем значения 
+                // меняем в нашем массиве значения
                 array[i + start] = arguments[i + 3];
-            } else if (i >= deleteCount) {
-                arrayTempVal[arrayTempVal.length] = array[i + start];
+            } else {
+
+                if(array[i + start] !== undefined) {
+                    arrayTempVal[arrayTempVal.length] = array[i + start];
+                }
+                array[i + start] = arguments[i + 3];
             }
+        } else {
+            // сразу удалять с конца элементы и распихивать их по массивам
             
+            if(i < deleteCount) {
+                arrayDeletedVal[arrayDeletedVal.length] = array[i + start];
+                // меняем в нашем массиве значения
+                if(arguments[i + 3] !== undefined) {
+                    array[i + start] = arguments[i + 3];
+                }
+            } else {
+                arrayTempVal.unshift(array[array.length - 1]);
+                array.length -= 1;
+                console.log(array.length)
+            }
+        }
+        
+        if(arrayTempVal.length) {
+            push(array, arrayTempVal[0]);
+            arrayTempVal.shift();
         }
     }
-    console.log(arrayTempVal, "tempVal");
-
-
-    // тут копирую в возвращаемый массив удаляемые єлементы,
-    // удалил из второго временного массива, все что нужно убить
-    // for(let i = 0; i < deleteCount; i += 1) {
-    //     arrayDeletedVal[arrayDeletedVal.length] = tempSecond[0];
-    //     tempSecond.shift(i);
-    // }
-    // объединил оба временных массива
     
     return arrayDeletedVal;
 }
@@ -83,7 +96,7 @@ function push(array, element) {
 }
 
 let arr = [1, 3, 4, 6, 9, 11];
-let spl = splice(arr, 2, 2, "num", "mki", "bnm") ;
+let spl = splice(arr, 2, 2, "num") ;
 
 console.log(spl, "work function");
 console.log(arr);
