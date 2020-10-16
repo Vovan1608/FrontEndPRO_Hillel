@@ -17,12 +17,26 @@ function splice(array, start, deleteCount = 0) {
     deleteCount = (arguments[2] <= array.length - start) ? getIndexForSplice(array, deleteCount) : array.length - start;
     // arrayDeletedVal - то,что функция возвращает (массив из удаленных элементов)
     let arrayDeletedVal = [],
-        arrayTempVal = [];
-    
-    //  
-    for(let i = start; i < deleteCount + start; i += 1) {
-        arrayDeletedVal[arrayDeletedVal.length] = array[i];
+        // arrayTempVal - значения, которые нужно сдвинуть 
+        arrayTempVal = [],
+        // кол-во итераций цикла
+        numberOfIterations = (deleteCount <= arguments.length - 3) ? arguments.length - 3 : deleteCount;
+        //  
+    for(let i = 0; i < numberOfIterations; i += 1) {
+        
+        if(deleteCount < arguments.length - 3) {
+            // получаем два массива, важен второй - для значений, которые нужно сдвинуть
+            if(i < deleteCount) {
+                arrayDeletedVal[arrayDeletedVal.length] = array[i + start];
+                // перетираем значения 
+                array[i + start] = arguments[i + 3];
+            } else if (i >= deleteCount) {
+                arrayTempVal[arrayTempVal.length] = array[i + start];
+            }
+            
+        }
     }
+    console.log(arrayTempVal, "tempVal");
 
 
     // тут копирую в возвращаемый массив удаляемые єлементы,
