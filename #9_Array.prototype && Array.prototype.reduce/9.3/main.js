@@ -67,6 +67,7 @@ function splice(array, start, deleteCount = 0) {
                     if(array[i + start]) {
                         // Элементы уходят в массив значений для сдвига
                         arrayTempVal[arrayTempVal.length] = array[i + start];
+                        console.log(arrayTempVal, "arrTemp")
                     }
                 } 
                 if(arguments[i + startIncertElemInArg]) {
@@ -77,7 +78,7 @@ function splice(array, start, deleteCount = 0) {
 
         // пока массив с временными значениями не пустой    
         } else if(arrayTempVal.length) {
-
+            // ПОСМОТРЕТЬ ЭТУ ЛОГИКУ ВСЮ ПЕРЕДЕЛАТЬ ДЛЯ ВСТАВЛЯЕМЫХ СДВИГАЕМЫХ УДАЛЯЕМЫХ
             if(deleteCount > numOfIncertElem) {
                 array[start + numOfIncertElem + i - numberOfIterations] = arrayTempVal[0];
             } else {
@@ -85,11 +86,16 @@ function splice(array, start, deleteCount = 0) {
                 if(numOfIncertElem < arrayTempVal.length ) {
                     // тут перетираем значения начиная с индекса (start + numOfIncertElem), (i - numberOfIterations) - увеличивает счетчик
                     array[start + numOfIncertElem + i - numberOfIterations] = arrayTempVal[0];
+                    
                 } else {
+                    
+                    if(array.length > start + numOfIncertElem) {
+                        array.length = start + numOfIncertElem;
+                    }
                     push(array, arrayTempVal[0]);   
                 }
+                
             }
-            
             arrayTempVal.shift();
         }
     }
@@ -116,21 +122,6 @@ function getIndexForSplice(array, index) {
     return index;
 }
 
-function slice(array, start = 0, end = array.length) {
-    start = getIndexForSplice(array, start);
-    end = getIndexForSplice(array, end);
-    let newArray = [];
-
-    if(isArray(array)) {
-
-        for (let i = start; i < end; i += 1) {
-            push(newArray, array[i]);
-        }
-    }
-    
-    return newArray;
-}
-
 function push(array, element) {
     array[array.length] = element;
 
@@ -138,7 +129,7 @@ function push(array, element) {
 }
 
 let arr = [1, 3, 4, 6, 9, 11];
-let spl = splice(arr, 2, 2, "ghj", "tyu", "yui");
+let spl = splice(arr, 0, 2, "ghj", "tyu", "yui");
 
 console.log(spl, "work function");
 console.log(arr);
