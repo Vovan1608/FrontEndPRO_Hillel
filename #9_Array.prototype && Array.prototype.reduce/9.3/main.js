@@ -13,7 +13,8 @@
 
 function splice(array, start, deleteCount = 0, ...args) {
     start = getIndexForSplice(array, start);
-    // deleteCount - сколько элементов удалить из массива; тут ограничение нужно для цикла, если вдруг число больше длины массива
+    // deleteCount - сколько элементов удалить из массива; тут ограничение нужно для цикла, если вдруг число больше длины массива, 
+    // arguments[2] - это и есть deleteCount в псевдомассиве arguments
     deleteCount = (arguments[2] <= array.length - start) ? getIndexForSplice(array, deleteCount) : array.length - start;
     // arrayDeletedVal - то,что функция возвращает (массив из удаленных элементов)
     let arrayDeletedVal = [],
