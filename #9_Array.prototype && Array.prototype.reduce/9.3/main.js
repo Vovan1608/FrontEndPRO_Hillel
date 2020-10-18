@@ -11,7 +11,7 @@
 и/или добавляя новые.
 */
 
-function splice(array, start, deleteCount = 0) {
+function splice(array, start, deleteCount = 0, ...args) {
     start = getIndexForSplice(array, start);
     // deleteCount - сколько элементов удалить из массива; тут ограничение нужно для цикла, если вдруг число больше длины массива
     deleteCount = (arguments[2] <= array.length - start) ? getIndexForSplice(array, deleteCount) : array.length - start;
@@ -19,15 +19,10 @@ function splice(array, start, deleteCount = 0) {
     let arrayDeletedVal = [],
         // arrayTempVal - значения, которые нужно сдвинуть 
         arrayTempVal = [],
-        // index с которого начинаются элементы для вставки в псевдомассиве arguments
-        startIncertElemInArg = 3,
-        // длина оригинального массива
-        originlArraySize = array.length,
         // кол-во элементов которые нужно вставить
-        numOfIncertElem = arguments.length - startIncertElemInArg, 
+        numOfIncertElem = args.length, 
         // кол-во итераций цикла
         numberOfIterations = (array.length - start <= numOfIncertElem) ? numOfIncertElem : array.length - start;
-        console.log(numberOfIterations, "iter")
         // когда пройдут все итерации по заменам, потом цикл продолжится пока временный массив не станет пустым 
     for(let i = 0; i < numberOfIterations || Boolean(arrayTempVal.length) === true; i += 1) {
         
@@ -40,9 +35,9 @@ function splice(array, start, deleteCount = 0) {
                     arrayTempVal[arrayTempVal.length] = array[i + start];
                 }
                 //если есть элемент для вставки
-                if(arguments[i + startIncertElemInArg]) {
+                if(args[i]) {
                     // всовываем элемент 
-                    array[i + start] = arguments[i + startIncertElemInArg];
+                    array[i + start] = args[i];
                 }
             }
             // 2-ой вариант, когда что-то удаляем, но ничего не вставляем
@@ -67,35 +62,16 @@ function splice(array, start, deleteCount = 0) {
                     if(array[i + start]) {
                         // Элементы уходят в массив значений для сдвига
                         arrayTempVal[arrayTempVal.length] = array[i + start];
-                        console.log(arrayTempVal, "arrTemp")
                     }
                 } 
-                if(arguments[i + startIncertElemInArg]) {
+                if(args[i]) {
                     // всовываем элемент 
-                    array[i + start] = arguments[i + startIncertElemInArg];
+                    array[i + start] = args[i];
                 }
             }
-
         // пока массив с временными значениями не пустой    
         } else if(arrayTempVal.length) {
-            // ПОСМОТРЕТЬ ЭТУ ЛОГИКУ ВСЮ ПЕРЕДЕЛАТЬ ДЛЯ ВСТАВЛЯЕМЫХ СДВИГАЕМЫХ УДАЛЯЕМЫХ
-            if(deleteCount > numOfIncertElem) {
-                array[start + numOfIncertElem + i - numberOfIterations] = arrayTempVal[0];
-            } else {
-                // если кол-во вставляемых эл-тов менее кол-ва сдвигаемых элементов(кол-во итераций - кол-во сдвигаемых элементов)
-                if(numOfIncertElem < arrayTempVal.length ) {
-                    // тут перетираем значения начиная с индекса (start + numOfIncertElem), (i - numberOfIterations) - увеличивает счетчик
-                    array[start + numOfIncertElem + i - numberOfIterations] = arrayTempVal[0];
-                    
-                } else {
-                    
-                    if(array.length > start + numOfIncertElem) {
-                        array.length = start + numOfIncertElem;
-                    }
-                    push(array, arrayTempVal[0]);   
-                }
-                
-            }
+            array[start + numOfIncertElem + i - numberOfIterations] = arrayTempVal[0];
             arrayTempVal.shift();
         }
     }
@@ -103,10 +79,6 @@ function splice(array, start, deleteCount = 0) {
     if(numOfIncertElem === 0) {
         array.length = start + numberOfIterations - deleteCount;            
     } 
-    // условие для 3-го варианта, где длинна массива остается без учета удаленных элементов
-    if(deleteCount > numOfIncertElem) {
-        array.length = originlArraySize - deleteCount + numOfIncertElem;
-    }
     
     return arrayDeletedVal;
 }
@@ -129,10 +101,7 @@ function push(array, element) {
 }
 
 let arr = [1, 3, 4, 6, 9, 11];
-let spl = splice(arr, 0, 2, "ghj", "tyu", "yui");
+let spl = splice(arr, 2);
 
-console.log(spl, "work function");
-console.log(arr);
-
-// "ghj", "tyu", "yui", "qwe", "tyui"
-// 
+console.log(spl);
+console.log(arr); 
