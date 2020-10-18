@@ -27,7 +27,7 @@ function splice(array, start, deleteCount = 0, ...args) {
     for(let i = 0; i < numberOfIterations || Boolean(arrayTempVal.length) === true; i += 1) {
         
         if(i < numberOfIterations) {
-            // 1-ый вариант, когда удаляем 0 и впихиваем 1 и более
+            //? 1-ый вариант, когда удаляем 0 и впихиваем 1 и более
             if(deleteCount === 0) {
                 // если элемент есть
                 if(array[i + start]) {
@@ -40,7 +40,7 @@ function splice(array, start, deleteCount = 0, ...args) {
                     array[i + start] = args[i];
                 }
             }
-            // 2-ой вариант, когда что-то удаляем, но ничего не вставляем
+            //? 2-ой вариант, когда что-то удаляем, но ничего не вставляем
             if(deleteCount > 0 && numOfIncertElem === 0) {
 
                 if(i < deleteCount) {
@@ -51,7 +51,7 @@ function splice(array, start, deleteCount = 0, ...args) {
                     arrayTempVal[arrayTempVal.length] = array[i + start];
                 }
             }
-            // 3-ий вариант, когда что-то удаляем и что-то всовываем
+            //? 3-ий вариант, когда что-то удаляем и что-то всовываем
             if(deleteCount > 0 && numOfIncertElem > 0) {
                 
                 if(i < deleteCount) {
@@ -69,7 +69,7 @@ function splice(array, start, deleteCount = 0, ...args) {
                     array[i + start] = args[i];
                 }
             }
-        // пока массив с временными значениями не пустой    
+        //* пока массив с временными значениями не пустой    
         } else if(arrayTempVal.length) {
             array[start + numOfIncertElem + i - numberOfIterations] = arrayTempVal[0];
             arrayTempVal.shift();
