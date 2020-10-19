@@ -128,7 +128,8 @@ const farmAccountLog = [
         age: 3
     }
 ].reduce( (acc, curent) => {
-    acc[curent.family] = ([curent.family] in acc) ? (acc[curent.family] + 1) : 1; 
+    // *acc[curent.family] = ([curent.family] in acc) ? (acc[curent.family] + 1) : 1; 
+    
 
     return acc;
 }, {});
