@@ -135,15 +135,15 @@ const farmAccountLog = [
         age: 3
     }
 ].reduce( (acc, curent) => { 
-  acc.register.length = Object.keys(acc.register).length - 1; // Object.keys(acc.register).length - считает кол-во ключей
-  
-  acc.register[curent.type] = {
+  acc.register: {
+    length: Object.keys(acc.register).length - 1, // Object.keys(acc.register).length - считает кол-во ключей
+    [curent.type]: {
     length: Object.keys([curent.type]).length - 1,
     [curent.class]: {
       length: Object.keys([curent.class]).length - 1,
       [curent.family]: {
         length: Object.keys([curent.family]).length - 1,
-
+      }
       }
     }
   };
