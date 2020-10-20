@@ -134,36 +134,38 @@ const farmAccountLog = [
         gender: "♂",
         age: 3
     }
-].reduce( (acc, cur) => {
-//   acc[curent.family] = ([curent.family] in acc) ? (acc[curent.family] + 1) : 1; 
-  acc.register.type.class.family.names.push(cur.name);
+].reduce( (acc, curent) => { 
+  acc.register.length = Object.keys(acc.register).length - 1; // Object.keys(acc.register).length - считает кол-во ключей
+  
+  acc.register[curent.type] = {
+    length: Object.keys([curent.type]).length - 1,
+    [curent.class]: {
+      length: Object.keys([curent.class]).length - 1,
+      [curent.family]: {
+        length: Object.keys([curent.family]).length - 1,
+
+      }
+    }
+  };
+  // acc.register.meat.length = Object.keys(acc.register.meat).length - 1;
+  // acc.register.meat.cattle.length = Object.keys(acc.register.meat.cattle) - 1;
   
   
   acc.stats.count++;
-  (cur.gender === "♂") ? acc.stats.males += 1 : acc.stats.females += 1;
-  acc.stats.maxAge = (cur.age > acc.stats.maxAge) ? cur.age : acc.stats.maxAge;
-  acc.stats.minAge = (cur.age < acc.stats.minAge) ? cur.age : acc.stats.minAge;
+  (curent.gender === "♂") ? acc.stats.males += 1 : acc.stats.females += 1;
+  acc.stats.maxAge = (curent.age > acc.stats.maxAge) ? curent.age : acc.stats.maxAge;
+  acc.stats.minAge = (curent.age < acc.stats.minAge) ? curent.age : acc.stats.minAge;
 
   return acc;
-}, { register: {
-      length: 0,
-      type: {
-        length: 0,
-        class: {
-          length: 0,
-          family: {
-            names: []
-          }
-        }
-      }
-    },
-    stats: {
-      count: 0,
-      males: 0,
-      females: 0,
-      minAge: 1000,
-      maxAge: 0,
-    }
-  });
+}, { 
+  register: {},
+  stats: {
+    count: 0,
+    males: 0,
+    females: 0,
+    minAge: 1000,
+    maxAge: 0,
+  }
+});
 
 console.log(farmAccountLog);
