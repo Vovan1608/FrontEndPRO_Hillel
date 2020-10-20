@@ -6,25 +6,32 @@
 
 {
 [register]: {
+  length: <number>,
+  [type] : {
     length: <number>,
-    [type] : {
-        length: <number>,
-        [class]: {
-            length: <number>,
-            [family]: {
-                names: Array<string> (Массив строк (animal.name))
-                }
-            }
+    [class]: {
+      length: <number>,
+      [family]: {
+        names: Array<string> (Массив строк (animal.name))
         }
-    },
-    [stats]: {
-        count: <number>,
-        males: <number>,
-        females: <number>,
-        minAge: <number>,
-        maxAge: <number>,
+      }
     }
+  },
+  [stats]: {
+    count: <number>,
+    males: <number>,
+    females: <number>,
+    minAge: <number>,
+    maxAge: <number>,
+  }
 }
+  id: 11,
+  type: "Meat",
+  class: "Cattle",
+  family: "Cow",
+  name: "Wiz",
+  gender: "♂",
+  age: 10
 */
 
 const farmAccountLog = [
@@ -127,11 +134,36 @@ const farmAccountLog = [
         gender: "♂",
         age: 3
     }
-].reduce( (acc, curent) => {
-    // *acc[curent.family] = ([curent.family] in acc) ? (acc[curent.family] + 1) : 1; 
-    
+].reduce( (acc, cur) => {
+//   acc[curent.family] = ([curent.family] in acc) ? (acc[curent.family] + 1) : 1; 
+  acc.register.type.class.family.names.push(cur.name);
+  
+  
+  acc.stats.count++;
+  (cur.gender === "♂") ? acc.stats.males += 1 : acc.stats.females += 1;
+  acc.stats.maxAge = (cur.age > acc.stats.maxAge) ? cur.age : acc.stats.maxAge;
+  acc.stats.minAge = (cur.age < acc.stats.minAge) ? cur.age : acc.stats.minAge;
 
-    return acc;
-}, {});
+  return acc;
+}, { register: {
+      length: 0,
+      type: {
+        length: 0,
+        class: {
+          length: 0,
+          family: {
+            names: []
+          }
+        }
+      }
+    },
+    stats: {
+      count: 0,
+      males: 0,
+      females: 0,
+      minAge: 1000,
+      maxAge: 0,
+    }
+  });
 
 console.log(farmAccountLog);
