@@ -140,8 +140,6 @@ const farmAccountLog = [
     length: Object.keys(curent.type).length - 1,
     [curent.class]: {}
   }
-
-  
   
   
   // acc.register = {
