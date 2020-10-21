@@ -135,37 +135,46 @@ const farmAccountLog = [
         age: 3
     }
 ].reduce( (acc, curent) => { 
-  acc.register: {
-    length: Object.keys(acc.register).length - 1, // Object.keys(acc.register).length - считает кол-во ключей
-    [curent.type]: {
-    length: Object.keys([curent.type]).length - 1,
-    [curent.class]: {
-      length: Object.keys([curent.class]).length - 1,
-      [curent.family]: {
-        length: Object.keys([curent.family]).length - 1,
-      }
-      }
-    }
-  };
+  acc.register.length = Object.keys(acc.register).length - 1;
+  acc.register[curent.type] = { // HAVE PROBLEM THERE
+    length: Object.keys(curent.type).length - 1,
+    [curent.class]: {}
+  }
+
+  
+  
+  
+  // acc.register = {
+  //   length: Object.keys(acc.register).length - 1, // Object.keys(acc.register).length - считает кол-во ключей
+  //   [curent.type]: {
+  //     length: Object.keys(curent.type).length - 1,
+  //     [curent.class]: {
+  //       length: Object.keys(curent.class).length - 1,
+  //       [curent.family]: {
+  //         length: Object.keys(curent.family).length - 1,
+  //       }
+  //     }
+  //   }
+  // };
   // acc.register.meat.length = Object.keys(acc.register.meat).length - 1;
   // acc.register.meat.cattle.length = Object.keys(acc.register.meat.cattle) - 1;
   
   
-  acc.stats.count++;
-  (curent.gender === "♂") ? acc.stats.males += 1 : acc.stats.females += 1;
-  acc.stats.maxAge = (curent.age > acc.stats.maxAge) ? curent.age : acc.stats.maxAge;
-  acc.stats.minAge = (curent.age < acc.stats.minAge) ? curent.age : acc.stats.minAge;
+  // acc.stats.count++;
+  // (curent.gender === "♂") ? acc.stats.males += 1 : acc.stats.females += 1;
+  // acc.stats.maxAge = (curent.age > acc.stats.maxAge) ? curent.age : acc.stats.maxAge;
+  // acc.stats.minAge = (curent.age < acc.stats.minAge) ? curent.age : acc.stats.minAge;
 
   return acc;
 }, { 
-  register: {},
-  stats: {
-    count: 0,
-    males: 0,
-    females: 0,
-    minAge: 1000,
-    maxAge: 0,
-  }
+    register: {},
+  // stats: {
+  //   count: 0,
+  //   males: 0,
+  //   females: 0,
+  //   minAge: 1000,
+  //   maxAge: 0,
+  // }
 });
 
 console.log(farmAccountLog);
