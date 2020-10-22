@@ -135,11 +135,12 @@ const farmAccountLog = [
         age: 3
     }
 ].reduce( (acc, curent) => { 
-  acc.register.length = Object.keys(acc.register).length - 1;
-  acc.register[curent.type] = { // HAVE PROBLEM THERE
-    length: Object.keys(curent.type).length - 1,
-    [curent.class]: {}
-  }
+  
+  // acc.register.length = Object.keys(acc.register).length - 1;
+  // acc.register[curent.type] = { // HAVE PROBLEM THERE
+  //   length: Object.keys(curent.type).length - 1,
+  //   [curent.class]: {}
+  // }
   
   
   // acc.register = {
@@ -165,7 +166,18 @@ const farmAccountLog = [
 
   return acc;
 }, { 
-    register: {},
+    // register: {
+    //   length: 0,
+    //   type: {
+    //     length: 0,
+    //     class: {
+    //       length: 0,
+    //       family: {
+    //         names: []
+    //       }
+    //     }
+    //   }
+    // },
   // stats: {
   //   count: 0,
   //   males: 0,
