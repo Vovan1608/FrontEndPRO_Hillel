@@ -14,7 +14,12 @@ var obj = {
 
 obj.renderObject = function () {
   
-  console.log(Object.values(obj));
+  for(var key in obj) {
+    
+    if(key !== "renderObject") {
+      document.write(key + ": " + obj[key] + "<br/>");
+    }
+  }
 }
 
 obj.renderObject(); 
