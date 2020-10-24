@@ -8,19 +8,14 @@
 
 var data = {
   addRecord: function(flag = false) {
-    
-    for(var key in data) {
-      
-      if(key) {
-        flag = true;
-      }
-    }
+
     var i = 0,
-        size = arguments.length - 1;
+        size = arguments.length - 1;// искл. последний параметр - flag
     
     for(i; i < size; i += 1) {
-      if(key === false) {
-        Object.assign(data, arguments[i]);
+      
+      if(flag === false) {
+        Object.assign(this, arguments[i]);
       }
     }
   },
@@ -30,8 +25,8 @@ var data = {
 }
 
 data.addRecord({x: 10}, {y: 20}, {z: 30, x: 50});
-data.x // 50
-data.y // 20
+data.x // 10
+data.y // -50
 data.z // 30
 data.p // 600
 data.str // 'hello'
