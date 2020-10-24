@@ -6,21 +6,20 @@
 
 var data = {
   addRecord: function(...arg) {
-    
-    //? 2-nd way
-    arg.reduce((acc, curent) => {
-      Object.assign(acc, curent);
-      
-      return acc;
-    }, data)
-    
     //? 1-st way
-    // var i = 0,
-    //     size = arg.length;
+    var i = 0,
+        size = arg.length;
     
-    // for(i; i < size; i += 1) {
-    //   Object.assign(data, arg[i]);
-    // }
+    for(i; i < size; i += 1) {
+      Object.assign(this, arg[i]);
+    }
+    //? 2-nd way
+    // arg.reduce( (acc, curent) => {
+    //   Object.assign(acc, curent);
+      
+    //   return acc;
+    // }, this)
+    
   },
   p: 600,
   str: 'hello',
