@@ -15,8 +15,9 @@ var data = {
     for(i; i < size; i += 1) {
       
       for(var key in arguments[i]) {
-        console.log(key);
-        if( !(key in this) ){
+        flag = (key in this) ? true : false;
+
+        if(!flag){
           Object.assign(this, arguments[i]);
         }
       }
