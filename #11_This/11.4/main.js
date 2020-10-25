@@ -7,13 +7,13 @@
 */
 
 var data = {
-  addRecord: function(flag = false) {
+  addRecord: function() {
     
     var i = 0,
-        size = arguments.length;
+        size = arguments.length - 1;
     
     for(i; i < size; i += 1) {
-      
+      console.log(data);
       for(var key in arguments[i]) {
         flag = (key in this) ? true : false;
 
@@ -28,7 +28,7 @@ var data = {
   y: -50
 };
 
-data.addRecord({x: 10}, {y: 20}, {z: 30, x: 50});
+data.addRecord({x: 10}, {y: 20}, {z: 30, x: 50}, {x: 100, z: 5000}, flag);
 data.x // 10
 data.y // -50
 data.z // 30
