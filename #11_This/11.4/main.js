@@ -7,18 +7,21 @@
 */
 
 var data = {
-  addRecord: function() {
-    
+  addRecord: function(...arg) {
     var i = 0,
-        size = arguments.length - 1;
-    
+        size = (typeof arg[arg.length - 1] === "object") ? arg.length : arg.length - 1; 
+  
     for(i; i < size; i += 1) {
-      console.log(data);
-      for(var key in arguments[i]) {
-        flag = (key in this) ? true : false;
 
-        if(!flag){
-          Object.assign(this, arguments[i]);
+      if(size === arg.length) {
+        Object.assign(this, arg[i]);
+      } else {
+        for(var key in arg[i]){
+          flag = (key in this) ? true : false;
+          
+          if(!flag) {
+            this[key] = arg[i][key];
+          }
         }
       }
     }
@@ -28,7 +31,7 @@ var data = {
   y: -50
 };
 
-data.addRecord({x: 10}, {y: 20}, {z: 30, x: 50}, {x: 100, z: 5000}, flag);
+data.addRecord({x: 10}, {y: 20}, {z: 30, x: 50}, flag = false);
 data.x // 10
 data.y // -50
 data.z // 30
