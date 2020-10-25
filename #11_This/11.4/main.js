@@ -8,21 +8,24 @@
 
 var data = {
   addRecord: function(flag = false) {
-
+    
     var i = 0,
-        size = arguments.length - 1;// искл. последний параметр - flag
+        size = arguments.length;
     
     for(i; i < size; i += 1) {
       
-      if(flag === false) {
-        Object.assign(this, arguments[i]);
+      for(var key in arguments[i]) {
+        console.log(key);
+        if( !(key in this) ){
+          Object.assign(this, arguments[i]);
+        }
       }
     }
   },
   p: 600,
   str: 'hello',
   y: -50
-}
+};
 
 data.addRecord({x: 10}, {y: 20}, {z: 30, x: 50});
 data.x // 10
