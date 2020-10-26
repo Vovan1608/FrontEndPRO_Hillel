@@ -7,18 +7,17 @@
 var data = {
   addRecord: function(...arg) {
     //? 1-st way
-    var i = 0,
-        size = arg.length;
+    // var i = 0,
+    //     size = arg.length;
     
-    for(i; i < size; i += 1) {
-      Object.assign(this, arg[i]);
-    }
+    // for(i; i < size; i += 1) {
+    //   Object.assign(this, arg[i]);
+    // }
     //? 2-nd way
-    // arg.reduce( (acc, curent) => {
-    //   Object.assign(acc, curent);
+    arg.reduce( (acc, curent) => {
       
-    //   return acc;
-    // }, this)
+      return Object.assign(acc, curent);
+    }, this)
     
   },
   p: 600,
