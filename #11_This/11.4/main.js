@@ -10,23 +10,17 @@ this, если false - берется свойство из arguments. По ум
 */
 
 var data = {
-  addRecord: function(flag = false) {
+  addRecord: function(...arg) {
     var i = 0,
-        size = (typeof arguments[arguments.length - 1] === "object") ? arguments.length : arguments.length - 1;
+        flag,
+        size = (typeof arg[arg.length - 1] === "object") ? arg.length : arg.length - 1;
   
     for(i; i < size; i += 1) {
-
-      if(size === arguments.length) {
-        Object.assign(this, arg[i]);
-      } else {
-        
-        for(var key in arguments[i]) {
-          flag = (key in this) ? true : false;
-          
-          if(!flag) {
-            this[key] = arguments[i][key];
-          }
-        }
+      flag = (size === arg.length) ? false : arg[arg.length - 1];
+    
+      for(var key in arg[i]) {
+        // !ТУТ ДОРАБОТАТЬ В ОДНО УСЛОВИЕ КЛЮЧЬ НЕТ и ФЛАГ НЕТ
+        this[key] = (key in this) ? ((flag === true) ?  this[key] : arg[i][key]) : arg[i][key];
       }
     }
   },
@@ -37,7 +31,7 @@ var data = {
 
 var flag;
 
-data.addRecord({x: 10}, {y: 20}, {z: 30, x: 50}, flag);
+data.addRecord({x: 10}, {y: 20}, {z: 30, x: 50}, true);
 data.x // 10
 data.y // -50
 data.z // 30
