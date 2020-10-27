@@ -135,41 +135,10 @@ const farmAccountLog = [
         age: 3
     }
 ].reduce( (acc, curent) => { 
-  // acc.register = {
-  //   [curent.type]: {
-  //     [curent.class]: {
-  //       [curent.family]: {
-  //         names: []
-  //       }
-  //     }
-  //   }
-  // };
-
-  acc[curent.type] = {}
-  acc[curent.type][curent.class] = {}
-  // acc[curent.type][curent.class][curent.family] = {}
-  // acc.register.length = Object.keys(acc.register).length - 1;
-  // acc.register[curent.type] = { // HAVE PROBLEM THERE
-  //   length: Object.keys(curent.type).length - 1,
-  //   [curent.class]: {}
-  // }
   
   
-  // acc.register = {
-  //   length: Object.keys(acc.register).length - 1, // Object.keys(acc.register).length - считает кол-во ключей
-  //   [curent.type]: {
-  //     length: Object.keys(curent.type).length - 1,
-  //     [curent.class]: {
-  //       length: Object.keys(curent.class).length - 1,
-  //       [curent.family]: {
-  //         length: Object.keys(curent.family).length - 1,
-  //       }
-  //     }
-  //   }
-  // };
   // acc.register.meat.length = Object.keys(acc.register.meat).length - 1;
   // acc.register.meat.cattle.length = Object.keys(acc.register.meat.cattle) - 1;
-  
   
   // acc.stats.count++;
   // (curent.gender === "♂") ? acc.stats.males += 1 : acc.stats.females += 1;
@@ -178,18 +147,18 @@ const farmAccountLog = [
 
   return acc;
 }, { 
-    // register: {
-    //   length: 0,
-    //   type: {
-    //     length: 0,
-    //     class: {
-    //       length: 0,
-    //       family: {
-    //         names: []
-    //       }
-    //     }
-    //   }
-    // },
+  //   register: {
+  //     length: 0,
+  //     type: {
+  //       length: 0,
+  //       class: {
+  //         length: 0,
+  //         family: {
+  //           names: []
+  //         }
+  //       }
+  //     }
+  //   },
   // stats: {
   //   count: 0,
   //   males: 0,
