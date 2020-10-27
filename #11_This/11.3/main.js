@@ -15,7 +15,6 @@ var data = {
     // }
     //? 2-nd way
     arg.reduce( (acc, curent) => {
-      
       return Object.assign(acc, curent);
     }, this)
     
