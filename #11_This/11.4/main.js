@@ -16,7 +16,7 @@ var data = {
         size = (typeof arg[arg.length - 1] === "object") ? arg.length : arg.length - 1;
   
     for(i; i < size; i += 1) {
-      // если flag не передан, то он по умолчанию false
+      // если flag не передан, то он по умолчанию false, иначе равен значению последнего параметра
       flag = (size === arg.length) ? false : arg[arg.length - 1];
     
       for(var key in arg[i]) {
