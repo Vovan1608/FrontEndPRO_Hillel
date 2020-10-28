@@ -7,14 +7,12 @@
 
 function assignObjects() {
     // 1-й способ
-
     for(let i = 1, size = arguments.length; i < size; i += 1) {
         
-            for(let key in arguments[i]) {
-                arguments[0][key] = arguments[i][key];
+        for(let key in arguments[i]) {
+            arguments[0][key] = arguments[i][key];
         }
     }
-
     return arguments[0];
     // 2-й способ
     // let data = Object.assign({}, arguments[0]);
