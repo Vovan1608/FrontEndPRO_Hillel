@@ -29,7 +29,6 @@ function convert(obj, newObj) {
             newObj[key] = element;
         }
     });
-
     return newObj;
 }
 
