@@ -16,11 +16,12 @@ var data = {
         size = (typeof arg[arg.length - 1] === "object") ? arg.length : arg.length - 1;
   
     for(i; i < size; i += 1) {
+      // если flag не передан, то он по умолчанию false
       flag = (size === arg.length) ? false : arg[arg.length - 1];
     
       for(var key in arg[i]) {
-        // !ТУТ ДОРАБОТАТЬ В ОДНО УСЛОВИЕ КЛЮЧЬ НЕТ и ФЛАГ НЕТ
-        this[key] = (key in this) ? ((flag === true) ?  this[key] : arg[i][key]) : arg[i][key];
+        // если key нет, то св-во записываем из arg, если есть и flag === true - св-во остается   
+        this[key] = (key in this && flag === true) ?  this[key] : arg[i][key];
       }
     }
   },
@@ -29,9 +30,7 @@ var data = {
   y: -50
 };
 
-var flag;
-
-data.addRecord({x: 10}, {y: 20}, {z: 30, x: 50}, true);
+data.addRecord({x: 10}, {y: 20}, {z: 30, x: 50});
 data.x // 10
 data.y // -50
 data.z // 30
