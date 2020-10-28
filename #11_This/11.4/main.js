@@ -12,13 +12,12 @@ this, если false - берется свойство из arguments. По ум
 var data = {
   addRecord: function(...arg) {
     var i = 0,
-        flag,
-        size = (typeof arg[arg.length - 1] === "object") ? arg.length : arg.length - 1;
+        size = (typeof arg[arg.length - 1] === "object") ? arg.length : arg.length - 1,
+        // если flag не передан, то он по умолчанию false, иначе равен значению последнего параметра
+        flag = (size === arg.length) ? false : arg[arg.length - 1];
   
     for(i; i < size; i += 1) {
-      // если flag не передан, то он по умолчанию false, иначе равен значению последнего параметра
-      flag = (size === arg.length) ? false : arg[arg.length - 1];
-    
+      
       for(var key in arg[i]) {
         // если key нет, то св-во записываем из arg, если есть и flag === true - св-во остается   
         this[key] = (key in this && flag === true) ?  this[key] : arg[i][key];
@@ -30,7 +29,7 @@ var data = {
   y: -50
 };
 
-data.addRecord({x: 10}, {y: 20}, {z: 30, x: 50});
+data.addRecord({x: 10}, {y: 20}, {z: 30, x: 50}, true);
 data.x // 10
 data.y // -50
 data.z // 30
