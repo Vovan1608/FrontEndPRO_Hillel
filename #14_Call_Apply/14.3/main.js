@@ -20,5 +20,7 @@ var user = {name: 'Алексей'};
 function func(surname, patronymic) { 
   console.log('привет' + ', ' + this.name + ' ' + patronymic + ' ' + surname); 
 }
-
-func.bind(user, "Николаев", "Иванович");
+// функция bind не вызывает функцию, а создаёт новую функцию, которая при вызове 
+// устанавливает в качестве контекста выполнения this предоставленное значение
+var messageFunc = func.bind(user);
+messageFunc("Николаев", "Иванович");
