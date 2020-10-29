@@ -69,6 +69,14 @@ const setOppomnentsHandlers = function (opponents) {
   });
 };
 
+const createButtons = function() {
+  const actions = document.getElementById("actions");
+  const buttons = actions.children;
+
+  const finishButton = buttons[0];
+  const resetButton = buttons[1];
+}
+
 const createApp = function () {
   const container = document.getElementById("opponents");
   getPlayers(container);
@@ -76,6 +84,8 @@ const createApp = function () {
   const opponents = container.getElementsByClassName("opponent");
   setOppomnentsHandlers(opponents);
 
+  
+  
   const actions = document.getElementById("actions");
   const buttons = actions.children;
 
