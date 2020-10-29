@@ -1,26 +1,23 @@
 ﻿// "use strict";
 
 /*
-Пусть есть объект 
-obj = {
-  anonim: {say: 'Hello anonim'}, 
-  user: {say: 'Hello user'}, 
-  admin: {say: 'Hello admin'}
-}, 
-и ф-я: function greeting(who) {}
-при помощи метода call вызвать ф-ю greeting как метод объекта obj без записи в него, 
-с одним из 3ьох значений "anonim, admin, user". Получить в ответ сообщение приветствия.
-*/
+Пусть дан следующий код:
+var user = {name: 'Алексей'}
 
-var obj = {
-  anonim: {say: 'Hello anonim'}, 
-  user: {say: 'Hello user'}, 
-  admin: {say: 'Hello admin'}
-};
-
-function greeting(who) {
-  return who.say;
+function func(surname, patronymic) { 
+  alert('привет' + ', ' + this.name + ' ' + patronymic + ' ' + surname); 
 }
 
-var message = greeting.call(obj, obj.admin);
-console.log(message);
+func(); //тут должно вывести 'привет, Алексей Алексеевич Петров'
+
+при помощи apply вывести сообщение 'привет, Алексей Алексеевич Петров' 
+'Алексеевич', 'Петров' должно быть параметрами ф-ии.
+*/
+
+var user = {name: 'Алексей'};
+
+function func(surname, patronymic) { 
+  console.log('привет' + ', ' + this.name + ' ' + patronymic + ' ' + surname); 
+}
+
+func.apply(user, ["Петров", "Алексеевич"]);
