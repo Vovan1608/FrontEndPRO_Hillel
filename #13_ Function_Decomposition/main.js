@@ -58,7 +58,7 @@ const getPlayers = function (container) {
   }
 };
 
-const setOppomnentsHandlers = function (opponents) {
+const setOpponentsHandlers = function (opponents) {
   forChildrenOfEachElement(opponents, function (children) {
     const target = children[0];
     const counter = children[1];
@@ -68,13 +68,12 @@ const setOppomnentsHandlers = function (opponents) {
     };
   });
 };
-
-const createButtons = function() {
-  const actions = document.getElementById("actions");
-  const buttons = actions.children;
-
-  const finishButton = buttons[0];
-  const resetButton = buttons[1];
+// фуекция для создания кнопок 
+const createButtons = function(actions) {
+  if(actions) {
+    const buttons = actions.children;
+    return buttons;
+  }
 }
 
 const createApp = function () {
@@ -82,12 +81,10 @@ const createApp = function () {
   getPlayers(container);
 
   const opponents = container.getElementsByClassName("opponent");
-  setOppomnentsHandlers(opponents);
+  setOpponentsHandlers(opponents);
 
-  
-  
   const actions = document.getElementById("actions");
-  const buttons = actions.children;
+  const buttons = createButtons(actions);
 
   const finishButton = buttons[0];
   const resetButton = buttons[1];
