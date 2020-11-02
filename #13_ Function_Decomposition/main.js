@@ -68,12 +68,20 @@ const setOpponentsHandlers = function (opponents) {
     };
   });
 };
-// фуекция для создания кнопок 
+// функция для создания кнопок 
 const createButtons = function(actions) {
   if(actions) {
     const buttons = actions.children;
     return buttons;
   }
+}
+
+const createResetButton = function() {
+  return createButtons(actions)[1];
+}
+
+const createFinishButton = function() {
+  return createButtons(actions)[0];
 }
 
 const createApp = function () {
@@ -86,9 +94,16 @@ const createApp = function () {
   const actions = document.getElementById("actions");
   const buttons = createButtons(actions);
 
-  const finishButton = buttons[0];
-  const resetButton = buttons[1];
+  const finishButton = createFinishButton();
+  const resetButton = createResetButton();
 
+
+
+
+
+
+
+  
   resetButton.onclick = function () {
     for (let index = 0; index < opponents.length; index++) {
       const opponent = opponents[index];
