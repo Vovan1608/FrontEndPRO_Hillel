@@ -84,6 +84,19 @@ const createFinishButton = function() {
   return createButtons(actions)[0];
 }
 
+const onclickResetButton = function (opponents) {
+  return function() {
+    for (let index = 0; index < opponents.length; index++) {
+      const opponent = opponents[index];
+      const children = opponent.children;
+
+      const counter = children[1];
+
+      counter.innerHTML = 0;
+    };
+  }
+}
+
 const createApp = function () {
   const container = document.getElementById("opponents");
   getPlayers(container);
@@ -97,23 +110,23 @@ const createApp = function () {
   const finishButton = createFinishButton();
   const resetButton = createResetButton();
 
-
+  resetButton.onclick = onclickResetButton;
 
 
 
 
 
   
-  resetButton.onclick = function () {
-    for (let index = 0; index < opponents.length; index++) {
-      const opponent = opponents[index];
-      const children = opponent.children;
+  // resetButton.onclick = function () {
+  //   for (let index = 0; index < opponents.length; index++) {
+  //     const opponent = opponents[index];
+  //     const children = opponent.children;
 
-      const counter = children[1];
+  //     const counter = children[1];
 
-      counter.innerHTML = 0;
-    }
-  };
+  //     counter.innerHTML = 0;
+  //   }
+  // };
 
   finishButton.onclick = function () {
     const resultModal = document.getElementById("results");
