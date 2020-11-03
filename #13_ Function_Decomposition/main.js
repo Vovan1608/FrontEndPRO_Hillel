@@ -58,7 +58,7 @@ const getPlayers = function (container) {
   }
 };
 
-const setOppomnentsHandlers = function (opponents) {
+const setOpponentsHandlers = function (opponents) {
   forChildrenOfEachElement(opponents, function (children) {
     const target = children[0];
     const counter = children[1];
@@ -69,31 +69,38 @@ const setOppomnentsHandlers = function (opponents) {
   });
 };
 
-const createApp = function () {
-  const container = document.getElementById("opponents");
-  getPlayers(container);
 
-  const opponents = container.getElementsByClassName("opponent");
-  setOppomnentsHandlers(opponents);
+// мое продолжение 
+const createButtons = function(actions) {
+  if(actions) {
+    const buttons = actions.children;
+    return buttons;
+  }
+}
 
-  const actions = document.getElementById("actions");
-  const buttons = actions.children;
+const createResetButton = function() {
+  return createButtons(actions)[1];
+}
 
-  const finishButton = buttons[0];
-  const resetButton = buttons[1];
+const createFinishButton = function() {
+  return createButtons(actions)[0];
+}
 
-  resetButton.onclick = function () {
+const onclickResetButton = function (opponents) {
+  return function() {
     for (let index = 0; index < opponents.length; index++) {
       const opponent = opponents[index];
       const children = opponent.children;
-
+  
       const counter = children[1];
-
+  
       counter.innerHTML = 0;
-    }
-  };
+    };
+  }
+}
 
-  finishButton.onclick = function () {
+const onclickFinishButton = function(opponents) {
+  return function () {
     const resultModal = document.getElementById("results");
 
     let maxScore = 0;
@@ -158,6 +165,25 @@ const createApp = function () {
 
     resultModal.classList.toggle("show");
   };
+}
+
+
+
+const createApp = function () {
+  const container = document.getElementById("opponents");
+  getPlayers(container);
+
+  const opponents = container.getElementsByClassName("opponent");
+  setOpponentsHandlers(opponents);
+
+  const actions = document.getElementById("actions");
+  const buttons = createButtons(actions);
+
+  const finishButton = createFinishButton();
+  const resetButton = createResetButton();
+
+  resetButton.onclick = onclickResetButton(opponents);
+  finishButton.onclick = onclickFinishButton(opponents);
 };
 
 createApp();
