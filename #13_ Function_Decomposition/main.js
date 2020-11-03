@@ -68,7 +68,9 @@ const setOpponentsHandlers = function (opponents) {
     };
   });
 };
-// функция для создания кнопок 
+
+
+// мое продолжение 
 const createButtons = function(actions) {
   if(actions) {
     const buttons = actions.children;
@@ -89,46 +91,16 @@ const onclickResetButton = function (opponents) {
     for (let index = 0; index < opponents.length; index++) {
       const opponent = opponents[index];
       const children = opponent.children;
-
+  
       const counter = children[1];
-
+  
       counter.innerHTML = 0;
     };
   }
 }
 
-const createApp = function () {
-  const container = document.getElementById("opponents");
-  getPlayers(container);
-
-  const opponents = container.getElementsByClassName("opponent");
-  setOpponentsHandlers(opponents);
-
-  const actions = document.getElementById("actions");
-  const buttons = createButtons(actions);
-
-  const finishButton = createFinishButton();
-  const resetButton = createResetButton();
-
-  resetButton.onclick = onclickResetButton;
-
-
-
-
-
-  
-  // resetButton.onclick = function () {
-  //   for (let index = 0; index < opponents.length; index++) {
-  //     const opponent = opponents[index];
-  //     const children = opponent.children;
-
-  //     const counter = children[1];
-
-  //     counter.innerHTML = 0;
-  //   }
-  // };
-
-  finishButton.onclick = function () {
+const onclickFinishButton = function(opponents) {
+  return function () {
     const resultModal = document.getElementById("results");
 
     let maxScore = 0;
@@ -193,6 +165,25 @@ const createApp = function () {
 
     resultModal.classList.toggle("show");
   };
+}
+
+
+
+const createApp = function () {
+  const container = document.getElementById("opponents");
+  getPlayers(container);
+
+  const opponents = container.getElementsByClassName("opponent");
+  setOpponentsHandlers(opponents);
+
+  const actions = document.getElementById("actions");
+  const buttons = createButtons(actions);
+
+  const finishButton = createFinishButton();
+  const resetButton = createResetButton();
+
+  resetButton.onclick = onclickResetButton(opponents);
+  finishButton.onclick = onclickFinishButton(opponents);
 };
 
 createApp();
