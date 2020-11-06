@@ -21,19 +21,19 @@ p.check(obj); // --> no p.input() -> 3 prompt -> считает
 function SuperMath() {
   
 }
-// 
+// метод input() класса SuperMath
 SuperMath.prototype.input = function() {
 
 }
 
 var p = new SuperMath();
-// Добавить к экземпляру метод
+// Добавить к экземпляру метод check(obj)
 p.check = function(obj) {
 
 }
 
 var obj = {
-  x: prompt("Enter number", "5"),
-  y: prompt("Enter number", 1),
-  znak: prompt()
+  x: 12,
+  y: 3,
+  znak: "/"
 }
