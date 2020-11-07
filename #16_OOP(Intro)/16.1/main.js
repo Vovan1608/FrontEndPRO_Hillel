@@ -35,44 +35,43 @@ SuperMath.prototype.input = function() {
 
 //сделать математическое действие znak(которое описано в прототипе)
 SuperMath.prototype.doMath = function(obj) {
-  if(isNumber(obj.x) && isNumber(obj.y) && isZnak(obj.znak) ) {
-    switch(obj.znak) {
+  // деструктуризация объекта
+  var {x, y, znak} = obj;
+
+  if(isNumber(x) && isNumber(y) && isZnak(znak) ) {
+
+    switch(znak) {
       case "+":
-        return obj.x + obj.y;
+        return x + y;
       case "-": 
-        return obj.x - obj.y;
+        return x - y;
       case "*":
-        return obj.x * obj.y;
+        return x * y;
       case "/":
-        if( obj.y !== 0) {
-          return obj.x / obj.y;
+        if( y !== 0) {
+          return x / y;
         } else {
           throw new Error("incorrect value y");
         }
       case "%":
-        return obj.x % obj.y;
+        return x % y;
     }
-    
-    // return eval(x + znak + y); // or `${x} ${znak} ${y}` 
   } else {
     throw new Error("incorrect value");
   }
 }
 
+// вспомогательные функции для проверок
 function isNumber(val) {
-  if(isNaN(val) || val === "" || typeof val === "boolean" || typeof val === "string" || val === null){
-      return false;
-  }else{
-      return true;
-  }
+  return (isNaN(val) || val === "" || typeof val === "boolean" || typeof val === "string" || val === null) ? false : true;
 }
 
 function isZnak(znak) {
-  if(["+", "-", "*", "/", "%"].includes(znak)) {
-      return true;
-  }else{
-      return false;
-  }
+  return (["+", "-", "*", "/", "%"].includes(znak)) ? true : false;
+}
+
+function isObject(obj) {
+  return (typeof obj === "object" || obj !== null || !Array.isArray(obj)) ? true : false;
 }
 
 var p = new SuperMath();
@@ -80,10 +79,9 @@ var p = new SuperMath();
 // Добавить к экземпляру метод check(obj)
 p.check = function(obj) {
   // проверка на object
-  if(typeof obj === "object" && obj !== null) {
+  if(isObject(obj)) {
     // подтвердить у пользователя хочет ли он произвести действие znak c Х и У.
-    return confirm(`Хотите ли Вы произвести действие ${obj.znak} c ${obj.x} и ${obj.y}?`) ? this.doMath(obj) : 
-      this.input();
+    return confirm(`Хотите ли Вы произвести действие  "${obj.znak}" c ${obj.x} и ${obj.y}?`) ? this.doMath(obj) : this.input();
   }
 }
 
