@@ -25,7 +25,53 @@ function SuperMath() {
 
 // метод input() класса SuperMath
 SuperMath.prototype.input = function() {
+  var newObj = {
+    x: Number(prompt("Введите Х", "12")),
+    y: Number(prompt("Введите Х", "3")),
+    znak: prompt("Введите znak", "/")
+  }
+  return this.doMath(newObj);
+}
 
+SuperMath.prototype.doMath = function(obj) {
+  if(isNumber(obj.x) && isNumber(obj.y) && isZnak(obj.znak) ) {
+    switch(obj.znak) {
+      case "+":
+        return obj.x + obj.y;
+      case "-": 
+        return obj.x - obj.y;
+      case "*":
+        return obj.x * obj.y;
+      case "/":
+        if( obj.y !== 0) {
+          return obj.x / obj.y;
+        } else {
+          throw new Error("incorrect value y");
+        }
+      case "%":
+        return obj.x % obj.y;
+    }
+    
+    // return eval(x + znak + y); // or `${x} ${znak} ${y}` 
+  } else {
+    throw new Error("incorrect value");
+  }
+}
+
+function isNumber(val) {
+  if(isNaN(val) || val === "" || typeof val === "boolean" || typeof val === "string" || val === null){
+      return false;
+  }else{
+      return true;
+  }
+}
+
+function isZnak(obj) {
+  if(["+", "-", "*", "/", "%"].includes(obj)) {
+      return true;
+  }else{
+      return false;
+  }
 }
 
 var p = new SuperMath();
@@ -35,15 +81,15 @@ p.check = function(obj) {
   // проверка на object
   if(typeof obj === "object" && obj !== null) {
     // подтвердить у пользователя хочет ли он произвести действие znak c Х и У.
-    return confirm(`Хотите ли Вы произвести действие ${obj.znak} c ${obj.x} и ${obj.y}?`) ? true : false;
+    return confirm(`Хотите ли Вы произвести действие ${obj.znak} c ${obj.x} и ${obj.y}?`) ? this.doMath(obj) : 
+      this.input();
   }
 }
 
 var obj = {
   x: 12,
   y: 3,
-  znak: "*"
-}
+  znak: "-"
+};
 
-var test = p.check(obj);
-console.log(test);
+console.log(p.check(obj));
