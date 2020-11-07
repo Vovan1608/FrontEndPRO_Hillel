@@ -33,6 +33,7 @@ SuperMath.prototype.input = function() {
   return this.doMath(newObj);
 }
 
+//сделать математическое действие znak(которое описано в прототипе)
 SuperMath.prototype.doMath = function(obj) {
   if(isNumber(obj.x) && isNumber(obj.y) && isZnak(obj.znak) ) {
     switch(obj.znak) {
@@ -66,8 +67,8 @@ function isNumber(val) {
   }
 }
 
-function isZnak(obj) {
-  if(["+", "-", "*", "/", "%"].includes(obj)) {
+function isZnak(znak) {
+  if(["+", "-", "*", "/", "%"].includes(znak)) {
       return true;
   }else{
       return false;
