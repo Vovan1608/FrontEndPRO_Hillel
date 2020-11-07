@@ -27,7 +27,7 @@ function SuperMath() {
 SuperMath.prototype.input = function() {
   var newObj = {
     x: Number(prompt("Введите Х", "12")),
-    y: Number(prompt("Введите Х", "3")),
+    y: Number(prompt("Введите Y", "3")),
     znak: prompt("Введите znak", "/")
   }
   return this.doMath(newObj);
