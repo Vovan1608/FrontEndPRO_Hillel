@@ -44,8 +44,49 @@ function Field(width, height) {
   this.height = height;
 }
 
+Field.prototype.renderField = function() {
+  document.write("<hr/>");
+
+  for(var i = 0; i < this.height; i += 1) {
+    
+    for(var j = 0; j < this.width; j += 1) {
+      document.writeln("0");
+    }
+    document.write("<br/>");
+  }
+  document.write("<hr/>");
+}
+
+Field.prototype.clearField = function() {
+
+}
+
+Field.prototype.changeSize = function() {
+
+}
+
 function Person(name, XPosition, YPosition) {
   this.name = name;
   this.XPosition = XPosition;
   this.YPosition = YPosition;
 }
+
+Person.prototype = Object.create(Field.prototype);
+Person.prototype = Person;
+
+Person.prototype.start = function(XPosition, YPosition) {
+
+}
+
+Person.prototype.go = function(direction, step) {
+
+}
+
+Person.prototype.resetPosition = function() {
+
+}
+
+var field = new Field(10, 10);
+var persone = new Person("Bob", 5, 8);
+
+field.renderField();
