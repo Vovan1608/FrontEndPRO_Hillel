@@ -90,9 +90,7 @@ Person.prototype = Object.create(Field.prototype);
 Person.prototype.constructor = Person;
 
 Person.prototype.start = function() {
-  var x = this.XPosition,
-      y = this.YPosition;
-  return [x, y];
+  return [this.XPosition, this.YPosition];
 }
 
 Person.prototype.go = function(direction, step) {
@@ -100,17 +98,17 @@ Person.prototype.go = function(direction, step) {
 
     switch(direction) {
       case "right":
-        this.x += step;
-        return [this.x, this.y];
+        this.XPosition += step;
+        return [this.XPosition, this.YPosition];
       case "left":
-        this.start()[0] -= step;
-        return [this.start()[0], this.start()[1]];
+        this.XPosition -= step;
+        return [this.XPosition, this.YPosition];
       case "top":
-        this.start()[1] -= step;
-        return [this.start()[0], this.start()[1]];
+        this.YPosition -= step;
+        return [this.XPosition, this.YPosition];
       case "bottom":
-        this.start()[1] += step;
-        return [this.start()[0], this.start()[1]];
+        this.YPosition += step;
+        return [this.XPosition, this.YPosition];
     }
   }
 }
@@ -127,7 +125,3 @@ var field = new Field(10, 10);
 var persone = new Person("Bob", 5, 8);
 
 field.renderField();
-console.log(persone.start());
-// persone.go("left", 2);
-console.log(persone.go("right", 2));
-console.log(persone.go("top", 2));
