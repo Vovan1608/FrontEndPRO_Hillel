@@ -40,21 +40,40 @@ field.renderField();
 */
 
 function Field(width, height) {
-  this.width = width;
-  this.height = height;
+  // проверка на правильные значения
+  if( isPositiveInteger(width) && isPositiveInteger(height) ){
+    this.width = width;
+    this.height = height;
+  }
 }
 
-Field.prototype.renderField = function(width, height, x, y) {
+Field.prototype.renderField = function(width, height) {
   document.write("<hr/>");
-  
-  if(arguments.length === 0) {
-    width = this.width;
+  // если передано два аргумента
+  if(arguments.length === 2) {
+    // и они положительные целые, то это и есть ширина и высота(для метода changeSize())
+    if( isPositiveInteger(width) && isPositiveInteger(height) ) {
+      width = width;
+      height = height;
+    }
+  } else if(arguments.length === 1) {
+    // если переданный аргумент массив, значит рисуем героя по координатам
+    if( Array.isArray(arguments[0]) ) {
+      var x = arguments[0][1],
+          y = arguments[0][0];
+      width = this.width;
+      height = this.height;
+    }
+    // если ничего не передали, рисуем пустое поле
+  } else {
+    width = this.width,
     height = this.height;
   }
 
   for(var i = 0; i < height; i += 1) {
     
     for(var j = 0; j < width; j += 1) {
+      
       if(i === x && j === y) {
         document.writeln("1");
       } else {
@@ -75,8 +94,9 @@ Field.prototype.changeSize = function(newX, newY) {
 }
 
 function Person(name, XPosition, YPosition) {
+  Field.apply(this);
   this.name = name;
-  
+  console.log(this.width);
   if(XPosition <= field.width) {
     this.XPosition = XPosition;
   }
@@ -86,8 +106,8 @@ function Person(name, XPosition, YPosition) {
   }
 }
 
-Person.prototype = Object.create(Field.prototype);
-Person.prototype.constructor = Person;
+// Person.prototype = Object.create(Field.prototype);
+// Person.prototype.constructor = Person;
 
 Person.prototype.start = function() {
   return [this.XPosition, this.YPosition];
@@ -95,26 +115,28 @@ Person.prototype.start = function() {
 
 Person.prototype.go = function(direction, step) {
   if(direction) {
-
+    var coord = this.start(),
+        x = coord[0],
+        y = coord[1];
     switch(direction) {
       case "right":
-        this.XPosition = (this.XPosition + step > field.width) ? this.XPosition : this.XPosition + step;
-        return [this.XPosition, this.YPosition];
+        x = (x + step > field.width) ? x : x + step;
+        return [x, y];
       case "left":
-        this.XPosition = (this.XPosition - step < 0) ? this.XPosition : this.XPosition - step;
-        return [this.XPosition, this.YPosition];
+        x = (x - step < 0) ? x : x - step;
+        return [x, y];
       case "top":
-        this.YPosition = (this.YPosition - step < 0) ? this.YPosition : this.YPosition - step;
-        return [this.XPosition, this.YPosition];
+        y = (y - step < 0) ? y : y - step;
+        return [x, y];
       case "bottom":
-        this.YPosition = (this.YPosition + step > field.height) ? this.YPosition : this.YPosition + step;
-        return [this.XPosition, this.YPosition];
+        y = (y + step > field.height) ? y : y + step;
+        return [x, y];
     }
   }
 }
 
 Person.prototype.resetPosition = function() {
-  this.start(); 
+  return this.start(); 
 }
 
 function isDirecton(direction) {
@@ -123,7 +145,7 @@ function isDirecton(direction) {
 
 function isPositiveInteger(num) {
   if(isNumber(num)) {
-    return (num > 0 && Number.isInteger(num)) ? true : false;
+    return (num > 0 && Number.isInteger(num) ) ? true : false;
   }
 }
 
@@ -132,12 +154,7 @@ function isNumber(val) {
 }
 
 var field = new Field(10, 10);
-var persone = new Person("Bob", 5, 3);
+var person = new Person("Bob", 5, 3);
 
-field.renderField();
-var start = persone.start();
-console.log(start);
-
-console.log(persone.go("left", 2));
-var res = persone.resetPosition();
-console.log(res);
+field.renderField(person.start());
+field.renderField(person.go("top", 2))
