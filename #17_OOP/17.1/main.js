@@ -100,8 +100,8 @@ Person.prototype.go = function(direction, step) {
 
     switch(direction) {
       case "right":
-        this.start()[0] += step;
-        return [this.start()[0], this.start()[1]];
+        this.x += step;
+        return [this.x, this.y];
       case "left":
         this.start()[0] -= step;
         return [this.start()[0], this.start()[1]];
@@ -129,5 +129,5 @@ var persone = new Person("Bob", 5, 8);
 field.renderField();
 console.log(persone.start());
 // persone.go("left", 2);
-console.log(persone.go("left", 2));
+console.log(persone.go("right", 2));
 console.log(persone.go("top", 2));
