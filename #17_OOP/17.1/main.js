@@ -114,15 +114,24 @@ Person.prototype.go = function(direction, step) {
 }
 
 Person.prototype.resetPosition = function() {
-
+  this.start(); 
 }
 
 function isDirecton(direction) {
   return ["left", "right", "top", "bottom"].includes(direction) ? true : false;
 }
 
+function isPositiveInteger(num) {
+  return (num > 0 && Number.isInteger(num)) ? true : false;
+}
+
 var field = new Field(10, 10);
-var persone = new Person("Bob", 5, 8);
+var persone = new Person("Bob", 5, 3);
 
 field.renderField();
-console.log(persone.go("bottom", 2));
+var start = persone.start();
+console.log(start);
+
+console.log(persone.go("left", 2));
+var res = persone.resetPosition();
+console.log(res);
