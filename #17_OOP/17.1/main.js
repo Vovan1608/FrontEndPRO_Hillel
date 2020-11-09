@@ -44,13 +44,22 @@ function Field(width, height) {
   this.height = height;
 }
 
-Field.prototype.renderField = function() {
+Field.prototype.renderField = function(width, height, x, y) {
   document.write("<hr/>");
+  
+  if(arguments.length === 0) {
+    width = this.width;
+    height = this.height;
+  }
 
-  for(var i = 0; i < this.height; i += 1) {
+  for(var i = 0; i < height; i += 1) {
     
-    for(var j = 0; j < this.width; j += 1) {
-      document.writeln("0");
+    for(var j = 0; j < width; j += 1) {
+      if(i === x && j === y) {
+        document.writeln("1");
+      } else {
+        document.writeln("0");
+      }
     }
     document.write("<br/>");
   }
@@ -58,35 +67,67 @@ Field.prototype.renderField = function() {
 }
 
 Field.prototype.clearField = function() {
-
+  this.renderField();
 }
 
-Field.prototype.changeSize = function() {
-
+Field.prototype.changeSize = function(newX, newY) {
+  this.renderField(newX, newY);
 }
 
 function Person(name, XPosition, YPosition) {
   this.name = name;
-  this.XPosition = XPosition;
-  this.YPosition = YPosition;
+  
+  if(XPosition <= field.width) {
+    this.XPosition = XPosition;
+  }
+  
+  if(YPosition <= field.height) {
+    this.YPosition = YPosition;
+  }
 }
 
 Person.prototype = Object.create(Field.prototype);
-Person.prototype = Person;
+Person.prototype.constructor = Person;
 
-Person.prototype.start = function(XPosition, YPosition) {
-
+Person.prototype.start = function() {
+  var x = this.XPosition,
+      y = this.YPosition;
+  return [x, y];
 }
 
 Person.prototype.go = function(direction, step) {
+  if(direction) {
 
+    switch(direction) {
+      case "right":
+        this.start()[0] += step;
+        return [this.start()[0], this.start()[1]];
+      case "left":
+        this.start()[0] -= step;
+        return [this.start()[0], this.start()[1]];
+      case "top":
+        this.start()[1] -= step;
+        return [this.start()[0], this.start()[1]];
+      case "bottom":
+        this.start()[1] += step;
+        return [this.start()[0], this.start()[1]];
+    }
+  }
 }
 
 Person.prototype.resetPosition = function() {
 
 }
 
+function isDirecton(direction) {
+  return ["left", "right", "top", "bottom"].includes(direction) ? true : false;
+}
+
 var field = new Field(10, 10);
 var persone = new Person("Bob", 5, 8);
 
 field.renderField();
+console.log(persone.start());
+// persone.go("left", 2);
+console.log(persone.go("left", 2));
+console.log(persone.go("top", 2));
