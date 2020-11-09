@@ -98,16 +98,16 @@ Person.prototype.go = function(direction, step) {
 
     switch(direction) {
       case "right":
-        this.XPosition += step;
+        this.XPosition = (this.XPosition + step > field.width) ? this.XPosition : this.XPosition + step;
         return [this.XPosition, this.YPosition];
       case "left":
-        this.XPosition -= step;
+        this.XPosition = (this.XPosition - step < 0) ? this.XPosition : this.XPosition - step;
         return [this.XPosition, this.YPosition];
       case "top":
-        this.YPosition -= step;
+        this.YPosition = (this.YPosition - step < 0) ? this.YPosition : this.YPosition - step;
         return [this.XPosition, this.YPosition];
       case "bottom":
-        this.YPosition += step;
+        this.YPosition = (this.YPosition + step > field.height) ? this.YPosition : this.YPosition + step;
         return [this.XPosition, this.YPosition];
     }
   }
@@ -125,3 +125,4 @@ var field = new Field(10, 10);
 var persone = new Person("Bob", 5, 8);
 
 field.renderField();
+console.log(persone.go("bottom", 2));
