@@ -122,7 +122,13 @@ function isDirecton(direction) {
 }
 
 function isPositiveInteger(num) {
-  return (num > 0 && Number.isInteger(num)) ? true : false;
+  if(isNumber(num)) {
+    return (num > 0 && Number.isInteger(num)) ? true : false;
+  }
+}
+
+function isNumber(val) {
+  return (isNaN(val) || val === "" || typeof val === "boolean" || typeof val === "string" || val === null) ? false : true;
 }
 
 var field = new Field(10, 10);
