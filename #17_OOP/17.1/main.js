@@ -61,11 +61,13 @@ Field.prototype.renderField = function(width, height) {
     if( Array.isArray(arguments[0]) ) {
       var x = arguments[0][1],
           y = arguments[0][0];
+      // берем переданные в конструктор значения
       width = this.width;
       height = this.height;
     }
     // если ничего не передали, рисуем пустое поле
   } else {
+    // берем переданные в конструктор значения
     width = this.width,
     height = this.height;
   }
@@ -86,17 +88,18 @@ Field.prototype.renderField = function(width, height) {
 }
 
 Field.prototype.clearField = function() {
+  // пустое поле с размерами из конструктора, т.к. ничего не передаем
   this.renderField();
 }
 
 Field.prototype.changeSize = function(newX, newY) {
+  // поле с этими размерами
   this.renderField(newX, newY);
 }
 
 function Person(name, XPosition, YPosition) {
-  Field.apply(this);
   this.name = name;
-  console.log(this.width);
+  // тут не знаю как достучаться до св-ва родителя
   if(XPosition <= field.width) {
     this.XPosition = XPosition;
   }
@@ -105,16 +108,18 @@ function Person(name, XPosition, YPosition) {
     this.YPosition = YPosition;
   }
 }
-
-// Person.prototype = Object.create(Field.prototype);
-// Person.prototype.constructor = Person;
+//наследуюсь от класса Field
+Person.prototype = Object.create(Field.prototype);
+Person.prototype.constructor = Person;
 
 Person.prototype.start = function() {
+  //возвр. массив начальных координат
   return [this.XPosition, this.YPosition];
 }
 
 Person.prototype.go = function(direction, step) {
   if(direction) {
+    // массив координат старта, не знаю как достучаться до св-в родителя
     var coord = this.start(),
         x = coord[0],
         y = coord[1];
@@ -136,9 +141,10 @@ Person.prototype.go = function(direction, step) {
 }
 
 Person.prototype.resetPosition = function() {
+  // для сброса вызыв метод старт, где массив начальных координат
   return this.start(); 
 }
-
+// Вспом. функции
 function isDirecton(direction) {
   return ["left", "right", "top", "bottom"].includes(direction) ? true : false;
 }
