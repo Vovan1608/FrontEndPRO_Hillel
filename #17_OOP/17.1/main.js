@@ -42,8 +42,8 @@ field.renderField();
 function Field(width, height) {
   // проверка на правильные значения
   if( isPositiveInteger(width) && isPositiveInteger(height) ){
-    this.width = width;
-    this.height = height;
+    this._width = width;
+    this._height = height;
   }
 }
 
@@ -62,14 +62,14 @@ Field.prototype.renderField = function(width, height) {
       var x = arguments[0][1],
           y = arguments[0][0];
       // берем переданные в конструктор значения
-      width = this.width;
-      height = this.height;
+      width = this._width;
+      height = this._height;
     }
     // если ничего не передали, рисуем пустое поле
   } else {
     // берем переданные в конструктор значения
-    width = this.width,
-    height = this.height;
+    width = this._width,
+    height = this._height;
   }
 
   for(var i = 0; i < height; i += 1) {
@@ -96,15 +96,16 @@ Field.prototype.changeSize = function(newX, newY) {
   // поле с этими размерами
   this.renderField(newX, newY);
 }
-
-function Person(name, XPosition, YPosition) {
+// добавил width, height из конструктора родителя
+function Person(width, height, name, XPosition, YPosition) {
+  // наследование св-в родителя
+  Field.apply(this, arguments);
   this.name = name;
-  // тут не знаю как достучаться до св-ва родителя
-  if(XPosition <= field.width) {
+  if(XPosition <= this._width) {
     this.XPosition = XPosition;
   }
   
-  if(YPosition <= field.height) {
+  if(YPosition <= this._height) {
     this.YPosition = YPosition;
   }
 }
@@ -119,13 +120,13 @@ Person.prototype.start = function() {
 
 Person.prototype.go = function(direction, step) {
   if(direction) {
-    // массив координат старта, не знаю как достучаться до св-в родителя
+    // массив координат старта
     var coord = this.start(),
         x = coord[0],
         y = coord[1];
     switch(direction) {
       case "right":
-        x = (x + step > field.width) ? x : x + step;
+        x = (x + step > this._width) ? x : x + step;
         return [x, y];
       case "left":
         x = (x - step < 0) ? x : x - step;
@@ -134,7 +135,7 @@ Person.prototype.go = function(direction, step) {
         y = (y - step < 0) ? y : y - step;
         return [x, y];
       case "bottom":
-        y = (y + step > field.height) ? y : y + step;
+        y = (y + step > this._height) ? y : y + step;
         return [x, y];
     }
   }
@@ -160,7 +161,8 @@ function isNumber(val) {
 }
 
 var field = new Field(10, 10);
-var person = new Person("Bob", 5, 3);
+
+var person = new Person(10, 10, "Bob", 5, 3);
 
 field.renderField(person.start());
 field.renderField(person.go("top", 2))
