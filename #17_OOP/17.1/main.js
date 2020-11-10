@@ -101,6 +101,7 @@ function Person(width, height, name, XPosition, YPosition) {
   // наследование св-в родителя
   Field.apply(this, arguments);
   this.name = name;
+  // проверка,что герой не выпадает из пределов поля
   if(XPosition <= this._width) {
     this.XPosition = XPosition;
   }
