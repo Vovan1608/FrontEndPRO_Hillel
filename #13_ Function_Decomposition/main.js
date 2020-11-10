@@ -71,33 +71,38 @@ const setOpponentsHandlers = function (opponents) {
 
 
 // мое продолжение 
-const createButtons = function(actions) {
+const getButtons = function(actions) {
   if(actions) {
     const buttons = actions.children;
     return buttons;
   }
 }
 
-const createResetButton = function() {
-  return createButtons(actions)[1];
+const getResetButton = function() {
+  return getButtons(actions)[1];
 }
 
-const createFinishButton = function() {
-  return createButtons(actions)[0];
+const getFinishButton = function() {
+  return getButtons(actions)[0];
+}
+
+const useFor = function(opponents) {
+  for (let index = 0; index < opponents.length; index++) {
+    const opponent = opponents[index];
+    const children = opponent.children;
+
+    const counter = children[1];
+
+    counter.innerHTML = 0;
+  }
 }
 
 const onclickResetButton = function (opponents) {
   return function() {
-    for (let index = 0; index < opponents.length; index++) {
-      const opponent = opponents[index];
-      const children = opponent.children;
-  
-      const counter = children[1];
-  
-      counter.innerHTML = 0;
-    };
+    useFor(opponents);
   }
 }
+
 
 const onclickFinishButton = function(opponents) {
   return function () {
@@ -126,14 +131,7 @@ const onclickFinishButton = function(opponents) {
       const winner = winners.shift().cloneNode(true);
 
       winner.onclick = function () {
-        for (let index = 0; index < opponents.length; index++) {
-          const opponent = opponents[index];
-          const children = opponent.children;
-
-          const counter = children[1];
-
-          counter.innerHTML = 0;
-        }
+        useFor(opponents);
 
         resultModal.classList.toggle("show");
         resultModal.innerHTML = "";
@@ -149,14 +147,7 @@ const onclickFinishButton = function(opponents) {
       const restart = document.getElementById("restart-button");
 
       restart.onclick = function () {
-        for (let index = 0; index < opponents.length; index++) {
-          const opponent = opponents[index];
-          const children = opponent.children;
-
-          const counter = children[1];
-
-          counter.innerHTML = 0;
-        }
+        useFor(opponents);
 
         resultModal.classList.toggle("show");
         resultModal.innerHTML = "";
@@ -177,10 +168,10 @@ const createApp = function () {
   setOpponentsHandlers(opponents);
 
   const actions = document.getElementById("actions");
-  const buttons = createButtons(actions);
+  const buttons = getButtons(actions);
 
-  const finishButton = createFinishButton();
-  const resetButton = createResetButton();
+  const finishButton = getFinishButton();
+  const resetButton = getResetButton();
 
   resetButton.onclick = onclickResetButton(opponents);
   finishButton.onclick = onclickFinishButton(opponents);
