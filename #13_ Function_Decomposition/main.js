@@ -86,7 +86,7 @@ const getFinishButton = function() {
   return getButtons(actions)[0];
 }
 
-const useFor = function(opponents) {
+const counterInner = function(opponents) {
   for (let index = 0; index < opponents.length; index++) {
     const opponent = opponents[index];
     const children = opponent.children;
@@ -99,66 +99,87 @@ const useFor = function(opponents) {
 
 const onclickResetButton = function (opponents) {
   return function() {
-    useFor(opponents);
+    counterInner(opponents);
   }
 }
 
+const getWinner = function(opponents) {
+  let maxScore = 0;
+  let winners = [];
+  for (let index = 0; index < opponents.length; index++) {
+    const opponent = opponents[index];
+    const children = opponent.children;
+
+    const counter = children[1];
+    
+    const target = children[0];
+
+    const score = Number(counter.innerHTML);
+
+    if (score > maxScore) {
+      maxScore = score;
+      winners = [target];
+    } else if (score === maxScore) {
+      winners.push(target);
+    }
+  }
+  return winners;
+}
+
+const getWinnerOnclick = function(resultModal) {
+  return function() {
+    counterInner(opponents);
+
+    resultModal.classList.toggle("show");
+    resultModal.innerHTML = "";
+
+    return resultModal;
+  }
+}
+
+const getRestartOnclick = function(resultModal) {
+  return function() {
+    counterInner(opponents);
+
+    resultModal.classList.toggle("show");
+    resultModal.innerHTML = "";
+  }
+}
+
+const createResulModal = function(resultModal) {
+  return resultModal.innerHTML = `
+  <p>draw</p>
+  <button id="restart-button">Restart</button>
+`;
+}
+
+const getResultModal = function(resultModal) {
+  const winners = getWinner(opponents);
+    
+  if (winners.length === 1) {
+    const winner = winners.shift().cloneNode(true);
+
+    winner.onclick = getWinnerOnclick(resultModal);
+
+    resultModal.append(winner);
+  } else {
+    createResulModal(resultModal);
+
+    const restart = document.getElementById("restart-button");
+
+    restart.onclick = getRestartOnclick(resultModal);
+  }
+}
 
 const onclickFinishButton = function(opponents) {
   return function () {
     const resultModal = document.getElementById("results");
-
-    let maxScore = 0;
-    let winners = [];
-    for (let index = 0; index < opponents.length; index++) {
-      const opponent = opponents[index];
-      const children = opponent.children;
-
-      const target = children[0];
-      const counter = children[1];
-
-      const score = Number(counter.innerHTML);
-
-      if (score > maxScore) {
-        maxScore = score;
-        winners = [target];
-      } else if (score === maxScore) {
-        winners.push(target);
-      }
-    }
-
-    if (winners.length === 1) {
-      const winner = winners.shift().cloneNode(true);
-
-      winner.onclick = function () {
-        useFor(opponents);
-
-        resultModal.classList.toggle("show");
-        resultModal.innerHTML = "";
-      };
-
-      resultModal.append(winner);
-    } else {
-      resultModal.innerHTML = `
-        <p>draw</p>
-        <button id="restart-button">Restart</button>
-      `;
-
-      const restart = document.getElementById("restart-button");
-
-      restart.onclick = function () {
-        useFor(opponents);
-
-        resultModal.classList.toggle("show");
-        resultModal.innerHTML = "";
-      };
-    }
-
+    
+    getResultModal(resultModal);
+    
     resultModal.classList.toggle("show");
   };
 }
-
-
 
 const createApp = function () {
   const container = document.getElementById("opponents");
