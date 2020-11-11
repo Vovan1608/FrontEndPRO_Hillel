@@ -73,49 +73,34 @@ const setOpponentsHandlers = function (opponents) {
 // мое продолжение 
 const getButtons = function(actions) {
   if(actions) {
-    const buttons = actions.children;
-    return buttons;
+    return actions.children;
   }
 }
 
-const getResetButton = function() {
-  return getButtons(actions)[1];
-}
-
-const getFinishButton = function() {
-  return getButtons(actions)[0];
-}
-
-const counterInner = function(opponents) {
-  const size = arguments.length;
-  for (let index = 0; index < opponents.length; index++) {
-    const opponent = opponents[index];
-    const children = opponent.children;
-
+const setCounterInnerZero = function(opponents) {
+  forChildrenOfEachElement(opponents, function (children) {
+    const target = children[0];
     const counter = children[1];
 
     counter.innerHTML = 0;
-  }
+  });
 }
 
 const onclickResetButton = function (opponents) {
   return function() {
-    counterInner(opponents);
+    setCounterInnerZero(opponents);
   }
 }
 
 const getWinner = function(opponents) {
   let maxScore = 0;
   let winners = [];
-  for (let index = 0; index < opponents.length; index++) {
-    const opponent = opponents[index];
-    const children = opponent.children;
 
-    const counter = children[1];
-    
+  forChildrenOfEachElement(opponents, function (children) {
     const target = children[0];
+    const counter = children[1];
 
-    const score = Number(counter.innerHTML);
+    const score = getCounter(counter);
 
     if (score > maxScore) {
       maxScore = score;
@@ -123,24 +108,24 @@ const getWinner = function(opponents) {
     } else if (score === maxScore) {
       winners.push(target);
     }
-  }
+  });
   return winners;
 }
 
-const getWinnerOnclick = function(resultModal) {
+const getWinnerOnclick = function(resultModal, opponents) {
   return function() {
-    counterInner(opponents);
+    setCounterInnerZero(opponents);
 
     resultModal.classList.toggle("show");
     resultModal.innerHTML = "";
-
+    
     return resultModal;
   }
 }
 
 const getRestartOnclick = function(resultModal) {
   return function() {
-    counterInner(opponents);
+    setCounterInnerZero(opponents);
 
     resultModal.classList.toggle("show");
     resultModal.innerHTML = "";
@@ -163,7 +148,7 @@ const onclickFinishButton = function(opponents) {
     if (winners.length === 1) {
       const winner = winners.shift().cloneNode(true);
 
-      winner.onclick = getWinnerOnclick(resultModal);
+      winner.onclick = getWinnerOnclick(resultModal, opponents);
 
       resultModal.append(winner);
     } else {
@@ -187,8 +172,8 @@ const createApp = function () {
   const actions = document.getElementById("actions");
   const buttons = getButtons(actions);
 
-  const finishButton = getFinishButton();
-  const resetButton = getResetButton();
+  const finishButton = buttons[0];
+  const resetButton = buttons[1];
 
   resetButton.onclick = onclickResetButton(opponents);
   finishButton.onclick = onclickFinishButton(opponents);
