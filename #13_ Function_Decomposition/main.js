@@ -87,6 +87,7 @@ const getFinishButton = function() {
 }
 
 const counterInner = function(opponents) {
+  const size = arguments.length;
   for (let index = 0; index < opponents.length; index++) {
     const opponent = opponents[index];
     const children = opponent.children;
@@ -153,30 +154,25 @@ const createResulModal = function(resultModal) {
 `;
 }
 
-const getResultModal = function(resultModal) {
-  const winners = getWinner(opponents);
-    
-  if (winners.length === 1) {
-    const winner = winners.shift().cloneNode(true);
-
-    winner.onclick = getWinnerOnclick(resultModal);
-
-    resultModal.append(winner);
-  } else {
-    createResulModal(resultModal);
-
-    const restart = document.getElementById("restart-button");
-
-    restart.onclick = getRestartOnclick(resultModal);
-  }
-}
-
 const onclickFinishButton = function(opponents) {
   return function () {
     const resultModal = document.getElementById("results");
     
-    getResultModal(resultModal);
+    const winners = getWinner(opponents);
     
+    if (winners.length === 1) {
+      const winner = winners.shift().cloneNode(true);
+
+      winner.onclick = getWinnerOnclick(resultModal);
+
+      resultModal.append(winner);
+    } else {
+      createResulModal(resultModal);
+
+      const restart = document.getElementById("restart-button");
+
+      restart.onclick = getRestartOnclick(resultModal);
+    }
     resultModal.classList.toggle("show");
   };
 }
