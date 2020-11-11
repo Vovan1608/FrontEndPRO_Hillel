@@ -125,8 +125,6 @@ const getWinnerOnclick = function(resultModal, opponents) {
 
 const getRestartOnclick = function(resultModal) {
   return function() {
-    setCounterInnerZero(opponents);
-
     resultModal.classList.toggle("show");
     resultModal.innerHTML = "";
   }
