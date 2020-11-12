@@ -33,19 +33,13 @@ SuperMath.prototype.input = function() {
   return this.doMath(newObj);
 }
 
-SuperMath.prototype.getSum = function(x, y) {
-  return x + y;
-}
+SuperMath.prototype.getSum = (x, y) => x + y;
 
-SuperMath.prototype.getDifference = function(x, y) {
-  return x - y;
-}
+SuperMath.prototype.getDifference = (x, y) => x - y;
 
-SuperMath.prototype.getMultiplication = function(x, y) {
-  return x * y;
-}
+SuperMath.prototype.getMultiplication = (x, y) => x * y;
 
-SuperMath.prototype.getDivision = function(x, y) {
+SuperMath.prototype.getDivision = (x, y) => {
   if(y !==  0) {
     return x / y;
   } else {
@@ -53,9 +47,7 @@ SuperMath.prototype.getDivision = function(x, y) {
   }
 }
 
-SuperMath.prototype.getReminder = function(x, y) {
-  return x % y;
-}
+SuperMath.prototype.getReminder = (x, y) => x % y;
 //сделать математическое действие znak(которое описано в прототипе)
 SuperMath.prototype.doMath = function(obj) {
   // деструктуризация объекта
