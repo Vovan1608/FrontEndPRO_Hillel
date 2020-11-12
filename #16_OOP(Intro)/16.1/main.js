@@ -58,7 +58,7 @@ SuperMath.prototype.doMath = function(obj) {
     switch(znak) {
       case "+":
         return this.getSum(x, y);
-      case "-": 
+      case "-":
         return this.getDifference(x, y);
       case "*":
         return this.getMultiplication(x, y);

@@ -73,9 +73,9 @@ Field.prototype.renderField = function(width, height) {
   }
 
   for(var i = 0; i < height; i += 1) {
-    
+
     for(var j = 0; j < width; j += 1) {
-      
+
       if(i === x && j === y) {
         document.writeln("1");
       } else {
@@ -105,7 +105,7 @@ function Person(width, height, name, XPosition, YPosition) {
   if(XPosition <= this._width) {
     this.XPosition = XPosition;
   }
-  
+
   if(YPosition <= this._height) {
     this.YPosition = YPosition;
   }
@@ -144,7 +144,7 @@ Person.prototype.go = function(direction, step) {
 
 Person.prototype.resetPosition = function() {
   // для сброса вызыв метод старт, где массив начальных координат
-  return this.start(); 
+  return this.start();
 }
 // Вспом. функции
 function isDirecton(direction) {
