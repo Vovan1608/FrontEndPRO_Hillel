@@ -33,6 +33,29 @@ SuperMath.prototype.input = function() {
   return this.doMath(newObj);
 }
 
+SuperMath.prototype.getSum = function(x, y) {
+  return x + y;
+}
+
+SuperMath.prototype.getDifference = function(x, y) {
+  return x - y;
+}
+
+SuperMath.prototype.getMultiplication = function(x, y) {
+  return x * y;
+}
+
+SuperMath.prototype.getDivision = function(x, y) {
+  if(y !==  0) {
+    return x / y;
+  } else {
+    throw new Error("incorrect value y");
+  }
+}
+
+SuperMath.prototype.getReminder = function(x, y) {
+  return x % y;
+}
 //сделать математическое действие znak(которое описано в прототипе)
 SuperMath.prototype.doMath = function(obj) {
   // деструктуризация объекта
@@ -42,19 +65,15 @@ SuperMath.prototype.doMath = function(obj) {
 
     switch(znak) {
       case "+":
-        return x + y;
+        return this.getSum(x, y);
       case "-": 
-        return x - y;
+        return this.getDifference(x, y);
       case "*":
-        return x * y;
+        return this.getMultiplication(x, y);
       case "/":
-        if( y !== 0) {
-          return x / y;
-        } else {
-          throw new Error("incorrect value y");
-        }
+        return this.getDivision(x, y);
       case "%":
-        return x % y;
+        return this.getReminder(x, y);
     }
   } else {
     throw new Error("incorrect value");
