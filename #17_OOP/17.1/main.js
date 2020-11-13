@@ -49,26 +49,17 @@ function Field(width, height) {
 
 Field.prototype.renderField = function(width, height) {
   document.write("<hr/>");
-  // если передано два аргумента
-  if(arguments.length === 2) {
-    // и они положительные целые, то это и есть ширина и высота(для метода changeSize())
-    if( isPositiveInteger(width) && isPositiveInteger(height) ) {
-      width = width;
-      height = height;
-    }
-  } else if(arguments.length === 1) {
-    // если переданный аргумент массив, значит рисуем героя по координатам
-    if( Array.isArray(arguments[0]) ) {
+  // если передано два аргумента и они положительные целые, то это и есть ширина и высота(для метода changeSize())
+  if(arguments.length === 2 && isPositiveInteger(width) && isPositiveInteger(height) ) {
+    width = width;
+    height = height;
+  } else {
+    if(Array.isArray(arguments[0])) { // если переданный аргумент массив, значит рисуем героя по координатам
       var x = arguments[0][1],
           y = arguments[0][0];
-      // берем переданные в конструктор значения
-      width = this._width;
-      height = this._height;
     }
-    // если ничего не передали, рисуем пустое поле
-  } else {
     // берем переданные в конструктор значения
-    width = this._width,
+    width = this._width;
     height = this._height;
   }
 
@@ -164,6 +155,6 @@ function isNumber(val) {
 var field = new Field(10, 10);
 
 var person = new Person(10, 10, "Bob", 5, 3);
-
+field.renderField()
 field.renderField(person.start());
 field.renderField(person.go("top", 2))
