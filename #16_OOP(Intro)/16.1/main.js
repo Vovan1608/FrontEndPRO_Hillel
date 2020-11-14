@@ -29,26 +29,32 @@ function SuperMath(obj) {
 
 // метод input() класса SuperMath
 SuperMath.prototype.input = function() {
-  var obj = {
+  return new SuperMath({
     x: Number(prompt("Введите Х", "12")),
     y: Number(prompt("Введите Y", "3")),
     znak: prompt("Введите znak", "/")
-  }
-  return this.doMath();
+  }).doMath();
 }
 
-SuperMath.prototype.getSum = () => {
-  console.log(this);
+SuperMath.prototype.getSum = function() {
   return this.x + this.y
-};
+}
 
-SuperMath.prototype.getDifference = () => this.x - this.y;
+SuperMath.prototype.getDifference = function() {
+  return this.x - this.y;
+}
 
-SuperMath.prototype.getMultiplication = () => this.x * this.y;
+SuperMath.prototype.getMultiplication = function() {
+  return this.x * this.y;
+}
 
-SuperMath.prototype.getDivision = () => (this.y !==  0) ? this.x / this.y : null;
+SuperMath.prototype.getDivision = function() {
+  return (this.y !==  0) ? this.x / this.y : null;
+}
 
-SuperMath.prototype.getReminder = () => this.x % this.y;
+SuperMath.prototype.getReminder = function() {
+  return this.x % this.y;
+}
 //сделать математическое действие znak(которое описано в прототипе)
 SuperMath.prototype.doMath = function() {
   if( isZnak(this.znak) ) {
@@ -76,9 +82,6 @@ SuperMath.prototype.check = function(obj) {
 }
 
 // вспомогательные функции для проверок
-function isNumber(val) {
-  return (isNaN(val) || val === "" || typeof val === "boolean" || typeof val === "string" || val === null) ? false : true;
-}
 
 function isZnak(znak) {
   return (["+", "-", "*", "/", "%"].includes(znak)) ? true : false;
@@ -88,7 +91,6 @@ function isObject(obj) {
   return (typeof obj === "object" || obj !== null || !Array.isArray(obj)) ? true : false;
 }
 
-var p = new SuperMath({x: 12, y: 3, znak: "+"});
-// console.log(p);
-console.log(p.doMath());
-// console.log(p.check(p));
+var p = new SuperMath({x: 12, y: 3, znak: "-"});
+
+console.log(p.check(p));
