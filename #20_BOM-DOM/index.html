@@ -1,0 +1,33 @@
+﻿<!DOCTYPE html>
+<html lang = "en">
+  <head>
+    <meta charset = "UTF-8">
+    <meta name = "viewport" content = "width=device-width, initial-scale=">
+    <title></title>
+  </head>
+  <body>
+    <div>
+      <input type="text">
+      <input type="text">
+      <input type="text">
+    </div>
+    <br>
+    <textarea id="text" cols="52" rows="3"></textarea>
+
+    <script>
+      setInterval( () => {
+        let inputs = document.getElementsByTagName('input'),// коллекция input
+            textArea = document.getElementById('text'),
+            arrInputs = [],//массив для значений input
+            i = 0,
+            size = inputs.length;
+
+        for(i; i < size; i += 1) {
+          arrInputs.push(inputs[i].value);
+        }
+        textArea.innerText = arrInputs.join(", ")
+      }, 3000);
+    </script>
+    <!-- <script src = "./main.js"></script> -->
+  </body>
+</html>
