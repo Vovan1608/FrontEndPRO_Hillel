@@ -6,13 +6,11 @@
 */
 
 setInterval( () => {
-	let inputs = document.getElementsByTagName('input'),// коллекция input
-		  textArea = document.getElementById('text'),
+	let inputs = document.querySelectorAll('input'), // || inputs = document.getElementsByTagName('input') коллекция input
+			textArea = document.querySelector('#text'), //  || textArea = document.getElementById('text')
 			arrInputs = [],//массив для значений input
-			i = 0,
-			size = inputs.length;
-	for(i; i < size; i += 1) {
-		arrInputs.push(inputs[i].value);
+	for(let inp of inputs) {
+		arrInputs.push(inputs[inp].value);
 	}
-	textArea.innerText = arrInputs.join(", ")
+	textArea.innerText = arrInputs.join(", "); // || textArea.innerHTML = arrInputs.join(", ");
 }, 3000);
