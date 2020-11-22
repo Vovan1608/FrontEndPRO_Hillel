@@ -1,0 +1,13 @@
+* {
+  box-sizing: border-box;
+}
+
+div {
+  display: flex;
+  justify-content: center;
+  margin-top: 60px;
+}
+
+#range {
+  margin-right: 10px;
+}

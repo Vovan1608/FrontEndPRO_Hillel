@@ -17,3 +17,8 @@
 Красный блок отображает количество комиссии. Например Значение выбора
 100, комиссия будет 8%. Результирующая сумма: 108. Высота красного блока - 8px
 */
+
+let valueOfRange = document.querySelector("#range"),
+		valueOfInput = document.querySelector("#number");
+
+console.log( valueOfInput.innerHTML = Number(valueOfRange.value) );
