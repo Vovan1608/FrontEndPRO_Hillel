@@ -18,9 +18,9 @@
       setInterval( () => {
 	      let inputs = document.querySelectorAll('input'), // || inputs = document.getElementsByTagName('input') коллекция input
 			      textArea = document.querySelector('#text'), //  || textArea = document.getElementById('text')
-			      arrInputs = [],//массив для значений input
+			      arrInputs = [];//массив для значений input
 	      for(let inp of inputs) {
-		      arrInputs.push(inputs[inp].value);
+		      arrInputs.push(inp.value);
 	      }
 	      textArea.innerText = arrInputs.join(", "); // || textArea.innerHTML = arrInputs.join(", ");
       }, 3000);
