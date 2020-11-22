@@ -7,9 +7,18 @@
     <link rel="stylesheet" href="./style.css">
   </head>
   <body>
-    <div>
-      <input id="range" type="range" min="0" max="100">
-      <input id="number">
+    <div class="input-container">
+      <!--Событие OnInput — срабатывает при любом изменении в элементе формы,
+          например при вводе нового символа, или при перемещении ползунка на 1px -->
+      <input id="range" type="range" min="0" max="100" oninput="setValInputNum()">
+      <input id="number" type="number" min="0" max="100" oninput="setValRangeFlag()">
+    </div>
+    <div class="visual-container">
+      <div class="visual-box">
+        <div class="nothing"></div>
+        <div class="comission"></div>
+        <div class="credit"></div>
+      </div>
     </div>
     <script src = "./main.js"></script>
   </body>

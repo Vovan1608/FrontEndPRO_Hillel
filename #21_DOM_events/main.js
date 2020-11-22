@@ -17,8 +17,17 @@
 Красный блок отображает количество комиссии. Например Значение выбора
 100, комиссия будет 8%. Результирующая сумма: 108. Высота красного блока - 8px
 */
+// функция возвращает в поле <input type="number> значение <input type="range>" типа string
+const setValInputNum = () => {
+	let valueOfRange = document.querySelector("#range"),  // object inputRange
+			valueOfInput = document.querySelector("#number"); // object inputNumber
+	return valueOfInput.value = valueOfRange.value;
+}
 
-let valueOfRange = document.querySelector("#range"),
-		valueOfInput = document.querySelector("#number");
-
-console.log( valueOfInput.innerHTML = Number(valueOfRange.value) );
+const setValRangeFlag = () => {
+	let valueOfRange = document.querySelector("#range"),  // object inputRange
+			valueOfInput = document.querySelector("#number"); // object inputNumber
+	return valueOfRange.value = valueOfInput.value;
+}
+// функция возвращает коллекцию детей (блоки 'nothing', 'comission', 'credit')
+const arrayNothingCreditComission = () => document.querySelector(".visual-box").children;

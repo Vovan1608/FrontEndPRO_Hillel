@@ -2,7 +2,7 @@
   box-sizing: border-box;
 }
 
-div {
+.input-container {
   display: flex;
   justify-content: center;
   margin-top: 60px;
@@ -10,4 +10,31 @@ div {
 
 #range {
   margin-right: 10px;
+}
+
+.visual-container {
+  display: flex;
+  justify-content: center;
+}
+
+.visual-box {
+  margin-top: 30px;
+  width: 30px;
+  height: 110px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  border: 1px solid black;
+}
+
+.nothing {
+  background: white;
+}
+
+.comission {
+  background: red;
+}
+
+.credit {
+  background: green;
 }
