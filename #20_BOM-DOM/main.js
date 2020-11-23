@@ -6,11 +6,9 @@
 */
 
 setInterval( () => {
-	let inputs = document.querySelectorAll('input'), // || inputs = document.getElementsByTagName('input') коллекция input
-			textArea = document.querySelector('#text'), //  || textArea = document.getElementById('text')
-			arrInputs = [];//массив для значений input
-	for(let inp of inputs) {
-		arrInputs.push(inp.value);
-	}
-	textArea.innerText = arrInputs.join(", "); // || textArea.innerHTML = arrInputs.join(", ");
+	const inputs = document.querySelectorAll('.input'); // коллекция input
+	// одалживание метода slice для коллекции inputs и применеие метода map
+	let arrayOfInputs = [].slice.call(inputs).map( (item) => item.value );
+	// Выводим в textarea содержимое всех полей ввода через запятую
+	inputs[3].innerText = `${arrayOfInputs[0]}, ${arrayOfInputs[1]}, ${arrayOfInputs[2]}`;
 }, 3000);
