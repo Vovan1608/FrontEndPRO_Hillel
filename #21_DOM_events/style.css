@@ -2,7 +2,7 @@
   box-sizing: border-box;
 }
 
-.input-container {
+.input_container {
   display: flex;
   justify-content: center;
   margin-top: 60px;
@@ -12,12 +12,12 @@
   margin-right: 10px;
 }
 
-.visual-container {
+.visual_container {
   display: flex;
   justify-content: center;
 }
 
-.visual-box {
+.visual_box {
   margin-top: 30px;
   width: 30px;
   height: 110px;
