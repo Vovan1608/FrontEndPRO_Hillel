@@ -18,33 +18,35 @@
 100, комиссия будет 8%. Результирующая сумма: 108. Высота красного блока - 8px
 */
 
-// функция возвращает в поле <input type="number> значение <input type="range>" типа string
-const setValInputNum = () => {
-	let valueOfRange = document.querySelector(`#range`),  // object inputRange
-			valueOfInput = document.querySelector("#number"); // object inputNumber
-	return valueOfInput.value = valueOfRange.value;
+// функция для получения эл-ов из DOM: принимает className(класс элемента) в виде string,
+// возвр. массив данных
+const getElementsAsArray = (className) => {
+	const collectElem = document.querySelectorAll(`.${className}`);
+	return [].slice.call(collectElem);
 }
 
-const setValRangeFlag = () => {
-	let valueOfRange = document.querySelector("#range"),  // object inputRange
-			valueOfInput = document.querySelector("#number"); // object inputNumber
-	return valueOfRange.value = valueOfInput.value;
+// функция принимает className(класс элемента) в виде string,
+// возвращает в поле <input type="number"> значение <input type="range"> типа string
+const setValInputNum = (className) => {
+	const arrayValues = getElementsAsArray(className);
+	return arrayValues[1].value = arrayValues[0].value;
 }
 
-// функция для получения эл-ов из DOM: принимает className(класс элемента) в виде string, возвр. коллекцию детей
-const getElements = (className) => document.querySelector(`.${className}`).children;
+// функция принимает className(класс элемента) в виде string,
+// возвращает в поле <input type="range"> значение <input type="number"> типа string
+const setValRangeFlag = (className) => {
+	const arrayValues = getElementsAsArray(className);
+	return arrayValues[0].value = arrayValues[1].value;
+}
 
-// функция для конвертации коллеции в массив:принимает className(класс элемента) в виде string, возвр. массив значений
-// применено одолжение метода у массивов
-const convertCollectionToArray = (className) => [].slice.call(getElements(className)).map( (item) => item.value);
-
-// 
+//функция принимает className(класс элемента) в виде string,
+// возвращает массив значений комиссии и кредита 
 const setHeightBloks = (className) => {
 	let comission,
 			credit,
-			arraytOfValues = convertCollectionToArray(className);
-	credit = arraytOfValues[1];
-	
+			arraytOfValues = getElementsAsArray(className);
+	credit = Number(arraytOfValues[1].value);
+
 	if(credit < 20) {
 		comission = 2;
 	} else if(credit >= 20 && credit < 50) {
@@ -54,6 +56,5 @@ const setHeightBloks = (className) => {
 	} else {
 		comission = 8;
 	}
-
-	
+	return [comission, credit];
 }
