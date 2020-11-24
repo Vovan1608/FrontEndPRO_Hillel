@@ -77,18 +77,18 @@ const getValueHeightBlocks = () => {
 // отрисовка элементов блок-диаграммы
 const render = () => {
 	// берем элемент с классом input_container(содержит input-ы)
-	// вешаем событие mousemove (при движении флажка в <input type="range">)
-	document.querySelector(".input_container").addEventListener("mousemove", function() {
-		// массив элементов input
+	// вешаем событие input
+	document.querySelector("[type='range']").addEventListener("input", function() {
+		// // массив элементов input
 		const [inpFromRange, inpFromNum] = getElementsAsArray("input");
 		inpFromRange.oninput = setValInputNum('input');
 		getValueHeightBlocks();
 	});
 	// берем элемент с классом input_container(содержит input-ы)
-	// вешаем событие click (при нажатии стрелок в <input type="number">)
-	document.querySelector(".input_container").addEventListener("click", function() {
+	// вешаем событие change (при нажатии стрелок в <input type="number">)
+	document.querySelector(".input_container").addEventListener("change", function() {
 		const [inpFromRange, inpFromNum] = getElementsAsArray("input");
-		inpFromNum.oninput = setValRangeFlag('input');
+		inpFromNum.onchange = setValRangeFlag('input');
 		getValueHeightBlocks();
 	});
 }
