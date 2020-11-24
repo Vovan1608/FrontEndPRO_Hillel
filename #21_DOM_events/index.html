@@ -10,14 +10,14 @@
     <div class="input_container">
       <!--Событие OnInput — срабатывает при любом изменении в элементе формы,
           например при вводе нового символа, или при перемещении ползунка на 1px -->
-      <input class="input" type="range" min="0" max="100" oninput="setValInputNum('input')">
-      <input class="input" type="number" min="0" max="100" oninput="setValRangeFlag('input')">
+      <input class="input" type="range" min="0" max="100">
+      <input class="input" type="number" min="0" max="100">
     </div>
     <div class="visual_container">
       <div class="visual_box">
         <div class="block"></div>
-        <div class="block" oninput="render()"></div>
-        <div class="block" oninput="render()"></div>
+        <div class="block"></div>
+        <div class="block"></div>
       </div>
     </div>
     <script src = "./main.js"></script>

@@ -59,18 +59,37 @@ const setHeightBloks = (className) => {
 	return [comission, credit];
 }
 
+// функция склеивает значение высоты блока-диаграммы со значением комиссии
+// возвращает массив стилей для блока-диаграммы
+const getValueHeightBlocks = () => {
+	// массив элементов блок-диаграммы
+	const [nothing, redBlock, greenBlock] = getElementsAsArray("block");
+
+	// массив с текущим значением credit и comission
+	const [credit, comission] = setHeightBloks("input");
+
+	greenBlock.style.height = `${comission}px`;
+	redBlock.style.height = `${credit}px`;
+
+	return [greenBlock.style.height, redBlock.style.height];
+}
+
 // отрисовка элементов блок-диаграммы
 const render = () => {
 	// берем элемент с классом input_container(содержит input-ы)
+	// вешаем событие mousemove (при движении флажка в <input type="range">)
 	document.querySelector(".input_container").addEventListener("mousemove", function() {
-		// массив элементов блок-диаграммы
-		const arrayOfElem = getElementsAsArray("block");
-		let [nothing, red, green] = arrayOfElem;
-		// массив с текущим значением credit и comission
-		const arrayCrCom = setHeightBloks("input");
-		let [credit, comission] = arrayCrCom;
-		green.style.height = comission + "px";
-		red.style.height = credit + "px";
+		// массив элементов input
+		const [inpFromRange, inpFromNum] = getElementsAsArray("input");
+		inpFromRange.oninput = setValInputNum('input');
+		getValueHeightBlocks();
+	});
+	// берем элемент с классом input_container(содержит input-ы)
+	// вешаем событие click (при нажатии стрелок в <input type="number">)
+	document.querySelector(".input_container").addEventListener("click", function() {
+		const [inpFromRange, inpFromNum] = getElementsAsArray("input");
+		inpFromNum.oninput = setValRangeFlag('input');
+		getValueHeightBlocks();
 	});
 }
 

@@ -27,7 +27,7 @@
   border: 1px solid black;
 }
 
-.block:nth-last-child(2) {
+.block:nth-child(2) {
   background: red;
 }
 
