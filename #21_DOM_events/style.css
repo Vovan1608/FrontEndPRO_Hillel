@@ -27,14 +27,10 @@
   border: 1px solid black;
 }
 
-.nothing {
-  background: white;
-}
-
-.comission {
+.block:nth-last-child(2) {
   background: red;
 }
 
-.credit {
+.block:last-child {
   background: green;
 }

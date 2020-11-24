@@ -40,7 +40,7 @@ const setValRangeFlag = (className) => {
 }
 
 //функция принимает className(класс элемента) в виде string,
-// возвращает массив значений комиссии и кредита 
+// возвращает массив значений комиссии и кредита
 const setHeightBloks = (className) => {
 	let comission,
 			credit,
@@ -58,3 +58,20 @@ const setHeightBloks = (className) => {
 	}
 	return [comission, credit];
 }
+
+// отрисовка элементов блок-диаграммы
+const render = () => {
+	// берем элемент с классом input_container(содержит input-ы)
+	document.querySelector(".input_container").addEventListener("mousemove", function() {
+		// массив элементов блок-диаграммы
+		const arrayOfElem = getElementsAsArray("block");
+		let [nothing, red, green] = arrayOfElem;
+		// массив с текущим значением credit и comission
+		const arrayCrCom = setHeightBloks("input");
+		let [credit, comission] = arrayCrCom;
+		green.style.height = comission + "px";
+		red.style.height = credit + "px";
+	});
+}
+
+render();
