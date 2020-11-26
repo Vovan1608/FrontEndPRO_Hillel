@@ -2,7 +2,7 @@
 
 /*
 Реализовать калькулятор, в котором есть слайдер
-(input type=”range”) и поле ввода (input type=”number”).
+(input type="range") и поле ввода (input type="number").
 Изменяя состояние range меняется состояние поля ввода number. И наоборот.
 
 Реализовать блок-диаграмму, который в пикселях будет отображать
@@ -18,34 +18,32 @@
 100, комиссия будет 8%. Результирующая сумма: 108. Высота красного блока - 8px
 */
 
-// функция для получения эл-ов из DOM: принимает className(класс элемента) в виде string,
-// возвр. массив данных
-const getElementsAsArray = (className) => {
-	const collectElem = document.querySelectorAll(`.${className}`);
-	return [].slice.call(collectElem);
+const RANGE = "[type='range']";
+const NUMBER = "[type='number']";
+// функция принимает selector(тип string), возвращает элемент из DOM
+const getElemFromDOM = (selector) => {
+  return document.querySelector(selector);
 }
 
-// функция принимает className(класс элемента) в виде string,
-// возвращает в поле <input type="number"> значение <input type="range"> типа string
-const setValInputNum = (className) => {
-	const arrayValues = getElementsAsArray(className);
-	return arrayValues[1].value = arrayValues[0].value;
+// функция принимает selector(тип string), возвращает значение элемента из DOM
+const getValueFromDOM = (selector) => {
+  return getElemFromDOM(selector).value;
 }
 
-// функция принимает className(класс элемента) в виде string,
-// возвращает в поле <input type="range"> значение <input type="number"> типа string
-const setValRangeFlag = (className) => {
-	const arrayValues = getElementsAsArray(className);
-	return arrayValues[0].value = arrayValues[1].value;
-}
+// хранит элемент с флажком range
+const range = getElemFromDOM(RANGE);
+// функция при изменении состояния range - меняет состояние поля ввода number
+range.oninput = () => getElemFromDOM(NUMBER).value = range.value;
 
-//функция принимает className(класс элемента) в виде string,
-// возвращает массив значений комиссии и кредита
-const setHeightBloks = (className) => {
+// хранит элемент с полем ввода number
+const number = getElemFromDOM(NUMBER);
+// функция при изменении состояния поля ввода number - меняет состояние range
+number.onchange = () => getElemFromDOM(RANGE).value = number.value;
+
+// функция уст. высоту блоков диаграммы и возвращает массив этих значений
+const setHeightBloks = () => {
 	let comission,
-			credit,
-			arraytOfValues = getElementsAsArray(className);
-	credit = Number(arraytOfValues[1].value);
+			credit = Number(getValueFromDOM(NUMBER));
 
 	if(credit < 20) {
 		comission = 2;
@@ -56,40 +54,23 @@ const setHeightBloks = (className) => {
 	} else {
 		comission = 8;
 	}
-	return [comission, credit];
-}
 
-// функция склеивает значение высоты блока-диаграммы со значением комиссии
-// возвращает массив стилей для блока-диаграммы
-const getValueHeightBlocks = () => {
-	// массив элементов блок-диаграммы
-	const [nothing, redBlock, greenBlock] = getElementsAsArray("block");
+	let greenBlock = getElemFromDOM(".green"),
+			redBlock = getElemFromDOM(".red");
 
-	// массив с текущим значением credit и comission
-	const [credit, comission] = setHeightBloks("input");
-
-	greenBlock.style.height = `${comission}px`;
-	redBlock.style.height = `${credit}px`;
+	redBlock.style.height = `${comission}px`;
+	greenBlock.style.height = `${credit}px`;
 
 	return [greenBlock.style.height, redBlock.style.height];
 }
 
 // отрисовка элементов блок-диаграммы
 const render = () => {
-	// берем элемент с классом input_container(содержит input-ы)
-	// вешаем событие input
-	document.querySelector("[type='range']").addEventListener("input", function() {
-		// // массив элементов input
-		const [inpFromRange, inpFromNum] = getElementsAsArray("input");
-		inpFromRange.oninput = setValInputNum('input');
-		getValueHeightBlocks();
+	document.querySelector(RANGE).addEventListener("input", function() {
+		setHeightBloks();
 	});
-	// берем элемент с классом input_container(содержит input-ы)
-	// вешаем событие change (при нажатии стрелок в <input type="number">)
-	document.querySelector(".input_container").addEventListener("change", function() {
-		const [inpFromRange, inpFromNum] = getElementsAsArray("input");
-		inpFromNum.onchange = setValRangeFlag('input');
-		getValueHeightBlocks();
+	document.querySelector(NUMBER).addEventListener("change", function() {
+		setHeightBloks();
 	});
 }
 
