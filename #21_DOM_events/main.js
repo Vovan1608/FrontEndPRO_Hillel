@@ -40,7 +40,7 @@ const number = getElemFromDOM(NUMBER);
 // функция при изменении состояния поля ввода number - меняет состояние range
 number.onchange = () => getElemFromDOM(RANGE).value = number.value;
 
-// функция уст. высоту блоков диаграммы и возвращает массив этих значений
+// функция уст. высоту блоков диаграммы
 const setHeightBloks = () => {
 	let comission,
 			credit = Number(getValueFromDOM(NUMBER));
