@@ -55,13 +55,8 @@ const setHeightBloks = () => {
 		comission = 8;
 	}
 
-	let greenBlock = getElemFromDOM(".green"),
-			redBlock = getElemFromDOM(".red");
-
-	redBlock.style.height = `${comission}px`;
-	greenBlock.style.height = `${credit}px`;
-
-	return [greenBlock.style.height, redBlock.style.height];
+	getElemFromDOM(".red").style.height = `${comission}px`;
+	getElemFromDOM(".green").style.height = `${credit}px`;
 }
 
 // отрисовка элементов блок-диаграммы
