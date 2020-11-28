@@ -67,10 +67,10 @@ const getHeightBlocks = () => {
 
 // отрисовка элементов блок-диаграммы
 const render = () => {
-  document.querySelector(RANGE).addEventListener("input", function() {
+  getElemFromDOM(RANGE).addEventListener("input", function() {
     getHeightBlocks();
   });
-  document.querySelector(NUMBER).addEventListener("change", function() {
+  getElemFromDOM(NUMBER).addEventListener("change", function() {
     getHeightBlocks();
   });
 }
