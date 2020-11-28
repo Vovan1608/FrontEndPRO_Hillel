@@ -40,7 +40,7 @@ const number = getElemFromDOM(NUMBER);
 // функция при изменении состояния поля ввода number - меняет состояние range
 number.onchange = () => getElemFromDOM(RANGE).value = number.value;
 
-// функцю. возвр. массив значений блоков по высоте
+// функцю. возвр. объект значений блоков по высоте
 const setHeightBloks = () => {
   let comission,
       credit = Number(getValueFromDOM(NUMBER));
@@ -54,12 +54,13 @@ const setHeightBloks = () => {
   } else {
     comission = 8;
   }
-  return [credit, comission];
+  return {credit, comission};
 }
 
 // функция уст. высоту блоков
 const getHeightBlocks = () => {
-  const [credit, comission] = setHeightBloks();
+  // деструктуризация объекта более устойчива
+  const {credit, comission} = setHeightBloks();
 
   getElemFromDOM(".red").style.height = `${comission}px`;
   getElemFromDOM(".green").style.height = `${credit}px`;
