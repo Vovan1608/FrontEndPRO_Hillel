@@ -42,37 +42,37 @@ number.onchange = () => getElemFromDOM(RANGE).value = number.value;
 
 // функцю. возвр. массив значений блоков по высоте
 const setHeightBloks = () => {
-	let comission,
-			credit = Number(getValueFromDOM(NUMBER));
+  let comission,
+      credit = Number(getValueFromDOM(NUMBER));
 
-	if(credit < 20) {
-		comission = 2;
-	} else if(credit >= 20 && credit < 50) {
-		comission = 4;
-	} else if(credit >= 50 && credit < 75) {
-		comission = 6;
-	} else {
-		comission = 8;
-	}
-	return [credit, comission];
+  if(credit < 20) {
+    comission = 2;
+  } else if(credit >= 20 && credit < 50) {
+    comission = 4;
+  } else if(credit >= 50 && credit < 75) {
+    comission = 6;
+  } else {
+    comission = 8;
+  }
+  return [credit, comission];
 }
 
 // функция уст. высоту блоков
 const getHeightBlocks = () => {
-	const [credit, comission] = setHeightBloks();
+  const [credit, comission] = setHeightBloks();
 
-	getElemFromDOM(".red").style.height = `${comission}px`;
-	getElemFromDOM(".green").style.height = `${credit}px`;
+  getElemFromDOM(".red").style.height = `${comission}px`;
+  getElemFromDOM(".green").style.height = `${credit}px`;
 }
 
 // отрисовка элементов блок-диаграммы
 const render = () => {
-	document.querySelector(RANGE).addEventListener("input", function() {
-		getHeightBlocks();
-	});
-	document.querySelector(NUMBER).addEventListener("change", function() {
-		getHeightBlocks();
-	});
+  document.querySelector(RANGE).addEventListener("input", function() {
+    getHeightBlocks();
+  });
+  document.querySelector(NUMBER).addEventListener("change", function() {
+    getHeightBlocks();
+  });
 }
 
 render();
