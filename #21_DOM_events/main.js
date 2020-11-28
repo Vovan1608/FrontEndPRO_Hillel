@@ -40,7 +40,7 @@ const number = getElemFromDOM(NUMBER);
 // функция при изменении состояния поля ввода number - меняет состояние range
 number.onchange = () => getElemFromDOM(RANGE).value = number.value;
 
-// функция уст. высоту блоков диаграммы
+// функцю. возвр. массив значений блоков по высоте
 const setHeightBloks = () => {
 	let comission,
 			credit = Number(getValueFromDOM(NUMBER));
@@ -54,6 +54,12 @@ const setHeightBloks = () => {
 	} else {
 		comission = 8;
 	}
+	return [credit, comission];
+}
+
+// функция уст. высоту блоков
+const getHeightBlocks = () => {
+	const [credit, comission] = setHeightBloks();
 
 	getElemFromDOM(".red").style.height = `${comission}px`;
 	getElemFromDOM(".green").style.height = `${credit}px`;
@@ -62,10 +68,10 @@ const setHeightBloks = () => {
 // отрисовка элементов блок-диаграммы
 const render = () => {
 	document.querySelector(RANGE).addEventListener("input", function() {
-		setHeightBloks();
+		getHeightBlocks();
 	});
 	document.querySelector(NUMBER).addEventListener("change", function() {
-		setHeightBloks();
+		getHeightBlocks();
 	});
 }
 
