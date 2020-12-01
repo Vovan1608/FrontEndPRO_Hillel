@@ -27,17 +27,21 @@ window.onload = function() {
 	container.append(textarea, buttonSave, buttonCancel);
 	// сам контейнер добавляем во фрагмент
 	fragment.append(container);
-	// делегируем родителю
-	table.addEventListener("click", function(event) {
+	// функция-обработчик события
+	const handlerEvent = function(event) {
+		console.log(event.type);
 		// элемент по которому кликнули
-		const elemClicked = event.target;
+		const clickedElem = event.target;
 		// если элемент по которому кликнули "TD"
-		if(elemClicked.tagName === "TD") {
+		if(clickedElem.tagName === "TD") {
 			// вставить фрагмент в элемент по которому кликнули
-			elemClicked.append(fragment);
+			clickedElem.append(fragment);
+			let textclickedElem = clickedElem.firstChild.nodeValue;
 			// многострочное текстовое поле с текстом который был в ячейке
-			textarea.innerText = elemClicked.firstChild.data;
-			// console.log(elemClicked.firstChild.data);
+			textarea.innerText = textclickedElem;
+			return console.log(clickedElem);
 		}
-	});
+	}
+	// делегируем родителю
+	table.addEventListener("click", handlerEvent(event));
 }
