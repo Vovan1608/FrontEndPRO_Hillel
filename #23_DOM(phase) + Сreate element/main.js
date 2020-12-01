@@ -9,3 +9,15 @@ cancel -- оставит все без изменений как было ран
 P.S. обязательно использовать делегирование события.
 */
 
+window.onload = function() {
+	const table = document.querySelector("table");
+	
+	table.addEventListener("click", function(event) {
+		const textarea = document.createElement("textarea");
+		const elemClicked = event.target;
+		if(elemClicked.tagName === "TD") {
+			elemClicked.append(textarea);
+			textarea.innerText = elemClicked.innerText;
+		}
+	});
+}
