@@ -10,14 +10,34 @@ P.S. обязательно использовать делегирование 
 */
 
 window.onload = function() {
+	// блок родитель, которому делегируем 
 	const table = document.querySelector("table");
-	
+	// фрагмент для вставки блока с текстом и кнопками
+	const fragment = document.createDocumentFragment();
+	// блок с текстом и кнопками
+	const container = document.createElement("div");
+	container.classList.add(".container");
+	// элементы блока
+	const textarea = document.createElement("textarea");
+	const buttonSave = document.createElement("button");
+	const buttonCancel = document.createElement("button");
+	buttonSave.innerText = "SAVE";
+	buttonCancel.innerText = "CANCEL";
+	// добавляем в контейнер элементы
+	container.append(textarea, buttonSave, buttonCancel);
+	// сам контейнер добавляем во фрагмент
+	fragment.append(container);
+	// делегируем родителю
 	table.addEventListener("click", function(event) {
-		const textarea = document.createElement("textarea");
+		// элемент по которому кликнули
 		const elemClicked = event.target;
+		// если элемент по которому кликнули "TD"
 		if(elemClicked.tagName === "TD") {
-			elemClicked.append(textarea);
-			textarea.innerText = elemClicked.innerText;
+			// вставить фрагмент в элемент по которому кликнули
+			elemClicked.append(fragment);
+			// многострочное текстовое поле с текстом который был в ячейке
+			textarea.innerText = elemClicked.firstChild.data;
+			// console.log(elemClicked.firstChild.data);
 		}
 	});
 }

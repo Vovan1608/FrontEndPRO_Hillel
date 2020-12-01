@@ -14,5 +14,22 @@ td {
   height: 100px;
 }
 
-textarea {
+.container {
+  display: grid;
+  /* grid-template-columns: 1fr;
+  grid-template-areas:
+    "first first"
+    "second therd"; */
+}
+
+first {
+  grid-area: first;
+}
+
+second {
+  grid-area: second;
+}
+
+third {
+  grid-area: third;
 }
