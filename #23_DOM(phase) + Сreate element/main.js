@@ -12,6 +12,7 @@ P.S. обязательно использовать делегирование 
 window.onload = function() {
 	// блок родитель, которому делегируем 
 	const table = document.querySelector("table");
+	
 	// фрагмент для вставки блока с текстом и кнопками
 	const fragment = document.createDocumentFragment();
 	// блок с текстом и кнопками
@@ -27,31 +28,35 @@ window.onload = function() {
 	container.append(textarea, buttonSave, buttonCancel);
 	// сам контейнер добавляем во фрагмент
 	fragment.append(container);
+
 	// функция-обработчик события
 	const handlerEvent = function(event) {
 		// элемент по которому кликнули
 		const clickedElem = event.target;
+		const textClickedElement = clickedElem.innerText;
 		// если элемент по которому кликнули "TD"
 		if(clickedElem.tagName === "TD") {
 			// вставить фрагмент в элемент по которому кликнули
 			clickedElem.append(fragment);
 			// многострочное текстовое поле с текстом который был в ячейке
-			textarea.innerText = clickedElem.firstChild.nodeValue;
+			textarea.innerText = textClickedElement;
 			// вешаем слушатель на кнопку save
 			buttonSave.addEventListener("click", function() {
 				// сохраняем изменения
 				clickedElem.innerText = textarea.value;
-				table.removeEventListener("click", handlerEvent);
+				// table.removeEventListener("click", handlerEvent);
 			});
 			buttonCancel.addEventListener("click", function() {
-				// отменить все изменения
-				clickedElem.innerText = clickedElem.firstChild.nodeValue;
-				table.removeEventListener("click", handlerEvent);
+				// оставит все без изменений как было раньше
+				clickedElem.innerText = textClickedElement;
+				// table.removeEventListener("click", handlerEvent);
 			});
 		}
 	}
-	// делегируем родителю
-	for(let elem in table) {
+	
+	const clickTable = function(table) {
 		table.addEventListener("click", handlerEvent);
 	}
+	// делегируем родителю
+	clickTable(table);
 }
