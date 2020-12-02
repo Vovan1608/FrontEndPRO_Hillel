@@ -29,19 +29,29 @@ window.onload = function() {
 	fragment.append(container);
 	// функция-обработчик события
 	const handlerEvent = function(event) {
-		console.log(event.type);
 		// элемент по которому кликнули
 		const clickedElem = event.target;
 		// если элемент по которому кликнули "TD"
 		if(clickedElem.tagName === "TD") {
 			// вставить фрагмент в элемент по которому кликнули
 			clickedElem.append(fragment);
-			let textclickedElem = clickedElem.firstChild.nodeValue;
 			// многострочное текстовое поле с текстом который был в ячейке
-			textarea.innerText = textclickedElem;
-			return console.log(clickedElem);
+			textarea.innerText = clickedElem.firstChild.nodeValue;
+			// вешаем слушатель на кнопку save
+			buttonSave.addEventListener("click", function() {
+				// сохраняем изменения
+				clickedElem.innerText = textarea.value;
+				table.removeEventListener("click", handlerEvent);
+			});
+			buttonCancel.addEventListener("click", function() {
+				// отменить все изменения
+				clickedElem.innerText = clickedElem.firstChild.nodeValue;
+				table.removeEventListener("click", handlerEvent);
+			});
 		}
 	}
 	// делегируем родителю
-	table.addEventListener("click", handlerEvent(event));
+	for(let elem in table) {
+		table.addEventListener("click", handlerEvent);
+	}
 }
