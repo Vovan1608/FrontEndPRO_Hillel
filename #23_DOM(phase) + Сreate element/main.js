@@ -10,6 +10,11 @@ P.S. обязательно использовать делегирование 
 */
 
 window.onload = function() {
+	
+	function Field() {
+		
+	}
+	
 	// блок родитель, которому делегируем 
 	const table = document.querySelector("table");
 	
