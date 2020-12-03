@@ -1,8 +1,8 @@
 ﻿"use strict";
 
 /*
-Сверстать таблицу 5х5 с любым текстовых содержимым заранее заполненным.
-При клике на любую ячейку таблицы появляется внутри ячейке многострочное 
+Сверстать таблицу 5х5 с любым текстовым содержимым заранее заполненным.
+При клике на любую ячейку таблицы появляется внутри ячейки многострочное 
 текстовое поле с текстом который был в ячейке(на которую нажали) и две 
 кнопки save, cancel save -- сохранить в текущей ячейке введенные данные, 
 cancel -- оставит все без изменений как было раньше.
@@ -16,8 +16,6 @@ window.onload = function() {
 	const getElement = (selector) => document.querySelector(selector);
 
 	const createElem = (selector) => document.createElement(selector);
-	
-	const createFragment = () => document.createDocumentFragment();
 
 	const createButtons = (buttons) => {
 		const saveCancelButton = [];
@@ -29,69 +27,46 @@ window.onload = function() {
 		return saveCancelButton;
 	}
 
-	const createBlockField = () => {
-		
-	}
-
-
-
-	const test = getElement(".test");
-	const div = createElem("div");
-	div.innerText = "Hello";
-	const frag = createFragment();
-	const [save, cancel] = createButtons(buttons); 
-	frag.append(div, save, cancel);
-	test.append(frag);
-	
-
-	/* 
-	// блок родитель, которому делегируем 
-	const table = document.querySelector("table");
-	
-	// фрагмент для вставки блока с текстом и кнопками
-	const fragment = document.createDocumentFragment();
-	// блок с текстом и кнопками
-	const container = document.createElement("div");
-	container.classList.add(".container");
-	// элементы блока
-	const textarea = document.createElement("textarea");
-	const buttonSave = document.createElement("button");
-	const buttonCancel = document.createElement("button");
-	buttonSave.innerText = "SAVE";
-	buttonCancel.innerText = "CANCEL";
-	// добавляем в контейнер элементы
-	container.append(textarea, buttonSave, buttonCancel);
-	// сам контейнер добавляем во фрагмент
-	fragment.append(container);
-
-	// функция-обработчик события
-	const handlerEvent = function(event) {
+	const handler = (event) => {
 		// элемент по которому кликнули
 		const clickedElem = event.target;
+		// текст элемента по которому кликнули
 		const textClickedElement = clickedElem.innerText;
-		// если элемент по которому кликнули "TD"
+
 		if(clickedElem.tagName === "TD") {
-			// вставить фрагмент в элемент по которому кликнули
-			clickedElem.append(fragment);
-			// многострочное текстовое поле с текстом который был в ячейке
+			// общий контейнер для вставки
+			const container = document.createElement("div");
+			container.classList.add("container");
+			
+			// элемент текстовое поле
+			const textarea = createElem("textarea");
+			// содержание текстового поля как у элемента, на который кликнули
 			textarea.innerText = textClickedElement;
-			// вешаем слушатель на кнопку save
-			buttonSave.addEventListener("click", function() {
-				// сохраняем изменения
+
+			// блок с кнопками
+			const [save, cancel] = createButtons(buttons);
+
+			// общий контейнер 
+			container.append(textarea, save, cancel);
+
+			// фрагмент вставляется в элемент по которому кликнули
+			clickedElem.append(container);
+
+			save.addEventListener("click", () => {
 				clickedElem.innerText = textarea.value;
-				// table.removeEventListener("click", handlerEvent);
+				table.removeEventListener("click", handler);
 			});
-			buttonCancel.addEventListener("click", function() {
-				// оставит все без изменений как было раньше
+			cancel.addEventListener("click", () => {
 				clickedElem.innerText = textClickedElement;
-				// table.removeEventListener("click", handlerEvent);
+				table.removeEventListener("click", handler);
 			});
 		}
 	}
-	
-	const clickTable = function(table) {
-		table.addEventListener("click", handlerEvent);
+
+	const onListenerTable = () => {
+		const table = getElement("table");
+		table.addEventListener("click", handler);
 	}
-	// делегируем родителю
-	clickTable(table); */
+
+	onListenerTable();
 }
