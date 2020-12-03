@@ -10,11 +10,41 @@ P.S. обязательно использовать делегирование 
 */
 
 window.onload = function() {
+
+	const buttons = [{button: "SAVE"}, {button: "CANCEL"}];
 	
-	function Field() {
+	const getElement = (selector) => document.querySelector(selector);
+
+	const createElem = (selector) => document.createElement(selector);
+	
+	const createFragment = () => document.createDocumentFragment();
+
+	const createButtons = (buttons) => {
+		const saveCancelButton = [];
+		buttons.forEach(item => {
+			const buttn = createElem("button");
+			buttn.innerText = item.button;
+			saveCancelButton.push(buttn);
+		});
+		return saveCancelButton;
+	}
+
+	const createBlockField = () => {
 		
 	}
+
+
+
+	const test = getElement(".test");
+	const div = createElem("div");
+	div.innerText = "Hello";
+	const frag = createFragment();
+	const [save, cancel] = createButtons(buttons); 
+	frag.append(div, save, cancel);
+	test.append(frag);
 	
+
+	/* 
 	// блок родитель, которому делегируем 
 	const table = document.querySelector("table");
 	
@@ -63,5 +93,5 @@ window.onload = function() {
 		table.addEventListener("click", handlerEvent);
 	}
 	// делегируем родителю
-	clickTable(table);
+	clickTable(table); */
 }
