@@ -35,7 +35,7 @@ window.onload = function() {
 
 		if(clickedElem.tagName === "TD") {
 			// общий контейнер для вставки
-			const container = document.createElement("div");
+			const container = createElem("div");
 			container.classList.add("container");
 			
 			// элемент текстовое поле
