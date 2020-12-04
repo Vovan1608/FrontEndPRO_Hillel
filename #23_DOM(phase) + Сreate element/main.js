@@ -28,6 +28,7 @@ window.onload = function() {
 	}
 
 	const handler = (event) => {
+		console.log(event);
 		// элемент по которому кликнули
 		const clickedElem = event.target;
 		// текст элемента по которому кликнули
@@ -49,16 +50,14 @@ window.onload = function() {
 			// общий контейнер 
 			container.append(textarea, save, cancel);
 
-			// фрагмент вставляется в элемент по которому кликнули
+			// контейнер вставляется в элемент по которому кликнули
 			clickedElem.append(container);
 
 			save.addEventListener("click", () => {
 				clickedElem.innerText = textarea.value;
-				table.removeEventListener("click", handler);
 			});
 			cancel.addEventListener("click", () => {
 				clickedElem.innerText = textClickedElement;
-				table.removeEventListener("click", handler);
 			});
 		}
 	}
