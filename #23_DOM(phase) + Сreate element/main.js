@@ -28,7 +28,6 @@ window.onload = function() {
 	}
 
 	const handler = (event) => {
-		console.log(event);
 		// элемент по которому кликнули
 		const clickedElem = event.target;
 		// текст элемента по которому кликнули
@@ -37,7 +36,7 @@ window.onload = function() {
 		if(clickedElem.tagName === "TD") {
 			// общий контейнер для вставки
 			const container = createElem("div");
-			container.classList.add("container");
+			// container.classList.add("container");
 			
 			// элемент текстовое поле
 			const textarea = createElem("textarea");
@@ -52,12 +51,17 @@ window.onload = function() {
 
 			// контейнер вставляется в элемент по которому кликнули
 			clickedElem.append(container);
+			// добавить контейнеру класс и перезаписать все классы у него на один
+			container.className  = "container";
 
 			save.addEventListener("click", () => {
 				clickedElem.innerText = textarea.value;
+				// контейнеру добавляется класс hidden - скрыть
+				container.classList.add("hidden");
 			});
 			cancel.addEventListener("click", () => {
 				clickedElem.innerText = textClickedElement;
+				container.classList.add("hidden");
 			});
 		}
 	}
