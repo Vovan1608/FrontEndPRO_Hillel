@@ -21,29 +21,33 @@
 const RANGE = "[type='range']";
 const NUMBER = "[type='number']";
 // функция принимает selector(тип string), возвращает элемент из DOM
-const getElemFromDOM = (selector) => {
-  return document.querySelector(selector);
-}
+const getElemFromDOM = (selector) => document.querySelector(selector);
 
 // функция принимает selector(тип string), возвращает значение элемента из DOM
-const getValueFromDOM = (selector) => {
-  return getElemFromDOM(selector).value;
+const getValueFromDOM = (selector) => getElemFromDOM(selector).value;
+
+// функция при изменении состояния поля range меняет состояние поля ввода number и наоборот
+const changeStateInputField = () => {
+  const inputs = document.querySelectorAll(".input");
+
+  for(const input of inputs) {
+    
+    if(input.type === "range") {
+      input.addEventListener("input", () => {
+        getElemFromDOM(NUMBER).value = getElemFromDOM(RANGE).value;
+      });
+    } else {
+      input.addEventListener("change", () => {
+        getElemFromDOM(RANGE).value = getElemFromDOM(NUMBER).value
+      });
+    }
+  }
 }
-
-// хранит элемент с флажком range
-const range = getElemFromDOM(RANGE);
-// функция при изменении состояния range - меняет состояние поля ввода number
-range.oninput = () => getElemFromDOM(NUMBER).value = range.value;
-
-// хранит элемент с полем ввода number
-const number = getElemFromDOM(NUMBER);
-// функция при изменении состояния поля ввода number - меняет состояние range
-number.onchange = () => getElemFromDOM(RANGE).value = number.value;
 
 // функцю. возвр. объект значений блоков по высоте
 const setHeightBloks = () => {
   let comission,
-      credit = Number(getValueFromDOM(NUMBER));
+      credit = Number(document.querySelector(NUMBER).value);
 
   if(credit < 20) {
     comission = 2;
@@ -68,6 +72,8 @@ const getHeightBlocks = () => {
 
 // отрисовка элементов блок-диаграммы
 const render = () => {
+  changeStateInputField();
+
   getElemFromDOM(RANGE).addEventListener("input", function() {
     getHeightBlocks();
   });
