@@ -18,8 +18,8 @@
 100, комиссия будет 8%. Результирующая сумма: 108. Высота красного блока - 8px
 */
 
-const RANGE = "[type='range']";
-const NUMBER = "[type='number']";
+const types = {range: "[type='range']", number: "[type='number']"};
+
 // функция принимает selector(тип string), возвращает элемент из DOM
 const getElemFromDOM = (selector) => document.querySelector(selector);
 
@@ -28,26 +28,28 @@ const getValueFromDOM = (selector) => getElemFromDOM(selector).value;
 
 // функция при изменении состояния поля range меняет состояние поля ввода number и наоборот
 const changeStateInputField = () => {
+  const {range, number} = types;
   const inputs = document.querySelectorAll(".input");
 
   for(const input of inputs) {
-    
+
     if(input.type === "range") {
       input.addEventListener("input", () => {
-        getElemFromDOM(NUMBER).value = getElemFromDOM(RANGE).value;
+        getElemFromDOM(number).value = getValueFromDOM(range);
       });
     } else {
       input.addEventListener("change", () => {
-        getElemFromDOM(RANGE).value = getElemFromDOM(NUMBER).value
+        getElemFromDOM(range).value = getValueFromDOM(number);
       });
     }
   }
 }
 
 // функцю. возвр. объект значений блоков по высоте
-const setHeightBloks = () => {
+const getHeightBloks = () => {
+  const {range, number} = types;
   let comission,
-      credit = Number(document.querySelector(NUMBER).value);
+      credit = Number(getValueFromDOM(number));
 
   if(credit < 20) {
     comission = 2;
@@ -62,9 +64,9 @@ const setHeightBloks = () => {
 }
 
 // функция уст. высоту блоков
-const getHeightBlocks = () => {
+const setHeightBlocks = () => {
   // деструктуризация объекта более устойчива
-  const {credit, comission} = setHeightBloks();
+  const {credit, comission} = getHeightBloks();
 
   getElemFromDOM(".red").style.height = `${comission}px`;
   getElemFromDOM(".green").style.height = `${credit}px`;
@@ -72,13 +74,14 @@ const getHeightBlocks = () => {
 
 // отрисовка элементов блок-диаграммы
 const render = () => {
+  const {range, number} = types;
   changeStateInputField();
 
-  getElemFromDOM(RANGE).addEventListener("input", function() {
-    getHeightBlocks();
+  getElemFromDOM(range).addEventListener("input", function() {
+    setHeightBlocks();
   });
-  getElemFromDOM(NUMBER).addEventListener("change", function() {
-    getHeightBlocks();
+  getElemFromDOM(number).addEventListener("change", function() {
+    setHeightBlocks();
   });
 }
 
