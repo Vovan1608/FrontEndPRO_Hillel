@@ -27,17 +27,36 @@ window.onload = function() {
 	}
 	// функция создает блок с необходимым кол-вом контейнеров
 	const createBlock = () => {
-		const mainContainer = document.querySelector("#main");
+		// основной блок в HTML в который будем все рисовать
+		const mainBlock = document.querySelector("#main");
 		const fragment = document.createDocumentFragment();
+		// задаем кол-во контейнеров
 		const numOfConteiners = 2;
+		
 		for(let i = 0; i < numOfConteiners; i += 1) {
 			const {container, button, tablo} = createElementForBlock();
+			// уникальные классы для контейнеров
+			button.classList.add(`button_${i + 1}`);
 			container.append(button, tablo);
 			fragment.append(container);
 		}
-
-		mainContainer.append(fragment);
+		mainBlock.append(fragment);
 	}
-	
 	createBlock();
+	
+	const buttons = document.querySelectorAll(".btn");
+	// навешиваем слушателей на каждую кнопку с click
+	buttons.forEach(item => item.addEventListener("click", (event) =>{
+		// получаем доступ к полю счетчика
+		const tablo = event.target.nextSibling;
+		// получаем имена классов кнопки "click"
+		const [btn, buttonNum] = event.target.classList;
+
+		tablo.innerText = localStorage.getItem(buttonNum);
+		// меняем значение счетчика по клику
+		tablo.innerText = Number(tablo.innerText) + 1;
+		
+		
+		localStorage.setItem(buttonNum, tablo.innerText);
+	}));
 }
