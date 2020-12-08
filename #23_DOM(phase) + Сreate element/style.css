@@ -16,4 +16,9 @@ td {
 
 .show {
   display: grid;
+  visibility: visible;
+}
+
+.hidden {
+  visibility: hidden;
 }

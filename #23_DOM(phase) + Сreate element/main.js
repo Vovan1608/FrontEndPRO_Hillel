@@ -11,17 +11,18 @@ P.S. обязательно использовать делегирование 
 
 window.onload = function() {
 
-	const buttons = [{button: "SAVE"}, {button: "CANCEL"}];
+	const buttons = [{data_name: "save"}, {data_name: "cancel"}];
 
 	const getElement = (selector) => document.querySelector(selector);
 
 	const createElem = (selector) => document.createElement(selector);
 
-	const createButtons = (buttons) => {
+	const createContainerButtons = (buttons) => {
 		const containersButton = [];
 		buttons.forEach(item => {
 			const buttn = createElem("button");
-			buttn.innerText = item.button;
+			buttn.innerText = item.data_name;
+			buttn.setAttribute("data_name", item.data_name);
 			containersButton.push(buttn);
 		});
 		return containersButton;
@@ -31,45 +32,42 @@ window.onload = function() {
 		// элемент текстовое поле
 		const textarea = createElem("textarea");
 		// блок с кнопками
-		const [save, cancel] = createButtons(buttons);
+		const [save, cancel] = createContainerButtons(buttons);
 		// общий контейнер для вставки
 		const container = createElem("div");
 		return {container, textarea, save, cancel};
 	}
 
+	const handler = (event) => {
+		const clickedElem = event.target;
+		console.log(clickedElem);
+
+		if(clickedElem.tagName === "TD") {
+			const {container, textarea, save, cancel} = createElemOfContainer();
+			// отрисовать в container элементы textarea, save, cancel
+			container.append(textarea, save, cancel);
+			// в кликнутом элементе вставить container
+			clickedElem.append(container);
+
+			// текст элемента по которому кликнули
+			const textClickedElement = clickedElem.firstChild.nodeValue;
+			// текстовое поле с текстом который был в ячейке(на которую нажали)
+			textarea.value = textClickedElement;
+
+			document.querySelectorAll("button").forEach(item => {
+				item.addEventListener("click", (e) => {
+					clickedElem.innerText = (e.target.getAttribute("data_name") === "save") ? 
+						textarea.value : textClickedElement;
+					
+						container.className = "hidden";
+				});
+			});
+		}
+	}
+
 	const onListenerTable = () => {
 		const table = getElement("table");
-		table.addEventListener("click", (event) => {
-
-			if(event.target.tagName === "TD") {
-				const {container, textarea, save, cancel} = createElemOfContainer();
-				// отрисовать в container элементы textarea, save, cancel
-				container.append(textarea, save, cancel);
-				// в кликнутом элементе вставить container
-				event.target.append(container);
-				// текст элемента по которому кликнули
-				const textClickedElement = event.target.firstChild.nodeValue;
-				// текстовое поле с текстом который был в ячейке(на которую нажали)
-				textarea.value = textClickedElement;
-				container.classList.add("show");
-
-				document.querySelectorAll("button").forEach(item => {
-					if(item.tagName === "BUTTON") {
-						item.addEventListener("click", () => {
-							if(item.innerText === "SAVE") {
-								event.target.innerText = textarea.value;
-								// удаляем класс show
-								container.classList.remove("show");
-							}
-							if(item.innerText === "CANCEL") {
-								event.target.innerText = textClickedElement;
-								container.classList.remove("show");
-							}
-						});
-					}
-				});
-			}
-		});
+		table.addEventListener("click", handler);
 	}
 
 	onListenerTable();
