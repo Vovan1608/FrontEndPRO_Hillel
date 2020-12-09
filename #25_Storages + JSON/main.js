@@ -21,7 +21,6 @@ window.onload = function() {
 		button.innerText = "click";
 		button.classList.add("btn");
 		const tablo = document.createElement("button");
-		tablo.innerText = 0;
 		tablo.classList.add("tablo");
 		return {container, button, tablo};
 	}
@@ -29,6 +28,7 @@ window.onload = function() {
 	const createBlock = () => {
 		// основной блок в HTML в который будем все рисовать
 		const mainBlock = document.querySelector("#main");
+
 		const fragment = document.createDocumentFragment();
 		// задаем кол-во контейнеров
 		const numOfConteiners = 2;
@@ -37,11 +37,14 @@ window.onload = function() {
 			const {container, button, tablo} = createElementForBlock();
 			// уникальные классы для контейнеров
 			button.classList.add(`button_${i + 1}`);
+			// При перезагрузке страницы counter сохраняtтся, если добавили новый контейнер , то counter = 0
+			tablo.innerText = localStorage.getItem(`button_${i + 1}`) || 0;
 			container.append(button, tablo);
 			fragment.append(container);
 		}
 		mainBlock.append(fragment);
 	}
+
 	createBlock();
 	
 	const buttons = document.querySelectorAll(".btn");
