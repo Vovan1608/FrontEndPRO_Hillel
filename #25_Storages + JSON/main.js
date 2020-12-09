@@ -33,14 +33,14 @@ window.onload = function() {
 			{button: "SetCounter", button_data: "data-set", data_value: "setCount"}
 		];
 		
-		const containerSetClerButton = [];
+		const containerClerSetButton = [];
 		buttons.forEach(item => {
 			const buttn = document.createElement("button");
 			buttn.innerText = item.button;
 			buttn.setAttribute(item.button_data, item.data_value);
-			containerSetClerButton.push(buttn);
+			containerClerSetButton.push(buttn);
 		});
-		return containerSetClerButton;
+		return containerClerSetButton;
 	}
 
 	// функция создает блок с необходимым кол-вом контейнеров
@@ -61,8 +61,8 @@ window.onload = function() {
 			container.append(button, tablo);
 			fragment.append(container);
 		}
-		const [setCounterButton, clearButton] = creatSetClearButtons();
-		mainBlock.append(fragment, setCounterButton,clearButton);
+		const [clearButton, setCounterButton] = creatSetClearButtons();
+		mainBlock.append(fragment, clearButton, setCounterButton);
 	}
 
 	createBlock();
