@@ -25,12 +25,24 @@ window.onload = function() {
 		return {container, button, tablo};
 	}
 
-	const createClearButton = () => {
-		const clear = document.createElement("button");
-		clear.innerText = "ClearCounters";
-		clear.setAttribute("data-clear", "clear");
-		return clear;
+	// функция создает кнопки ClearCounters и SetCounter
+	const creatSetClearButtons = () => {
+		// данные для создания кнопок ClearCounters и SetCounter
+		const buttons = [
+			{button: "ClearCounters", button_data: "data-clear", data_value: "clear"}, 
+			{button: "SetCounter", button_data: "data-set", data_value: "setCount"}
+		];
+		
+		const containerSetClerButton = [];
+		buttons.forEach(item => {
+			const buttn = document.createElement("button");
+			buttn.innerText = item.button;
+			buttn.setAttribute(item.button_data, item.data_value);
+			containerSetClerButton.push(buttn);
+		});
+		return containerSetClerButton;
 	}
+
 	// функция создает блок с необходимым кол-вом контейнеров
 	const createBlock = () => {
 		// основной блок в HTML в который будем все рисовать
@@ -49,7 +61,8 @@ window.onload = function() {
 			container.append(button, tablo);
 			fragment.append(container);
 		}
-		mainBlock.append(fragment, createClearButton());
+		const [setCounterButton, clearButton] = creatSetClearButtons();
+		mainBlock.append(fragment, setCounterButton,clearButton);
 	}
 
 	createBlock();
@@ -87,8 +100,6 @@ window.onload = function() {
 		localStorage.clear();
 	}
 
-	// получаем кнопку для очистки по атрибуту
-	const clearButton = document.querySelector("[data-clear]");
-	// навешиваем слушателя
-	clearButton.addEventListener("click", clearAll);
+	// получаем кнопку для очистки по атрибуту и навешиваем слушателя
+	document.querySelector("[data-clear]").addEventListener("click", clearAll);
 }
