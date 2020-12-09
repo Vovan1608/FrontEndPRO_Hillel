@@ -48,18 +48,25 @@ window.onload = function() {
 	createBlock();
 	
 	const buttons = document.querySelectorAll(".btn");
-	// навешиваем слушателей на каждую кнопку с click
-	buttons.forEach(item => item.addEventListener("click", (event) =>{
+
+	// возвращает значение счетчика
+	const countUp = (event) => {
 		// получаем доступ к полю счетчика
 		const tablo = event.target.nextSibling;
-		// получаем имена классов кнопки "click"
-		const [btn, buttonNum] = event.target.classList;
-
-		tablo.innerText = localStorage.getItem(buttonNum);
 		// меняем значение счетчика по клику
 		tablo.innerText = Number(tablo.innerText) + 1;
 		
-		
-		localStorage.setItem(buttonNum, tablo.innerText);
-	}));
+		return tablo.innerText;
+	}
+
+	// обработчик для записи значения в localStorage
+	const setValueToLocalStorage = (event) => {
+		countUp(event);
+		// получаем имена классов кнопки "click"
+		const [btn, buttonNum] = event.target.classList;
+		// сохраняем в localStorage значение 
+		localStorage.setItem(buttonNum, countUp(event));
+	}
+	// навешиваем слушателей на каждую кнопку с click
+	buttons.forEach( item => item.addEventListener("click", setValueToLocalStorage) );
 }
