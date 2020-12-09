@@ -24,6 +24,12 @@ window.onload = function() {
 		tablo.classList.add("tablo");
 		return {container, button, tablo};
 	}
+
+	const createClearButton = () => {
+		const clear = document.createElement("button");
+		clear.innerText = "ClearCounters";
+		return clear;
+	}
 	// функция создает блок с необходимым кол-вом контейнеров
 	const createBlock = () => {
 		// основной блок в HTML в который будем все рисовать
@@ -42,7 +48,7 @@ window.onload = function() {
 			container.append(button, tablo);
 			fragment.append(container);
 		}
-		mainBlock.append(fragment);
+		mainBlock.append(fragment, createClearButton());
 	}
 
 	createBlock();
@@ -69,4 +75,5 @@ window.onload = function() {
 	}
 	// навешиваем слушателей на каждую кнопку с click
 	buttons.forEach( item => item.addEventListener("click", setValueToLocalStorage) );
+	// 
 }
