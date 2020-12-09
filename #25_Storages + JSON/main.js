@@ -50,7 +50,7 @@ window.onload = function() {
 
 		const fragment = document.createDocumentFragment();
 		// задаем кол-во контейнеров
-		const numOfConteiners = 2;
+		const numOfConteiners = creatSetClearButtons().length;
 		
 		for(let i = 0; i < numOfConteiners; i += 1) {
 			const {container, button, tablo} = createElementForBlock();
@@ -102,4 +102,8 @@ window.onload = function() {
 
 	// получаем кнопку для очистки по атрибуту и навешиваем слушателя
 	document.querySelector("[data-clear]").addEventListener("click", clearAll);
+
+	document.querySelector("[data-set]").addEventListener("click", () => {
+		console.log("data-set");
+	});
 }
