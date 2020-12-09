@@ -28,6 +28,7 @@ window.onload = function() {
 	const createClearButton = () => {
 		const clear = document.createElement("button");
 		clear.innerText = "ClearCounters";
+		clear.setAttribute("data-clear", "clear");
 		return clear;
 	}
 	// функция создает блок с необходимым кол-вом контейнеров
@@ -42,9 +43,9 @@ window.onload = function() {
 		for(let i = 0; i < numOfConteiners; i += 1) {
 			const {container, button, tablo} = createElementForBlock();
 			// уникальные классы для контейнеров
-			button.classList.add(`button_${i + 1}`);
-			// При перезагрузке страницы counter сохраняtтся, если добавили новый контейнер , то counter = 0
-			tablo.innerText = localStorage.getItem(`button_${i + 1}`) || 0;
+			button.setAttribute("id", `id_${i + 1}`);
+			// При перезагрузке страницы counter сохраняется, если добавили новый контейнер , то counter = 0
+			tablo.innerText = localStorage.getItem(`id_${i + 1}`) || 0;
 			container.append(button, tablo);
 			fragment.append(container);
 		}
@@ -52,8 +53,6 @@ window.onload = function() {
 	}
 
 	createBlock();
-	
-	const buttons = document.querySelectorAll(".btn");
 
 	// возвращает значение счетчика
 	const countUp = (event) => {
@@ -67,13 +66,29 @@ window.onload = function() {
 
 	// обработчик для записи значения в localStorage
 	const setValueToLocalStorage = (event) => {
-		countUp(event);
-		// получаем имена классов кнопки "click"
-		const [btn, buttonNum] = event.target.classList;
+		// получаем результат счетчика
+		const tabloValue = countUp(event);
+		// получаем id кнопки "click"
+		const buttonID = event.target.id;
 		// сохраняем в localStorage значение 
-		localStorage.setItem(buttonNum, countUp(event));
+		localStorage.setItem(buttonID, tabloValue);
 	}
+
+	// коллекция кнопок click
+	const buttons = document.querySelectorAll(".btn");
 	// навешиваем слушателей на каждую кнопку с click
 	buttons.forEach( item => item.addEventListener("click", setValueToLocalStorage) );
-	// 
+	
+	// обработчик для очистки
+	const clearAll = () => {
+		// обнуляем поля счетчика
+		buttons.forEach( item => item.nextSibling.innerText = 0);
+		// очищаем localStorage
+		localStorage.clear();
+	}
+
+	// получаем кнопку для очистки по атрибуту
+	const clearButton = document.querySelector("[data-clear]");
+	// навешиваем слушателя
+	clearButton.addEventListener("click", clearAll);
 }
