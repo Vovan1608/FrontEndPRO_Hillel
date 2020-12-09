@@ -32,7 +32,7 @@ window.onload = function() {
 			{button: "ClearCounters", button_data: "data-clear", data_value: "clear"}, 
 			{button: "SetCounter", button_data: "data-set", data_value: "setCount"}
 		];
-		
+
 		const containerClerSetButton = [];
 		buttons.forEach(item => {
 			const buttn = document.createElement("button");
@@ -51,7 +51,7 @@ window.onload = function() {
 		const fragment = document.createDocumentFragment();
 		// задаем кол-во контейнеров
 		const numOfConteiners = creatSetClearButtons().length;
-		
+
 		for(let i = 0; i < numOfConteiners; i += 1) {
 			const {container, button, tablo} = createElementForBlock();
 			// уникальные классы для контейнеров
@@ -73,7 +73,7 @@ window.onload = function() {
 		const tablo = event.target.nextSibling;
 		// меняем значение счетчика по клику
 		tablo.innerText = Number(tablo.innerText) + 1;
-		
+
 		return tablo.innerText;
 	}
 
@@ -83,7 +83,7 @@ window.onload = function() {
 		const tabloValue = countUp(event);
 		// получаем id кнопки "click"
 		const buttonID = event.target.id;
-		// сохраняем в localStorage значение 
+		// сохраняем в localStorage значение
 		localStorage.setItem(buttonID, tabloValue);
 	}
 
@@ -91,7 +91,7 @@ window.onload = function() {
 	const buttons = document.querySelectorAll(".btn");
 	// навешиваем слушателей на каждую кнопку с click
 	buttons.forEach( item => item.addEventListener("click", setValueToLocalStorage) );
-	
+
 	// обработчик для очистки
 	const clearAll = () => {
 		// обнуляем поля счетчика
@@ -103,7 +103,9 @@ window.onload = function() {
 	// получаем кнопку для очистки по атрибуту и навешиваем слушателя
 	document.querySelector("[data-clear]").addEventListener("click", clearAll);
 
-	document.querySelector("[data-set]").addEventListener("click", () => {
-		console.log("data-set");
-	});
+	const setCounter = () => {
+		const callID = prompt("Введите номер блока", 1);
+	}
+
+	document.querySelector("[data-set]").addEventListener("click", setCounter);
 }
