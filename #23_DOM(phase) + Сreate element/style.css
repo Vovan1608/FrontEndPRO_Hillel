@@ -20,5 +20,5 @@ td {
 }
 
 .hidden {
-  visibility: hidden;
+  display: none;
 }
