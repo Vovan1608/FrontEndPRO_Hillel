@@ -18,7 +18,6 @@ window.onload = function() {
 		const container = document.createElement("div");
 		container.classList.add("container");
 		const button = document.createElement("button");
-		button.innerText = "click";
 		button.classList.add("btn");
 		const tablo = document.createElement("button");
 		tablo.classList.add("tablo");
@@ -33,14 +32,14 @@ window.onload = function() {
 			{button: "SetCounter", button_data: "data-set", data_value: "setCount"}
 		];
 
-		const containerClerSetButton = [];
+		const containerClearSetButton = [];
 		buttons.forEach(item => {
 			const buttn = document.createElement("button");
 			buttn.innerText = item.button;
 			buttn.setAttribute(item.button_data, item.data_value);
-			containerClerSetButton.push(buttn);
+			containerClearSetButton.push(buttn);
 		});
-		return containerClerSetButton;
+		return containerClearSetButton;
 	}
 
 	// функция создает блок с необходимым кол-вом контейнеров
@@ -49,12 +48,13 @@ window.onload = function() {
 		const mainBlock = document.querySelector("#main");
 
 		const fragment = document.createDocumentFragment();
-		// задаем кол-во контейнеров
-		const numOfConteiners = creatSetClearButtons().length;
+		// задаем кол-во контейнеров 
+		const numOfConteiners = 2;
 
 		for(let i = 0; i < numOfConteiners; i += 1) {
 			const {container, button, tablo} = createElementForBlock();
-			// уникальные классы для контейнеров
+			button.innerText = `click_${i + 1}`;
+			// уникальные id для контейнеров
 			button.setAttribute("id", `id_${i + 1}`);
 			// При перезагрузке страницы counter сохраняется, если добавили новый контейнер , то counter = 0
 			tablo.innerText = localStorage.getItem(`id_${i + 1}`) || 0;
@@ -64,7 +64,7 @@ window.onload = function() {
 		const [clearButton, setCounterButton] = creatSetClearButtons();
 		mainBlock.append(fragment, clearButton, setCounterButton);
 	}
-
+	// нарисовали полный блок
 	createBlock();
 
 	// возвращает значение счетчика
@@ -103,9 +103,37 @@ window.onload = function() {
 	// получаем кнопку для очистки по атрибуту и навешиваем слушателя
 	document.querySelector("[data-clear]").addEventListener("click", clearAll);
 
-	const setCounter = () => {
-		const callID = prompt("Введите номер блока", 1);
+	const isCorrectNumber = (value)=> {
+    if(isNaN(value) || value === null || value === "" || typeof value === "string") {
+      return false;
+    } else {
+      return true;
+    }
 	}
-
+	// обработчик для установки значения в табло
+	const setCounter = () => {
+		const callID = Number(prompt("Введите номер блока", 1));
+		
+		if(isCorrectNumber(callID) && callID > 0 && callID <= buttons.length) {
+			// получил блок
+			const block = document.querySelector(`#id_${callID}`);
+			// получил доступ к табло
+			const tablo = block.nextSibling;
+			// значение для табло
+			const tabloValue = Number( prompt("Какое значение установить счетчику?", "5") );
+			
+			if(isCorrectNumber(tabloValue)) {
+				// меняем на табло
+				tablo.innerText = tabloValue;
+				// меняем в localStorage
+				localStorage.setItem(`id_${callID}`, tabloValue);
+			} else {
+				throw new Error("некорректное число");
+			}
+		} else {
+			throw new Error("некорректное число");
+		}
+	}
+	// получаем кнопку для установки значения по атрибуту и навешиваем слушателя 
 	document.querySelector("[data-set]").addEventListener("click", setCounter);
 }
