@@ -104,11 +104,11 @@ window.onload = function() {
 	document.querySelector("[data-clear]").addEventListener("click", clearAll);
 
 	const isCorrectNumber = (value)=> {
-    if(isNaN(value) || value === null || value === "" || typeof value === "string") {
-      return false;
-    } else {
-      return true;
-    }
+		if(isNaN(value) || value === null || value === "" || typeof value === "string") {
+			return false;
+		} else {
+			return true;
+		}
 	}
 	// обработчик для установки значения в табло
 	const setCounter = () => {
