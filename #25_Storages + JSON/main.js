@@ -19,6 +19,7 @@ window.onload = function() {
 		container.classList.add("container");
 		const button = document.createElement("button");
 		button.classList.add("btn");
+		button.setAttribute("data-counter", "click");
 		const tablo = document.createElement("button");
 		tablo.classList.add("tablo");
 		return {container, button, tablo};
@@ -64,7 +65,7 @@ window.onload = function() {
 		const [clearButton, setCounterButton] = creatSetClearButtons();
 		mainBlock.append(fragment, clearButton, setCounterButton);
 	}
-	// нарисовали полный блок
+	// нарисовали блок со всеми кнопками и табло
 	createBlock();
 
 	// возвращает значение счетчика
@@ -89,8 +90,6 @@ window.onload = function() {
 
 	// коллекция кнопок click
 	const buttons = document.querySelectorAll(".btn");
-	// навешиваем слушателей на каждую кнопку с click
-	buttons.forEach( item => item.addEventListener("click", setValueToLocalStorage) );
 
 	// обработчик для очистки
 	const clearAll = () => {
@@ -100,10 +99,7 @@ window.onload = function() {
 		localStorage.clear();
 	}
 
-	// получаем кнопку для очистки по атрибуту и навешиваем слушателя
-	document.querySelector("[data-clear]").addEventListener("click", clearAll);
-
-	const isCorrectNumber = (value)=> {
+	const isCorrectNumber = (value) => {
 		if(isNaN(value) || value === null || value === "" || typeof value === "string") {
 			return false;
 		} else {
@@ -112,7 +108,7 @@ window.onload = function() {
 	}
 	// обработчик для установки значения в табло
 	const setCounter = () => {
-		const callID = Number(prompt("Введите номер блока", 1));
+		const callID = Number(prompt("Введите номер контейнера", 1));
 		
 		if(isCorrectNumber(callID) && callID > 0 && callID <= buttons.length) {
 			// получил блок
@@ -134,6 +130,20 @@ window.onload = function() {
 			throw new Error("некорректное число");
 		}
 	}
-	// получаем кнопку для установки значения по атрибуту и навешиваем слушателя 
-	document.querySelector("[data-set]").addEventListener("click", setCounter);
+
+	// один обработчик на все события
+	const handlerForBlock = (event) => {
+		if( event.target.getAttribute('data-clear') ) {
+			return clearAll();
+		} else if ( event.target.getAttribute('data-set') ) {
+			return setCounter();
+		} else if ( event.target.getAttribute('data-counter') ) {
+			return setValueToLocalStorage(event);
+		}
+	}
+
+	// навесил один слушатель на родителя
+	const onListenerBlock = () => document.querySelector("#main").addEventListener("click", handlerForBlock);
+	
+	onListenerBlock();
 }
