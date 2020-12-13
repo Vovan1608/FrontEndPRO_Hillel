@@ -34,7 +34,7 @@ app.get('/', function(request, response) {
   fs.readFile('./data/data.json', 'utf-8', function(error, data) {
     // преобразовал считанные данные data
     const myData = JSON.parse(data);
-      // отправляем с 
+      // отправляем с сервера отвеи в браузер
       response
       .send(myData);
   });
