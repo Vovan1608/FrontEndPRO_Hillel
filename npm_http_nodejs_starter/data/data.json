@@ -1,0 +1,4 @@
+[
+	{"button": "ClearCounters", "button_data": "data-clear", "data_value": "clear"}, 
+	{"button": "SetCounter", "button_data": "data-set", "data_value": "setCount"}
+]

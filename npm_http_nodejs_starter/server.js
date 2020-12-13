@@ -1,8 +1,8 @@
 ﻿"use strict";
-
+// !ЭТО ВСЕ СЕРВЕРНАЯ СТОРОНА И СООТВЕТСВЕННО ВСЕ РАБОТАЕТ ТОЛЬКО ДЛЯ NodeJS
 /*
-в Node.js служебное слово require
-служит для подключения одного независимого модуля (файла) к другому независимому модулю (файлу). 
+в Node.js служебное слово require служит для подключения одного независимого 
+модуля (файла) к другому независимому модулю (файлу). 
 Принцип подключения через require заключается в создании в целевом модуле объекта и 
 помещении в этот объект подключаемого модуля.
 */
@@ -14,30 +14,17 @@ var bodyParser = require("body-parser"); // 'body-parser' -- библиотек�
 var app = express();
 
 
-const port = 3003;
+const port = 3000;
 
 app.listen(port, function() {
   console.log(`Example app listening on port http://localhost:${port}/`);
 });
 
-app.get('/candidates', function(request, response) {
-  fs.readFile('./models/data.json', 'utf-8', function(error, data) {
-    const users = JSON.parse(data);
-    const user = users[users.length - 1];
+app.get('/', function(request, response) {
+  fs.readFile('./data/data.json', 'utf-8', function(error, data) {
+    const myData = JSON.parse(data);
 
       response
-      .send(JSON.stringify(user));
+      .send(myData);
   });
 });
-
-app.get('/vacancies', function() {
-  console.log('vacancies callback');
-});
-
-
-
-
-function read(url, callback) {
-  fs.readFile(url, "utf-8", callback);
-}
-
