@@ -21,5 +21,58 @@
 */
 
 window.onload = function() {
-	
+	// XMLHttpRequest – это встроенный в браузер объект, который даёт возможность делать HTTP-запросы к
+	// серверу без перезагрузки страницы.
+
+	// ToDo1. создаем экземпляр XMLHttpRequest()
+	// let xhr = new XMLHttpRequest();
+
+	// ToDo2. инициализация xhr.open(method, URL, [async, user, password])
+	// -method – HTTP-метод. Обычно это "GET" или "POST".
+	// -URL – URL, куда отправляется запрос: строка, может быть и объект URL.
+	// -async – если указать false, тогда запрос будет выполнен синхронно, это мы рассмотрим чуть позже.
+	// -user, password – логин и пароль для базовой HTTP-авторизации (если требуется).
+	// вызов open не открывает соединение. Он лишь конфигурирует запрос
+	// xhr.open("GET", "http://localhost:3000/");
+
+	// xhr.onload = function() {
+	// 	console.log(xhr.response);
+	// }
+
+	// const sign = document.querySelector(".signin");
+
+	// const handler = () => {
+		// Этот метод устанавливает соединение и отсылает запрос к серверу
+	// 	xhr.send();
+	// }
+
+
+
+	sign.addEventListener("click", handler);
+
+	function ajax({method, url, success, error}) {
+		let xhr = new XMLHttpRequest();
+
+		xhr.addEventListener("load", success.bind(xhr, xhr.response));
+
+		xhr.addEventListener("error", error.bind(xhr));
+
+		xhr.open("GET", "http://localhost:3000/");
+		xhr.send();
+
+	}
+
+	ajax({
+		method: "GET",
+		url: "http://localhost:3000/",
+		success(response) {
+			console.log(response);
+		},
+		error(err) {
+			console.log(err);
+		}
+
+	})
+
+
 }
