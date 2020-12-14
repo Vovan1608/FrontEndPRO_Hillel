@@ -4,13 +4,14 @@
 
 .container {
   display: flex;
+  flex-direction: column;
+}
+
+.enter {
   margin-bottom: 10px;
 }
 
-.btn {
-  width: 60px;
-}
-
-.tablo {
-  width: 50px;
+.signin {
+  display: inline;
+  width: 80px;
 }
