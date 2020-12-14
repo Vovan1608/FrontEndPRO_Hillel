@@ -42,37 +42,78 @@ window.onload = function() {
 	// const sign = document.querySelector(".signin");
 
 	// const handler = () => {
-		// Этот метод устанавливает соединение и отсылает запрос к серверу
+		// ToDo 3.Этот метод устанавливает соединение и отсылает запрос к серверу
 	// 	xhr.send();
 	// }
-
-
-
-	sign.addEventListener("click", handler);
 
 	function ajax({method, url, success, error}) {
 		let xhr = new XMLHttpRequest();
 
-		xhr.addEventListener("load", success.bind(xhr, xhr.response));
+		xhr.addEventListener("load", () => success.call(xhr, xhr.response));
 
 		xhr.addEventListener("error", error.bind(xhr));
 
-		xhr.open("GET", "http://localhost:3000/");
+		xhr.open(method, url);
 		xhr.send();
-
 	}
 
-	ajax({
+	function registrationMod(selector) {
+
+		const config = {
+			payLoad: null,
+			form: document.querySelector(selector),
+			config: null,
+			init(config) {
+				this.config = config;
+			},
+			sendRequest() {
+				ajax({
+					method: "GET",
+					url: "http://localhost:3000/users",
+					success(response) {
+						const data = JSON.parse(response);
+		
+						console.log(data);
+					},
+					error(err) {
+						console.log(err);
+					}
+				});
+			},
+			prepare() {
+				
+			}
+		};
+
+		return config.init;
+	}
+
+	registrationMod("#reg").init({
 		method: "GET",
-		url: "http://localhost:3000/",
+		url: "http://localhost:3000/users",
 		success(response) {
-			console.log(response);
+			const data = JSON.parse(response);
+
+			console.log(data);
 		},
 		error(err) {
 			console.log(err);
 		}
+	});
+	const sign = document.querySelector(".signin");
 
-	})
+	sign.addEventListener("click", function() {
+		ajax({
+			method: "GET",
+			url: "http://localhost:3000/users",
+			success(response) {
+				const data = JSON.parse(response);
 
-
+				console.log(data);
+			},
+			error(err) {
+				console.log(err);
+			}
+		});
+	});
 }
