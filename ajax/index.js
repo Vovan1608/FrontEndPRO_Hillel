@@ -10,5 +10,9 @@ module.exports = {
 		fs.writeFile(url, JSON.stringify(data), function(error) {
 			console.log(error);
 		});
+	},
+	// то что пришло с фронт-энд сравниваем с данными в файле users.json
+	checkClient(body, data) {
+		return (body.login === data[0].login && body.password === data[0].password) ? true : false;
 	}
 }

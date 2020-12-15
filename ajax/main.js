@@ -126,7 +126,17 @@ window.onload = function() {
 		url: "http://localhost:3000/reg",
 		success(response) {
 			const data = JSON.parse(response);
-			console.log(data);
+
+			ajax({
+				method: "GET",
+				url: "http://localhost:3000/reg",
+				success(data) {
+					
+				},
+				error(err) {
+					console.log(err);
+				}
+			});
 		},
 		error(err) {
 			console.log(err);

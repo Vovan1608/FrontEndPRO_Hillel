@@ -4,7 +4,7 @@ var bodyParser = require("body-parser"); // 'body-parser' -- библиотек�
 var app = express(); // создаем объект приложения
 // доступ к объекту из файла index.js который содержит функции
 // для чтения данных и записи данных
-const {read, write} = require("./index");
+const {read, write, checkClient} = require("./index");
 
 // эти настройки нужны чтобы сервер мог получать тело запроса
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -31,33 +31,54 @@ app.listen(port, function() {
 
 app.post("/reg", function(req, res) {
   // пришли данные с фронт-энд(от клиента)
-  const body = req.body;
+  const body = JSON.parse(req.body);
+  // читаем файл с пользователями(jsonPayload это те данные, которые хранятся в файле users.json)
+  read("./server/users.json", (error, jsonPayload) => {
+    // распарсить файл с пользователями
+    const data = JSON.parse(jsonPayload);
 
-  res
-    .send(["OK"]);
-  // читаем файл с пользователями
-  // read("./server/users.json", (error, jsonPayload) => {
-  //   // распарсить файл с пользователями
-  //   const data = JSON.parse(jsonPayload);
-  //   // добавить в пользователей то что прилетело
-  //   data.push(JSON.parse(body));
-
-  //   if(jsonPayload) {
-  //     // записываем в файл изменеия(stryngify уже произошел в функции)
-  //     write("./server/users.json", data);
-  //     // отправляем ответ клиенту
-  //     res
-  //       .send(data); 
-  //   }
-  // });
+    (checkClient(body, data)) ? 
+      res.status(200).send(JSON.stringify(data[0].id)) : res.status(401).send("[Unauthorized]");
+  });
 });
 
-app.get('/users', function(req, res) {
-  
+app.get('/reg', function(req, res) {
   fs.readFile("./server/users.json", "utf-8", (error, data) => {
     const myData = JSON.parse(data);
-    res
-    .status(200)
-    .send(myData);
+    res.send(JSON.stringify(myData));
+    console.log(myData);
   })
 });
+
+
+
+
+
+
+
+
+/* 
+!то что с лекции пригодится
+app.post("/reg", function(req, res) {
+  // пришли данные с фронт-энд(от клиента)
+  const body = JSON.parse(req.body);
+
+  // читаем файл с пользователями(jsonPayload это те данные, которые хранятся в файле users.json)
+  read("./server/users.json", (error, jsonPayload) => {
+    // распарсить файл с пользователями
+    const data = JSON.parse(jsonPayload);
+    // добавить в пользователей то что прилетело
+    // data.push(body);
+
+    const result = checkClient(body, data);
+
+    if(jsonPayload) {
+      // записываем в файл изменеия(stryngify уже произошел в функции)
+      // write("./server/users.json", data);
+      // отправляем ответ клиенту
+      res
+        .send(data); 
+    }
+  });
+});
+*/
