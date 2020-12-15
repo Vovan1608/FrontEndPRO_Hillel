@@ -2,6 +2,9 @@ var express = require("express"); // подключить express(упрощен
 var fs = require("fs"); // fs -- объект который дает возможность читать файлы(например json)
 var bodyParser = require("body-parser"); // 'body-parser' -- библиотека дает возможность прочитать post запрос на NodeJs
 var app = express(); // создаем объект приложения
+// доступ к объекту из файла index.js который содержит функции
+// для чтения данных и записи данных
+const {read, write} = require("./index");
 
 // эти настройки нужны чтобы сервер мог получать тело запроса
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -37,10 +40,19 @@ app.get('/users', function(req, res) {
 });
 
 app.post("/reg", function(req, res) {
+  // пришли данные с фронт-энд(от клиента)
   const body = req.body;
-  console.log(body);
+  
+  read("./server/users.json", (error, jsonPayload) => {
+    const data = JSON.parse(jsonPayload);
+    data.push(JSON.parse(body));
 
-  res
-    .status(200)
-    .send("ok");
+    console.log(data);
+
+    if(jsonPayload) {
+      write("./server/users.json", data);
+      res
+        .send("OK!!!"); 
+    }
+  });
 });

@@ -30,7 +30,7 @@ window.onload = function() {
 	// ToDo2. инициализация xhr.open(method, URL, [async, user, password])
 	// -method – HTTP-метод. Обычно это "GET" или "POST".
 	// -URL – URL, куда отправляется запрос: строка, может быть и объект URL.
-	// -async – если указать false, тогда запрос будет выполнен синхронно, это мы рассмотрим чуть позже.
+	// -async – если указать false, тогда запрос будет выполнен синхронно.
 	// -user, password – логин и пароль для базовой HTTP-авторизации (если требуется).
 	// вызов open не открывает соединение. Он лишь конфигурирует запрос
 	// xhr.open("GET", "http://localhost:3000/");
@@ -46,7 +46,8 @@ window.onload = function() {
 	// 	xhr.send();
 	// }
 
-	function ajax({method, url, success, error}) {
+	// payLoad - параметр для отправки POST запроса(хранит тело запроса)
+	function ajax({method, url, payLoad, success, error}) {
 		let xhr = new XMLHttpRequest();
 
 		xhr.addEventListener("load", () => success.call(xhr, xhr.response));
@@ -54,66 +55,70 @@ window.onload = function() {
 		xhr.addEventListener("error", error.bind(xhr));
 
 		xhr.open(method, url);
-		xhr.send();
+		// данные которые будут посылаться на сервер
+		// если используется GET-запрос, то send() пустой,
+		// если используем POST-запрос, то send(payLoad) с телом запроса
+		method.toUpperCase() === "GET" ? xhr.send() : xhr.send(payLoad);
 	}
 
 	function registrationMod(selector) {
-
+		// объект конфигурации регистрации
 		const config = {
+			// данные для формы(то что будем отправлять)
 			payLoad: null,
+			// форма - откуда будут взяты данные для отправки на регистрацию
 			form: document.querySelector(selector),
+			// тот конфиг, который будет передаваться в функцию ajax
+			// (каким методом, куда, обраблтчики ответов)
 			config: null,
+			// получаем конфигурацию и инициализируем событие submit
 			init(config) {
 				this.config = config;
+				this.bindEvent();
 			},
+			// отправить запрос при нажатии на кнопку 
 			sendRequest() {
+				const payLoad = JSON.stringify(this.prepare());
 				ajax({
-					method: "GET",
-					url: "http://localhost:3000/users",
-					success(response) {
-						const data = JSON.parse(response);
-		
-						console.log(data);
-					},
-					error(err) {
-						console.log(err);
-					}
+					// к тому, что есть в объекте конфиг, добавим данные объекта payLoad
+					...this.config,
+					payLoad
 				});
 			},
+			// к форме привязывает событие submit, которое генерируется кнопкой отправить
+			bindEvent() {
+				this.form.addEventListener("submit", event => {
+					event.preventDefault();
+					// отправляем данные на сервер
+					this.sendRequest();
+				});
+			},
+			// соберет данные с формы и запишет в payLoad
 			prepare() {
-				
+				const data = {};
+				// идем по форме и берем значения по атрибуту
+				[].forEach.call(this.form, ({name, value, tagName}) => {
+					if(tagName === "BUTTON" || !(name && value)) return;
+					data[name] = value;
+				});
+
+				return data;
 			}
 		};
-
-		return config.init;
+		// поскольку в registrationMod().init - это вызов функции у которой нет имени
+		// поэтому тут мы даем ей имя init и привязываем контекст 
+		// иначе при вызове registrationMod() пропадет наш контекст
+		return {init: config.init.bind(config)};
 	}
 
 	registrationMod("#reg").init({
-		method: "GET",
-		url: "http://localhost:3000/users",
+		method: "POST",
+		url: "http://localhost:3000/reg",
 		success(response) {
 			const data = JSON.parse(response);
-
-			console.log(data);
 		},
 		error(err) {
 			console.log(err);
 		}
-	});
-	const sign = document.querySelector(".signin");
-
-	sign.addEventListener("click", function() {
-		ajax({
-			method: "GET",
-			url: "http://localhost:3000/users",
-			success(response) {
-				const data = JSON.parse(response);
-
-				console.log(data);
-			},
-			error(err) {
-				console.log(err);
-			}
-		});
 	});
 }
