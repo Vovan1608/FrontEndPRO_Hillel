@@ -39,8 +39,6 @@ window.onload = function() {
 	// 	console.log(xhr.response);
 	// }
 
-	// const sign = document.querySelector(".signin");
-
 	// const handler = () => {
 		// ToDo 3.Этот метод устанавливает соединение и отсылает запрос к серверу
 	// 	xhr.send();
@@ -73,17 +71,22 @@ window.onload = function() {
 			config: null,
 			// получаем конфигурацию и инициализируем событие submit
 			init(config) {
-				this.config = config;
-				this.bindEvent();
+				if(config) {
+					this.config = config;
+					this.bindEvent();
+				}
 			},
 			// отправить запрос при нажатии на кнопку 
 			sendRequest() {
-				const payLoad = JSON.stringify(this.prepare());
-				ajax({
-					// к тому, что есть в объекте конфиг, добавим данные объекта payLoad
-					...this.config,
-					payLoad
+				// если форма пррошла валидацию (все поля заполнены), то шлем запрос
+				if(this.prepare()) {
+					const payLoad = JSON.stringify(this.prepare());
+					ajax({
+						// к тому, что есть в объекте конфиг, добавим данные объекта payLoad
+						...this.config,
+						payLoad
 				});
+				}
 			},
 			// к форме привязывает событие submit, которое генерируется кнопкой отправить
 			bindEvent() {
@@ -95,14 +98,21 @@ window.onload = function() {
 			},
 			// соберет данные с формы и запишет в payLoad
 			prepare() {
+				const inputs = document.querySelectorAll("input");
 				const data = {};
-				// идем по форме и берем значения по атрибуту
-				[].forEach.call(this.form, ({name, value, tagName}) => {
-					if(tagName === "BUTTON" || !(name && value)) return;
-					data[name] = value;
+				// флаг если поле не пустое
+				let valid = true;
+				// идем по инпутам и берем значения по атрибуту
+				[].forEach.call(inputs, ({name, value}) => {
+					// если значение не пустое, создать св-во
+					if(value) {
+						data[name] = value;
+					} else {
+						valid = false;
+					}
 				});
-
-				return data;
+				// если флаг, то вернем данные, а иначе в sendRequest() уйдет false
+				return (valid) ? data : false;
 			}
 		};
 		// поскольку в registrationMod().init - это вызов функции у которой нет имени
@@ -116,6 +126,7 @@ window.onload = function() {
 		url: "http://localhost:3000/reg",
 		success(response) {
 			const data = JSON.parse(response);
+			console.log(data);
 		},
 		error(err) {
 			console.log(err);

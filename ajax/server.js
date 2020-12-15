@@ -29,6 +29,29 @@ app.listen(port, function() {
   localhost:${port}/`);
 });
 
+app.post("/reg", function(req, res) {
+  // пришли данные с фронт-энд(от клиента)
+  const body = req.body;
+
+  res
+    .send(["OK"]);
+  // читаем файл с пользователями
+  // read("./server/users.json", (error, jsonPayload) => {
+  //   // распарсить файл с пользователями
+  //   const data = JSON.parse(jsonPayload);
+  //   // добавить в пользователей то что прилетело
+  //   data.push(JSON.parse(body));
+
+  //   if(jsonPayload) {
+  //     // записываем в файл изменеия(stryngify уже произошел в функции)
+  //     write("./server/users.json", data);
+  //     // отправляем ответ клиенту
+  //     res
+  //       .send(data); 
+  //   }
+  // });
+});
+
 app.get('/users', function(req, res) {
   
   fs.readFile("./server/users.json", "utf-8", (error, data) => {
@@ -37,22 +60,4 @@ app.get('/users', function(req, res) {
     .status(200)
     .send(myData);
   })
-});
-
-app.post("/reg", function(req, res) {
-  // пришли данные с фронт-энд(от клиента)
-  const body = req.body;
-  
-  read("./server/users.json", (error, jsonPayload) => {
-    const data = JSON.parse(jsonPayload);
-    data.push(JSON.parse(body));
-
-    console.log(data);
-
-    if(jsonPayload) {
-      write("./server/users.json", data);
-      res
-        .send("OK!!!"); 
-    }
-  });
 });
