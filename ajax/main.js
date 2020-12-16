@@ -59,7 +59,7 @@ window.onload = function() {
 		method.toUpperCase() === "GET" ? xhr.send() : xhr.send(payLoad);
 	}
 
-	function registrationMod(selector) {
+	function registrationCheck(selector) {
 		// объект конфигурации регистрации
 		const config = {
 			// данные для формы(то что будем отправлять)
@@ -78,7 +78,7 @@ window.onload = function() {
 			},
 			// отправить запрос при нажатии на кнопку 
 			sendRequest() {
-				// если форма пррошла валидацию (все поля заполнены), то шлем запрос
+				// если форма прошла валидацию (все поля заполнены), то шлем запрос
 				if(this.prepare()) {
 					const payLoad = JSON.stringify(this.prepare());
 					ajax({
@@ -100,7 +100,7 @@ window.onload = function() {
 			prepare() {
 				const inputs = document.querySelectorAll("input");
 				const data = {};
-				// флаг если поле не пустое
+				// флаг если поля не пустые
 				let valid = true;
 				// идем по инпутам и берем значения по атрибуту
 				[].forEach.call(inputs, ({name, value}) => {
@@ -121,17 +121,22 @@ window.onload = function() {
 		return {init: config.init.bind(config)};
 	}
 
-	registrationMod("#reg").init({
+	registrationCheck("#reg").init({
 		method: "POST",
 		url: "http://localhost:3000/reg",
 		success(response) {
 			const data = JSON.parse(response);
-
+			// получив ответ с сервера, отправляем новый запрос на получение данных
+			// по id
 			ajax({
-				method: "GET",
-				url: "http://localhost:3000/reg",
-				success(data) {
-					
+				method: "POST",
+				url: "http://localhost:3000/",
+				// ложим в тело запроса данные, которые пришли
+				payLoad: data,
+				success(response) {
+					// обрабатываем ответ
+					const serverRes = JSON.parse(response)
+					console.log(serverRes);
 				},
 				error(err) {
 					console.log(err);

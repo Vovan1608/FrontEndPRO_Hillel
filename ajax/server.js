@@ -42,9 +42,13 @@ app.post("/reg", function(req, res) {
   });
 });
 
-app.get('/reg', function(req, res) {
-  fs.readFile("./server/users.json", "utf-8", (error, data) => {
+app.post('/', function(req, res) {
+  // новый запрос от клиента
+  const clientReq = req.body;
+
+  fs.readFile(`./server/${clientReq}.json`, "utf-8", (error, data) => { 
     const myData = JSON.parse(data);
+    // новый ответ
     res.send(JSON.stringify(myData));
     console.log(myData);
   })
