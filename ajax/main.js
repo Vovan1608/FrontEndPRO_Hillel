@@ -128,20 +128,22 @@ window.onload = function() {
 			const data = JSON.parse(response);
 			// получив ответ с сервера, отправляем новый запрос на получение данных
 			// по id
-			ajax({
-				method: "POST",
-				url: "http://localhost:3000/",
-				// ложим в тело запроса данные, которые пришли
-				payLoad: data,
-				success(response) {
-					// обрабатываем ответ
-					const serverRes = JSON.parse(response)
-					console.log(serverRes);
-				},
-				error(err) {
-					console.log(err);
-				}
-			});
+			if(data) {
+				ajax({
+					method: "POST",
+					url: "http://localhost:3000/",
+					// ложим в тело запроса данные, которые пришли
+					payLoad: data,
+					success(response) {
+						// обрабатываем ответ
+						const serverRes = JSON.parse(response)
+						console.log(serverRes);
+					},
+					error(err) {
+						console.log(err);
+					}
+				});
+			}
 		},
 		error(err) {
 			console.log(err);
