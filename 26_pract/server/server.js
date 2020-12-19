@@ -25,6 +25,12 @@ app.listen(port, function() {
   localhost:${port}/`);
 });
 
+app.get("/check-reg", function(req, res) {
+  const data = true;
+
+  res.send(data).json();
+})
+
 app.post("/reg", function(req, res) {
   const body = JSON.parse(req.body);
   read("./server/users.json", (error, jsonPayload) => {
