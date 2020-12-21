@@ -1,54 +1,70 @@
 "use strict";
+
 /* 
 Используя цепочку Promise согласно таблицы http://prntscr.com/oxzs7j. 
 Организовать вывод в консоль такой порядок цифр " 0 1 3 6 8 9 12 ", 
 " 0 2 3 6 7 9 12". Где 0 - это значение которое выводится в сallback - ф-ии которая передается в Promise.
+
+ЗАПОМНИТЬ:
+если в then() возвращается 
+-return throw Error();
+-return new Promise((res, rej))
+-return Promise.reject() | Promise.resolve()
+-Exeption
+ТО ПОЛЮБЛМУ ПОПАДАЕМ В БЛОК reject(2-ая часть следующего then())
 */
 
-const callback = () => 0;
-
-const promise = new Promise( (callback) => {
+const promise = new Promise( (resolve, reject) => {
+	const result = 1;
 	console.log(0);
 
-	(!callback()) ? resolve() : reject();
+	return (!result) ? resolve(1) : reject(2);
 });
 
 promise
-	.then(() => {
-		const res = 1;
-		console.log(res);
+	.then((result) => {
+		console.log(result, "res");
+		return 3;
 	},
-	() => {
-		const res = 2;
-		console.log(res);
+	(result) => {
+		console.log(result, "rej");
+		return Promise.reject(3);
 	})
-	.then(() => {
-		console.log(3);
+	.then((result) => {
+		console.log(result, "res");
+		return 6;
 	},
-	() => {
-		console.log(4);
+	(result) => {
+		console.log(result, "rej");
+		return Promise.reject(6); 
 	})
-	.then(() => {
-		console.log(5);
+	.then((result) => {
+		console.log(result, "res");
+		return 8; // -> 8
 	},
-	() => {
-		console.log(6);
+	(result) => {
+		console.log(result, "rej");
+		return Promise.reject(7);
 	})
-	.then(() => {
-		console.log(7);
+	.then((result) => {
+		console.log(result, "res");
+		return 9;
 	},
-	() => {
-		console.log(8);
+	(result) => {
+		console.log(result, "rej");
+		return Promise.reject(9);
 	})
-	.then(() => {
-		console.log(9);
+	.then((result) => {
+		console.log(result, "res");
+		return 12;
 	},
-	() => {
-		console.log(10);
+	(result) => {
+		console.log(result, "rej");
+		return Promise.reject(12);
 	})
-	.then(() => {
-		console.log(11);
+	.then((result) => {
+		console.log(result, "res");
 	},
-	() => {
-		console.log(12);
-	});
+	(result) => {
+		console.log(result, "rej");
+	})
