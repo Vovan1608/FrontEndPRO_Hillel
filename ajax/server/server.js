@@ -4,7 +4,7 @@ var bodyParser = require("body-parser"); // 'body-parser' -- библиотек�
 var app = express(); // создаем объект приложения
 // доступ к объекту из файла index.js который содержит функции
 // для чтения данных и записи данных
-const {read, write, checkClient} = require("./index");
+const {read, write, checkClient} = require("./controller");
 
 // эти настройки нужны чтобы сервер мог получать тело запроса
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -33,7 +33,7 @@ app.post("/reg", function(req, res) {
   // пришли данные с фронт-энд(от клиента)
   const body = JSON.parse(req.body);
   // читаем файл с пользователями(jsonPayload это те данные, которые хранятся в файле users.json)
-  read("./server/users.json", (error, jsonPayload) => {
+  read("./data/users.json", (error, jsonPayload) => {
     // распарсить файл с пользователями
     const data = JSON.parse(jsonPayload);
 
@@ -46,7 +46,7 @@ app.post('/', function(req, res) {
   // новый запрос от клиента
   const clientReq = req.body;
 
-  fs.readFile(`./server/${clientReq}.json`, "utf-8", (error, data) => { 
+  read(`./data/${clientReq}.json`, (error, data) => { 
     const myData = JSON.parse(data);
     // новый ответ
     res.send(JSON.stringify(myData));
