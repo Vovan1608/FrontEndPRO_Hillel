@@ -121,7 +121,20 @@ function registrationCheck(selector) {
 	return {init: config.init.bind(config)};
 }
 
-registrationCheck("#reg").init({
+const createBlock = (responseData) => {
+
+	const {good, coast} = responseData[0];
+	// основной блок в HTML в который будем все рисовать
+	const mainBlock = document.querySelector("#response");
+	const item = document.createElement("div");
+
+	item.classList.add("goods");
+	item.innerText = `Name - ${good}, coast - ${coast}`;
+
+	mainBlock.append(item);
+}
+
+const res = registrationCheck("#reg").init({
 	method: "POST",
 	url: "http://localhost:3000/reg",
 	success(response) {
@@ -136,8 +149,11 @@ registrationCheck("#reg").init({
 				payLoad: data,
 				success(response) {
 					// обрабатываем ответ
-					const serverRes = JSON.parse(response)
-					console.log(serverRes);
+					const serverRes = JSON.parse(response);
+					// отобразть входящую информацию на экране
+					if(serverRes) {
+						createBlock(serverRes);
+					}
 				},
 				error(err) {
 					console.log(err);
