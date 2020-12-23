@@ -1,0 +1,90 @@
+@import url("https://fonts.googleapis.com/css2?family=Padauk:wght@400;700&display=swap");
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+}
+
+.app {
+  font-family: "Padauk", sans-serif;
+}
+
+.icon {
+  display: inline-flex;
+  cursor: pointer;
+}
+
+.icon svg {
+  width: 1rem !important;
+  height: 1rem !important;
+}
+
+.icon:not(:last-child) {
+  margin-right: 0.25rem;
+}
+
+.list {
+  margin: 0;
+  padding: 0;
+  list-style-type: none;
+}
+
+.list-body {
+  margin: 1rem;
+  padding: 0.125rem;
+  border: 1px solid #333;
+  border-radius: 4px;
+}
+
+.list-placeholder {
+  padding: 0.125rem;
+  margin: 0;
+}
+
+.list-header {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  padding: 0.25rem 1rem;
+  margin-bottom: 1rem;
+  background-color: lightgray;
+}
+
+.list-title {
+  margin: 8px 0;
+  text-transform: uppercase;
+}
+
+.list-add {
+  padding: 0.125rem;
+  border-radius: 50%;
+  background-color: white;
+}
+
+.list-item,
+.list-icons {
+  display: flex;
+  align-items: center;
+}
+
+.list-item {
+  padding: 0.25rem;
+  border-radius: 4px;
+  background-color: coral;
+}
+
+.list-item:not(:first-child) {
+  margin-top: 0.25rem;
+}
+
+.list-input {
+  width: 100%;
+  margin-right: 0.25rem;
+}
+
+.list-icons {
+  margin-left: auto;
+}
