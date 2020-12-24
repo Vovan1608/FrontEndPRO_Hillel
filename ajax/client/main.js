@@ -53,17 +53,17 @@ function ajax({method, url, payLoad, success, error}) {
 	xhr.addEventListener("error", error.bind(xhr));
 
 	xhr.open(method, url);
+
+	const body = JSON.stringify(payLoad)
 	// данные которые будут посылаться на сервер
 	// если используется GET-запрос, то send() пустой,
 	// если используем POST-запрос, то send(payLoad) с телом запроса
-	method.toUpperCase() === "GET" ? xhr.send() : xhr.send(payLoad);
+	method.toUpperCase() === "POST" ? xhr.send(body) : xhr.send();
 }
 
 function registrationCheck(selector) {
 	// объект конфигурации регистрации
 	const config = {
-		// данные для формы(то что будем отправлять)
-		payLoad: null,
 		// форма - откуда будут взяты данные для отправки на регистрацию
 		form: document.querySelector(selector),
 		// тот конфиг, который будет передаваться в функцию ajax
@@ -80,7 +80,7 @@ function registrationCheck(selector) {
 		sendRequest() {
 			// если форма прошла валидацию (все поля заполнены), то шлем запрос
 			if(this.prepare()) {
-				const payLoad = JSON.stringify(this.prepare());
+				const payLoad = this.prepare();
 				ajax({
 					// к тому, что есть в объекте конфиг, добавим данные объекта payLoad
 					...this.config,
@@ -105,19 +105,12 @@ function registrationCheck(selector) {
 			// идем по инпутам и берем значения по атрибуту
 			[].forEach.call(inputs, ({name, value}) => {
 				// если значение не пустое, создать св-во
-				if(value) {
-					data[name] = value;
-				} else {
-					valid = false;
-				}
+				value ? data[name] = value : valid = false;
 			});
 			// если флаг, то вернем данные, а иначе в sendRequest() уйдет false
-			return (valid) ? data : false;
+			return valid ? data : false;
 		}
 	};
-	// поскольку в registrationMod().init - это вызов функции у которой нет имени
-	// поэтому тут мы даем ей имя init и привязываем контекст 
-	// иначе при вызове registrationMod() пропадет наш контекст
 	return {init: config.init.bind(config)};
 }
 
