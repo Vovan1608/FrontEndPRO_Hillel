@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    {{ name }}
+    
   </div>
 </template>
 
@@ -10,7 +10,7 @@ export default {
   name: "App",
   data() {
     return {
-      name: 'Vovan'
+      
     }
   },
   components: {
