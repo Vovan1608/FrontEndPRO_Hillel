@@ -4,7 +4,6 @@
   </div>
 </template>
 
-
 <script>
 import Diagrams from './components/Diagrams';
 
@@ -20,7 +19,6 @@ export default {
   }
 };
 </script>
-
 
 <style lang="scss">
 #app {

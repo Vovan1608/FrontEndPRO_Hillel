@@ -31,7 +31,7 @@ export default {
   },
   methods: {
 		onInput( { target } ) {
-      
+      console.log(target.dataset.id, target.value);
 			return target.value;
 		}
   },
