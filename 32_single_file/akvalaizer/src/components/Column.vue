@@ -1,36 +1,26 @@
 <template>
-  <div class="column">
-	</div>
+  <div class="column" :style="{ height: blockHeight + 'px' }"></div>
 </template>
 
-
 <script>
-
+// :style="{ height: blockHeight + 'px' }"
 export default {
-  data: () => {
-		return {
-
-		}
+	props: {
+		blockHeight: Number,
 	},
-  components: {
-	},
+	// на основании переданных props в компоненте Diagrams
+	// я могу получить цвет блока
 	mounted() {
 		const elem = this.$el;
 		elem.style.background = elem.dataset.color; 
-	},
-	beforUpdate() {
-		console.log(this.$el);
 	}
 };
 </script>
 
-
 <style lang="scss">
 	.column {
-		display: flex;
 		padding: 10px;
 		margin-bottom: 10px;
 		min-height: 100px;
-		max-height: 300px;
 	}
 </style>

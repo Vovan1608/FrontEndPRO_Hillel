@@ -21,6 +21,9 @@ export default {
 </script>
 
 <style lang="scss">
+* {
+  box-sizing: border-box;
+}
 #app {
   display: flex;
   margin: 0 auto;
