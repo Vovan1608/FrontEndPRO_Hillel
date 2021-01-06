@@ -1,8 +1,8 @@
 <template>
   <div class="wrap">
-    <div class="wrap__inner" v-for="({color}, $index) in blocksData" :key="$index" > 
+    <div class="wrap__inner" v-for="({color}, $index) in blocksData" :key="$index" >
       <!-- передаю props :data-color="name" в компонент Column -->
-      <Column :data-color="color" :blockHeight="heights[$index]"/> 
+      <Column :data-color="color" :blockHeight="heights[$index]"/>
       <!-- @heightBlock - кастомное событие из ребенка Range-->
       <Range @heightBlock="setHeight"/>
     </div>
