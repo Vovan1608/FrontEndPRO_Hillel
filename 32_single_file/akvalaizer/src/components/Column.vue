@@ -1,18 +1,21 @@
 <template>
-  <div class="column" :style="{ height: blockHeight + 'px' }"></div>
+  <div class="column" :style="{ height: 120 + 'px' }"></div>
 </template>
 
 <script>
 // :style="{ height: blockHeight + 'px' }"
 export default {
 	props: {
-		blockHeight: Number,
+		blockHeight: Array,
 	},
+	data: () => ({
+
+	}),
 	// на основании переданных props в компоненте Diagrams
 	// я могу получить цвет блока
 	mounted() {
 		const elem = this.$el;
-		elem.style.background = elem.dataset.color; 
+		elem.style.background = elem.dataset.color;
 	}
 };
 </script>

@@ -1,10 +1,10 @@
 <template>
   <div class="wrap">
-    <div class="wrap__inner" v-for="({color}, $index) in blocksData" :key="$index" > 
+    <div class="wrap__inner" v-for="({color}, index) in blocksData" :key="index" >
       <!-- передаю props :data-color="name" в компонент Column -->
-      <Column :data-color="color" :blockHeight="heights[$index]"/> 
+      <Column :data-color="color" :blockHeight="blocksData"/>
       <!-- @heightBlock - кастомное событие из ребенка Range-->
-      <Range @heightBlock="setHeight"/>
+      <Range :id="index" @heightBlock="setHeight"/>
     </div>
   </div>
 </template>
@@ -17,16 +17,14 @@ import Range from './Range';
 export default {
   data: () => ({
 		blocksData: [
-      {color: 'red'},
-      {color: 'orange'},
-      {color: 'yellow'},
-      {color: 'green'},
-      {color: 'lightblue'},
-      {color: 'blue'},
-      {color: 'purple'},
+      {id: 0, color: 'red', height: 100},
+      {id: 1, color: 'orange', height: 100},
+      {id: 2, color: 'yellow', height: 100},
+      {id: 3, color: 'green', height: 100},
+      {id: 4, color: 'lightblue', height: 100},
+      {id: 5, color: 'blue', height: 100},
+      {id: 6, color: 'purple', height: 100},
     ],
-    heights: [100, 100, 100, 100, 100, 100, 100],
-    height: 120
 	}),
   components: {
     Column,
@@ -34,9 +32,13 @@ export default {
   },
   methods: {
 		setHeight() {
-      // console.log(Number(event.target.id), Number(event.target.value));
-      this.$set(this.heights, Number(event.target.id), Number(event.target.value));
-      // this.height = Number(event.target.value);
+      const range = event.target;
+      const idBlock = Number(range.id);
+      const heightVal = Number(range.value);
+      let {height} = this.blocksData[idBlock];
+      this.set(this.blocksData[idBlock], height, heightVal)
+      console.log(this.blocksData[idBlock])
+      return height;
     }
   }
 };

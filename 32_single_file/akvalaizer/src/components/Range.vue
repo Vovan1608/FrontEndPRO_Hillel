@@ -13,7 +13,7 @@ export default {
 		getInput({ target }) {
 			// передача данных родителю, heightBlock - кастомное событие
 			this.$emit('heightBlock')
-			return this.height = Number(target.value);
+			return target;
     }
 	}
 };
