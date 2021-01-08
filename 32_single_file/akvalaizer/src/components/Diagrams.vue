@@ -1,14 +1,8 @@
 <template>
   <div class="wrap">
-<<<<<<< HEAD
     <div class="wrap__inner" v-for="({color}, index) in blocksData" :key="index" >
       <!-- передаю props :data-color="name" в компонент Column -->
       <Column :data-color="color" :blockHeight="blocksData"/>
-=======
-    <div class="wrap__inner" v-for="({color}, $index) in blocksData" :key="$index" >
-      <!-- передаю props :data-color="name" в компонент Column -->
-      <Column :data-color="color" :blockHeight="heights[$index]"/>
->>>>>>> bd71789672721fb5df93b965a767dee9ea43366e
       <!-- @heightBlock - кастомное событие из ребенка Range-->
       <Range :id="index" @heightBlock="setHeight"/>
     </div>
@@ -42,8 +36,7 @@ export default {
       const idBlock = Number(range.id);
       const heightVal = Number(range.value);
       let {height} = this.blocksData[idBlock];
-      this.set(this.blocksData[idBlock], height, heightVal)
-      console.log(this.blocksData[idBlock])
+      height = heightVal;
       return height;
     }
   }
