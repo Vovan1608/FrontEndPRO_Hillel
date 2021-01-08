@@ -37,6 +37,8 @@ export default {
       const heightVal = Number(range.value);
       let {height} = this.blocksData[idBlock];
       height = heightVal;
+      console.log(this);
+      // this.$set(this.blocksData[idBlock], height, heightVal);
       return height;
     }
   }
