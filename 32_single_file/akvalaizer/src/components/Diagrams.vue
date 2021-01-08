@@ -1,11 +1,10 @@
 <template>
-  <div class="wrap">
-    <div class="wrap__inner" v-for="({color}, index) in blocksData" :key="index" >
-      <!-- передаю props :data-color="name" в компонент Column -->
-      <Column :data-color="color" :blockHeight="blocksData"/>
-      <!-- @heightBlock - кастомное событие из ребенка Range-->
-      <Range :id="index" @heightBlock="setHeight"/>
-    </div>
+  <div class="wrap" v-for="({color}, index) in blocksData" :key="index" >
+    <!-- передаю props :data-color="name" в компонент Column -->
+    <!-- для высоты блока передаю объект из  blocksData-->
+    <Column :data-color="color" :blockHeight="blocksData[index]"/>
+    <!-- @heightBlock - кастомное событие из ребенка Range-->
+    <Range :id="index" @heightBlock="setHeight"/>
   </div>
 </template>
 
@@ -35,11 +34,7 @@ export default {
       const range = event.target;
       const idBlock = Number(range.id);
       const heightVal = Number(range.value);
-      let {height} = this.blocksData[idBlock];
-      height = heightVal;
-      console.log(this);
-      // this.$set(this.blocksData[idBlock], height, heightVal);
-      return height;
+      this.blocksData[idBlock].height = heightVal;
     }
   }
 };
@@ -49,18 +44,14 @@ export default {
 <style lang="scss">
   .wrap {
     display: flex;
-
-    &__inner {
-      display: flex;
-      flex-direction: column;
-      justify-content: flex-end;
-      flex-shrink: 1;
-      flex-grow: 1;
-      margin: 10px;
-      border: 1px solid rgb(144, 144, 160);
-      padding: 10px;
-      min-width: 10px;
-      height: 360px;
-    }
+    flex-direction: column;
+    justify-content: flex-end;
+    flex-shrink: 1;
+    flex-grow: 1;
+    margin: 10px;
+    border: 1px solid rgb(144, 144, 160);
+    padding: 10px;
+    min-width: 10px;
+    height: 360px;
   }
 </style>

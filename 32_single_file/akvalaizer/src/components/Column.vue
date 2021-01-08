@@ -1,21 +1,24 @@
 <template>
-  <div class="column" :style="{ height: 120 + 'px' }"></div>
+  <div class="column" :style="{ height: getBlockHeight + 'px' }"></div>
 </template>
 
 <script>
-// :style="{ height: blockHeight + 'px' }"
 export default {
 	props: {
-		blockHeight: Array,
+		// пришел объект из Diagrams {id: ..., color: '', height: ...}
+		blockHeight: Object,
 	},
-	data: () => ({
-
-	}),
 	// на основании переданных props в компоненте Diagrams
 	// я могу получить цвет блока
 	mounted() {
 		const elem = this.$el;
 		elem.style.background = elem.dataset.color;
+	},
+	// возвращаем из пришедшего объекта height
+	computed: {
+		getBlockHeight: function() {
+			return this.blockHeight.height;
+		}
 	}
 };
 </script>
