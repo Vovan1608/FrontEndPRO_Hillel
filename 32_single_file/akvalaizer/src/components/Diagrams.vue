@@ -15,7 +15,7 @@ import Range from './Range';
 
 export default {
   data: () => ({
-		blocksData: [
+		blocksData:  JSON.parse(localStorage.getItem("blocksData")) || [
       {id: 0, color: 'red', height: 100},
       {id: 1, color: 'orange', height: 100},
       {id: 2, color: 'yellow', height: 100},
@@ -35,9 +35,12 @@ export default {
       const idBlock = Number(range.id);
       const heightVal = Number(range.value);
       this.blocksData[idBlock].height = heightVal;
+
+      localStorage.setItem("blocksData", JSON.stringify(this.blocksData));
     }
   }
 };
+
 </script>
 
 
