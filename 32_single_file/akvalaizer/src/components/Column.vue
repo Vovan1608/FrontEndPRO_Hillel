@@ -4,6 +4,7 @@
 
 <script>
 export default {
+	name: "Column",
 	props: {
 		// пришел объект из Diagrams {id: ..., color: '', height: ...}
 		blockHeight: Object,

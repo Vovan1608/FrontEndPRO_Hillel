@@ -1,21 +1,16 @@
 <template>
   <div id="app">
-    <Diagrams/>
+    <Main/>
   </div>
 </template>
 
 <script>
-import Diagrams from './components/Diagrams';
+import Main from './components/Main';
 
 export default {
   name: "App",
-  data() {
-    return {
-      
-    }
-  },
   components: {
-    Diagrams
+    Main
   }
 };
 </script>
@@ -24,6 +19,7 @@ export default {
 * {
   box-sizing: border-box;
 }
+
 #app {
   display: flex;
   margin: 0 auto;

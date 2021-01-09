@@ -1,10 +1,15 @@
 <template>
-	<input class="range" type="range" min="100" max="300" step="2" @input="getInput">
+	<input class="range" type="range" min="100" max="300" step="2" @input="getInput" value="100">
 </template>
 
 <script>
 
 export default {
+	name: "Range",
+	props: {
+		// пришел объект из Diagrams {id: ..., color: '', height: ...}
+		blockHeight: Object,
+	},
   data: () => ({
 		height: Number,
 		id: Number
@@ -15,6 +20,11 @@ export default {
 			this.$emit('heightBlock')
 			return target;
     }
+	},
+	// сохраняем значение ползунка при перезагрузке
+	mounted() {
+		const elem = this.$el;
+		elem.value = this.blockHeight.height;
 	}
 };
 </script>

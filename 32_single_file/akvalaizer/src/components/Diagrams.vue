@@ -4,7 +4,8 @@
     <!-- для высоты блока передаю объект из  blocksData-->
     <Column :data-color="color" :blockHeight="blocksData[index]"/>
     <!-- @heightBlock - кастомное событие из ребенка Range-->
-    <Range :id="index" @heightBlock="setHeight"/>
+    <!-- для ползунка передаю объект из  blocksData -->
+    <Range :id="index" :blockHeight="blocksData[index]" @heightBlock="setHeight"/>
   </div>
 </template>
 
@@ -14,6 +15,7 @@ import Column from './Column';
 import Range from './Range';
 
 export default {
+  name: "Diagrams",
   data: () => ({
 		blocksData:  JSON.parse(localStorage.getItem("blocksData")) || [
       {id: 0, color: 'red', height: 100},
