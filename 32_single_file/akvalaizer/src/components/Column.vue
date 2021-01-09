@@ -8,6 +8,7 @@ export default {
 	props: {
 		// пришел объект из Diagrams {id: ..., color: '', height: ...}
 		blockHeight: Object,
+		sorted: Object
 	},
 	// на основании переданных props в компоненте Diagrams
 	// я могу получить цвет блока

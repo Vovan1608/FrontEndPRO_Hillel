@@ -1,7 +1,7 @@
 <template>
   <div class="main">
 		<div class="main__wrap">
-			<Diagrams :sorted="sortBlock"/>
+			<Diagrams :sorted="sortBlock()"/>
 		</div>
 		<button class="main__button" @click="sortBlock">FILTER</button>
   </div>
@@ -21,9 +21,11 @@ export default {
 	}),
 	methods: {
 		sortBlock() {
-			const newArr = this.objectLocalStorage.slice();
-			newArr.sort( (a, b) => a.height > b.height ? 1 : -1);
-			return newArr;
+			this.objectLocalStorage.sort( (a, b) => a.height > b.height ? 1 : -1);
+
+			localStorage.setItem("blocksData", JSON.stringify(this.objectLocalStorage));
+
+			return this.objectLocalStorage;
 		}
 	}
 };

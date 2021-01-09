@@ -2,7 +2,7 @@
   <div class="wrap" v-for="({color}, index) in blocksData" :key="index" >
     <!-- передаю props :data-color="name" в компонент Column -->
     <!-- для высоты блока передаю объект из  blocksData-->
-    <Column :data-color="color" :blockHeight="blocksData[index]"/>
+    <Column :data-color="color" :blockHeight="blocksData[index]" :sorted="sorted"/>
     <!-- @heightBlock - кастомное событие из ребенка Range-->
     <!-- для ползунка передаю объект из  blocksData -->
     <Range :id="index" :blockHeight="blocksData[index]" @heightBlock="setHeight"/>
@@ -18,7 +18,7 @@ export default {
   name: "Diagrams",
   props: {
     sorted: Array
-    },
+  },
   data: () => ({
 		blocksData:  JSON.parse(localStorage.getItem("blocksData")) || [
       {id: 0, color: 'red', height: 100},
