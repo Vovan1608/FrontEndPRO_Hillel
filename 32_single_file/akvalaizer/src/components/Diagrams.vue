@@ -16,6 +16,9 @@ import Range from './Range';
 
 export default {
   name: "Diagrams",
+  props: {
+    sorted: Array
+    },
   data: () => ({
 		blocksData:  JSON.parse(localStorage.getItem("blocksData")) || [
       {id: 0, color: 'red', height: 100},
