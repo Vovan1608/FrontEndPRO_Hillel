@@ -1,6 +1,7 @@
 <template>
   <div id="app">
     <Diagrams />
+    <button class="button">FILTER</button>
   </div>
 </template>
 
@@ -20,6 +21,15 @@ export default {
   box-sizing: border-box;
 }
 #app {
-  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border: 1px solid red;
+  padding: 10px;
+}
+
+.button {
+  margin-top: 10px;
+  width: 80px;
 }
 </style>

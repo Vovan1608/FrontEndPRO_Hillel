@@ -9,7 +9,6 @@
       <Column :blocks="blocks" />
       <input
         :id="index"
-        :data-set="index"
         class="main__range"
         type="range"
         min="100"
